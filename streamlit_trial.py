@@ -10,6 +10,7 @@ import os
 import csv
 import sys
 
+@st.cache_data
 def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Stash data in a dictionary
     data_dict = {}
@@ -82,10 +83,12 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
 
     return data_dict
 
+@st.cache_data
 def get_peace_processes(data_dict):
     processes = [row[data_dict['links_header'].index('PPName')].strip() for row in data_dict['links_data']]
     return sorted(list(set(processes)))
 
+@st.cache_data
 def get_peace_process_data(process_name,data_dict):
     
     # Peace process data are in the links table so collect all edges assigned to the process
@@ -157,6 +160,7 @@ def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     results_dict['node_colors'] = node_colors
     return results_dict
 
+@st.cache_data
 def display_graph(graph,node_colors):
     f = plt.figure(figsize=(16,16))
     pos = nx.spring_layout(graph) 
@@ -208,9 +212,9 @@ pp_names = get_peace_processes(data_dict)
 
 #show selectbox for PP options to select
 pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
-print(pp_selection)
+
+pp_selection = 'Bosnia peace process'
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
-print(pp_data_dict)
 
 # Display matrix
 pp_matrix = pp_data_dict['pp_matrix']
