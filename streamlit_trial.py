@@ -87,7 +87,7 @@ def get_peace_processes(data_dict):
     return sorted(list(set(processes)))
 
 def get_peace_process_data(process_name,data_dict):
-    
+    st.write(process_name)
     # Peace process data are in the links table so collect all edges assigned to the process
     pp_edges = [row for row in data_dict['links_data'] if row[data_dict['links_header'].\
                                                               index('PPName')].strip()==process_name]
