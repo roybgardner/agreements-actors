@@ -102,7 +102,6 @@ def get_peace_process_data(process_name,data_dict):
     pp_actor_indices = [data_dict['actor_vertices'].index(actor_id) for actor_id in pp_actor_ids]
 
     pp_matrix = data_dict['matrix'][np.ix_(pp_agreement_indices,pp_actor_indices)]
-    pp_matrix = np.array(pp_matrix)
     pp_data_dict = {}
     pp_data_dict['pp_matrix'] = pp_matrix
     
@@ -152,7 +151,7 @@ def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     found_graph.add_nodes_from(found_vertices)
     for e in found_edges:
         found_graph.add_edge(e[0],e[1],weight=1)
-    node_colors = [color_map[v.split('_')[0]] for v in found_graph.nodes()]
+    node_colors = [data_dict['color_map'][v.split('_')[0]] for v in found_graph.nodes()]
     results_dict = {}
     results_dict['graph'] = found_graph
     results_dict['node_colors'] = node_colors
@@ -209,8 +208,9 @@ pp_names = get_peace_processes(data_dict)
 
 #show selectbox for PP options to select
 pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
-
+print(pp_selection)
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+print(pp_data_dict)
 
 # Display matrix
 pp_matrix = pp_data_dict['pp_matrix']
