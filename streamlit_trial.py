@@ -209,8 +209,8 @@ pp_names = get_peace_processes(data_dict)
 #show selectbox for PP options to select
 pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
 
-pp_selection = 'Bosnia peace process'
-pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+with pp_selection:
+    pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
 # Display matrix
 pp_matrix = pp_data_dict['pp_matrix']
