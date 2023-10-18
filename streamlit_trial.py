@@ -218,11 +218,14 @@ pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
 # Display graph
 pp_graph = pp_data_dict['pp_graph']['graph']
-st.write(pp_graph)
 
 node_colors = pp_data_dict['pp_graph']['node_colors']
-st.write(node_colors)
-display_graph(pp_graph,node_colors)
+#display_graph(pp_graph,node_colors)
+f = plt.figure(figsize=(16,16))
+pos = nx.spring_layout(pp_graph) 
+nx.draw_networkx(pp_graph,pos,node_color=node_colors,font_size='8',alpha=0.8)
+plt.grid(False)
+plt.show()
 
 
 #Query vertices using depth-first search
