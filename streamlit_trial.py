@@ -161,7 +161,8 @@ def display_graph(graph,node_colors):
     pos = nx.spring_layout(graph) 
     nx.draw_networkx(graph,pos,node_color=node_colors,font_size='8',alpha=0.8)
     plt.grid(False)
-    plt.show()
+    st.pyplot(f)
+
 
 #define css for different classes 
 st.markdown("""
@@ -220,13 +221,7 @@ pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 pp_graph = pp_data_dict['pp_graph']['graph']
 
 node_colors = pp_data_dict['pp_graph']['node_colors']
-#display_graph(pp_graph,node_colors)
-f = plt.figure(figsize=(16,16))
-pos = nx.spring_layout(pp_graph) 
-nx.draw_networkx(pp_graph,pos,node_color=node_colors,font_size='8',alpha=0.8)
-plt.grid(False)
-plt.show()
-
+display_graph(pp_graph,node_colors)
 
 #Query vertices using depth-first search
 
