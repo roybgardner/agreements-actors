@@ -211,12 +211,11 @@ pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, h
 
 st.write(pp_selection)
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
-st.write(pp_data_dict)
-
+#
 # Display matrix
-pp_matrix = pp_data_dict['pp_matrix']
-plt.imshow(pp_matrix,cmap=plt.cm.Blues)
-plt.show()
+#pp_matrix = pp_data_dict['pp_matrix']
+#plt.imshow(pp_matrix,cmap=plt.cm.Blues)
+#plt.show()
 
 # Display graph
 pp_graph = pp_data_dict['pp_graph']['graph']
