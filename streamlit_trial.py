@@ -242,7 +242,7 @@ with st.form("query"):
 
     operator=["AND", "OR"]
     select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
-    depth=st.slider("Select depth", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    depth=st.slider("Select depth", min_value=1, max_value=3, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
@@ -252,14 +252,12 @@ with st.form("query"):
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
 #Query vertices using depth-first search
-#with st.form("cooccurrence"):
-#    st.write("Actor and agreement cooccurrence")
-#    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-#    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+with st.form("cooccurrence"):
+    st.write("Actor and agreement cooccurrence")
+    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
    # Every form must have a submit button.
-#    submitted = st.form_submit_button("Submit")
-#    if submitted:
-#        st.write('hit')
-#
-
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.write('hit')
