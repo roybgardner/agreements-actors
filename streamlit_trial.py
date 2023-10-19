@@ -287,7 +287,6 @@ with st.form("cooccurrence"):
             actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
         labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(vertices)}
-        st.write(labels)
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
 
@@ -301,10 +300,10 @@ with st.form("cooccurrence"):
                             width=[t[1] for t in linked_pairs],
                             edge_color='lightblue',
                             alpha=0.6)
-        #nx.draw_networkx_labels(actor_graph, pos=pos,
-        #                        labels=labels,
-        #                        horizontalalignment='left',
-        #                        font_color='black')
+        nx.draw_networkx_labels(actor_graph, pos=pos,
+                                labels=labels,
+                                horizontalalignment='left',
+                                font_color='black')
         nx.draw_networkx_edge_labels(actor_graph, pos=pos,
                                 edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
                                 font_color='black')
