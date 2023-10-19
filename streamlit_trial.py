@@ -102,6 +102,8 @@ def get_peace_process_data(process_name,data_dict):
 
     pp_matrix = data_dict['matrix'][np.ix_(pp_agreement_indices,pp_actor_indices)]
     pp_data_dict = {}
+    pp_data_dict['pp_actor_ids'] = pp_actor_ids
+    pp_data_dict['pp_agreement_ids'] = pp_agreement_ids
     pp_data_dict['pp_matrix'] = pp_matrix
     
     # Build a graph
@@ -128,8 +130,7 @@ def get_peace_process_data(process_name,data_dict):
 def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     tree_list = []
     for v in query_vertices:
-        st.write(v)
-        tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
+         tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
 
     found_vertices = set(tree_list[0].nodes) 
     for tree in tree_list:
@@ -225,12 +226,13 @@ display_graph(pp_graph,node_colors)
 
 
 #Query vertices using depth-first search
-#results_dict = query_graph(pp_graph,query_vertices=['CON_20','CON_21'],operator='AND',depth=1)
-#display_graph(results_dict['graph'],results_dict['node_colors'])
-
-#radio button to select operator type
 with st.form("my_form"):
     st.write("Query peace process network")
+    # Build the options
+    option_list = []
+    option_list.extend(pp_data_dict['pp_actor_ids'])
+    option_list.extend(pp_data_dict['pp_agreement_ids'])
+    
     options = st.multiselect(
     'Select actors and/or agreements',
     ['CON_20', 'CON_21'],
