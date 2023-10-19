@@ -291,7 +291,25 @@ with st.form("cooccurrence"):
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
 
-        nx.draw_networkx(actor_graph,pos,labels=labels,horizontalalignment='left',node_color='pink',node_size=1000)
+        nx.draw_networkx_nodes(actor_graph,pos,
+                        nodelist=vertices,
+                        node_size=1500,
+                        node_color='pink',
+                        alpha=0.7)
+        nx.draw_networkx_edges(actor_graph,pos,
+                            edgelist = [(t[0],t[2]) for t in linked_pairs],
+                            width=[t[1] for t in linked_pairs],
+                            edge_color='lightblue',
+                            alpha=0.6)
+        nx.draw_networkx_labels(actor_graph, pos=pos,
+                                labels=labels,
+                                horizontalalignment='left',
+                                font_color='black')
+        nx.draw_networkx_edge_labels(actor_graph, pos=pos,
+                                edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
+                                font_color='black')
+
+    #nx.draw_networkx(actor_graph,pos,labels=labels,horizontalalignment='left',node_color='pink',node_size=1000)
 
         st.pyplot(f)
 
