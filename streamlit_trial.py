@@ -227,7 +227,7 @@ display_graph(pp_graph,node_colors)
 
 #Query vertices using depth-first search
 with st.form("query"):
-    st.write("Query peace process network")
+    st.title("Query peace process network")
     # Build the options
     option_list = []
     option_list.extend(pp_data_dict['pp_actor_ids'])
@@ -253,7 +253,7 @@ with st.form("query"):
 
 #Query vertices using depth-first search
 with st.form("cooccurrence"):
-    st.write("Actor and agreement cooccurrence")
+    st.title("Actor and agreement cooccurrence")
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
