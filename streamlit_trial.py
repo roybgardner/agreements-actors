@@ -229,9 +229,9 @@ display_graph(pp_graph,node_colors)
 
 #radio button to select operator type
 with st.sidebar.form("my_form"):
-    st.write("Query peace process nework")
+    st.write("Query peace process network")
     options = st.multiselect(
-    'Selct actors and/or agreements',
+    'Select actors and/or agreements',
     ['CON20', 'CON21'],
     [])
 
@@ -242,7 +242,7 @@ with st.sidebar.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        options = [option.split(':')[1].strip() for option in options]
+        options = [list(option.values())[0] for option in options]
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
