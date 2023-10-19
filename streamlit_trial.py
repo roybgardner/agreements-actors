@@ -219,13 +219,12 @@ pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
 # Display peace process graph
 pp_graph = pp_data_dict['pp_graph']['graph']
-
 node_colors = pp_data_dict['pp_graph']['node_colors']
 display_graph(pp_graph,node_colors)
 
 #Query vertices using depth-first search
-results_dict = query_graph(pp_graph,query_vertices=['CON_20','CON_21'],operator='AND',depth=1)
-display_graph(results_dict['graph'],results_dict['node_colors'])
+#results_dict = query_graph(pp_graph,query_vertices=['CON_20','CON_21'],operator='AND',depth=1)
+#display_graph(results_dict['graph'],results_dict['node_colors'])
 
 #radio button to select operator type
 
