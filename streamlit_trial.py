@@ -288,8 +288,7 @@ with st.form("cooccurrence"):
         actor_labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
         actor_ids = {v for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
         st.write(actor_ids)
-        st.write(data_dict['color_map'])
-        node_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_ids]
+        actor_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_ids]
 
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
@@ -297,7 +296,7 @@ with st.form("cooccurrence"):
         nx.draw_networkx_nodes(actor_graph,pos,
                         nodelist=vertices,
                         node_size=1500,
-                        node_color=node_colors,
+                        node_color=actor_colors,
                         alpha=0.7)
         nx.draw_networkx_edges(actor_graph,pos,
                             edgelist = [(t[0],t[2]) for t in linked_pairs],
