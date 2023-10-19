@@ -127,6 +127,7 @@ def get_peace_process_data(process_name,data_dict):
 
 def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     tree_list = []
+    st.write(query_vertices)
     for v in query_vertices:
         tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
 
@@ -242,7 +243,6 @@ with st.sidebar.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        st.write(type(options[0]))
         options = ['CON_20','CON21']
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
