@@ -230,6 +230,11 @@ display_graph(pp_graph,node_colors)
 #radio button to select operator type
 with st.sidebar.form("my_form"):
     st.write("Query peace process nework")
+    options = st.multiselect(
+    'Seelct actors and/or agreements',
+    ['CON20', 'CON21'],
+    [])
+
     operator=["AND", "OR"]
     select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
     depth=st.slider("Select depth", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
