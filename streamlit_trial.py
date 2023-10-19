@@ -263,7 +263,7 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 
 # Query vertices using depth-first search
 with st.form("cooccurrence"):
-    st.title("Actor and agreement cooccurrence")
+    st.title("Actor and agreement co-occurrence")
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=np.amin(actor_upper), max_value=np.amax(actor_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=np.amin(agreement_upper), max_value=np.amax(agreement_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
@@ -286,14 +286,16 @@ with st.form("cooccurrence"):
             actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
         actor_labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
- 
+        actor_ids = {v for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
+        node_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_ids]
+
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
 
         nx.draw_networkx_nodes(actor_graph,pos,
                         nodelist=vertices,
                         node_size=1500,
-                        node_color='pink',
+                        node_color=node_colors,
                         alpha=0.7)
         nx.draw_networkx_edges(actor_graph,pos,
                             edgelist = [(t[0],t[2]) for t in linked_pairs],
