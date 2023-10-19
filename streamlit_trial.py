@@ -165,6 +165,12 @@ def display_graph(graph,node_colors):
     plt.grid(False)
     st.pyplot(f)
 
+def get_cooccurrence_matrices(pp_matrix):
+    # Actor-actor co-occurence matrix for a peace process
+    V = np.matmul(pp_matrix.T,pp_matrix)
+    # Agreement-agreement co-occurence matrix
+    W = np.matmul(pp_matrix,pp_matrix.T)
+    return (V,W)
 
 #define css for different classes 
 st.markdown("""
@@ -251,11 +257,13 @@ with st.form("query"):
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
-#Query vertices using depth-first search
+co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+
+# Query vertices using depth-first search
 with st.form("cooccurrence"):
     st.title("Actor and agreement cooccurrence")
-    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=np.amin(co_matrices[0]), max_value=np.amax(co_matrices[0]), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=np.amin(co_matrices[1]), max_value=np.amax(co_matrices[1], value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
