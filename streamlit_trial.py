@@ -233,7 +233,7 @@ with st.form("my_form"):
     option_list.extend(pp_data_dict['pp_actor_ids'])
     option_list.extend(pp_data_dict['pp_agreement_ids'])
     option_list = sorted(option_list,reverse=True)
-    option_list = [vertex_id + ' ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
+    option_list = [vertex_id + ': ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
 
     options = st.multiselect(
     'Select actors and/or agreements',
@@ -247,6 +247,7 @@ with st.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
+        options = [v.split(':')[0] for v in options]
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
