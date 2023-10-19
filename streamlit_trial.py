@@ -300,10 +300,10 @@ with st.form("cooccurrence"):
                             width=[t[1] for t in linked_pairs],
                             edge_color='lightblue',
                             alpha=0.6)
-        nx.draw_networkx_labels(actor_graph, pos,
-                                labels=actor_labels,
-                                horizontalalignment='left',
-                                font_color='black')
+        #nx.draw_networkx_labels(actor_graph, pos,
+        #                        labels=actor_labels,
+        #                        horizontalalignment='left',
+        #                        font_color='black')
         nx.draw_networkx_edge_labels(actor_graph, pos,
                                 edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
                                 font_color='black')
