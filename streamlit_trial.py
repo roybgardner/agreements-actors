@@ -128,7 +128,6 @@ def get_peace_process_data(process_name,data_dict):
 def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     tree_list = []
     for v in query_vertices:
-        st.write(v)
         tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
 
     found_vertices = set(tree_list[0].nodes) 
@@ -229,11 +228,11 @@ display_graph(pp_graph,node_colors)
 #display_graph(results_dict['graph'],results_dict['node_colors'])
 
 #radio button to select operator type
-with st.sidebar.form("my_form"):
+with st.form("my_form"):
     st.write("Query peace process network")
     options = st.multiselect(
     'Select actors and/or agreements',
-    ['CON20', 'CON21'],
+    ['CON_20', 'CON_21'],
     [])
 
     operator=["AND", "OR"]
@@ -243,9 +242,7 @@ with st.sidebar.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        query_vertices = ['CON_20','CON_21']
-        st.write(query_vertices)
-        results_dict = query_graph(pp_graph,query_vertices=query_vertices,operator=select_operator,depth=depth)
+        results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
 
