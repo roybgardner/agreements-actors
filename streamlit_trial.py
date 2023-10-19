@@ -231,7 +231,7 @@ display_graph(pp_graph,node_colors)
 with st.sidebar.form("my_form"):
     st.write("Query peace process nework")
     options = st.multiselect(
-    'Seelct actors and/or agreements',
+    'Selct actors and/or agreements',
     ['CON20', 'CON21'],
     [])
 
@@ -242,6 +242,6 @@ with st.sidebar.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        st.write("slider", depth, "radio", select_operator)
+        st.write("select", options,"slider", depth, "radio", select_operator)
 
 
