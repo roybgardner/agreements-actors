@@ -288,7 +288,7 @@ with st.form("cooccurrence"):
         actor_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if v in vertices}
 
         actor_ids = [v for i,v in enumerate(pp_data_dict['pp_actor_ids']) if v in vertices]
-        actor_colors = [data_dict['color_map'][v.split('_')[0]] for invdex in actor_ids]
+        actor_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_ids]
         st.write(actor_ids,actor_colors)
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
