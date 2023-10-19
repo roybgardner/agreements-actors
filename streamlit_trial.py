@@ -127,9 +127,8 @@ def get_peace_process_data(process_name,data_dict):
 
 def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     tree_list = []
-    query_vertices=['CON_20','CON21']
-    print(query_vertices)
     for v in query_vertices:
+        st.write(v)
         tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
 
     found_vertices = set(tree_list[0].nodes) 
