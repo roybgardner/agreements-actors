@@ -288,6 +288,7 @@ with st.form("cooccurrence"):
         actor_labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
         actor_ids = {v for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
         st.write(actor_ids)
+        print(data_dict['color_map'])
         node_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_ids]
 
         f = plt.figure(figsize=(16,16))
