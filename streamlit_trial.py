@@ -235,7 +235,7 @@ with st.form("my_form"):
     
     options = st.multiselect(
     'Select actors and/or agreements',
-    ['CON_20', 'CON_21'],
+    option_list,
     [])
 
     operator=["AND", "OR"]
