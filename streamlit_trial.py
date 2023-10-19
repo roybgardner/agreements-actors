@@ -243,7 +243,7 @@ with st.sidebar.form("my_form"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        options = ['CON_20','CON21']
-        results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
+        query_vertices = ['CON_20','CON21']
+        results_dict = query_graph(pp_graph,query_vertices=query_vertices,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
