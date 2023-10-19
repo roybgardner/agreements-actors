@@ -231,8 +231,8 @@ display_graph(pp_graph,node_colors)
 with st.sidebar.form("my_form"):
     st.write("Query peace process nework")
     operator=["AND", "OR"]
-    select_operator=st.sidebar.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
-    depth=st.sidebar.slider("Select depth", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
+    depth=st.slider("Select depth", min_value=1, max_value=10, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
