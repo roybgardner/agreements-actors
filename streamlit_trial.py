@@ -244,6 +244,8 @@ with st.sidebar.form("my_form"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         query_vertices = ['CON_20','CON21']
+        st.write(query_vertices)
         results_dict = query_graph(pp_graph,query_vertices=query_vertices,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
+
 
