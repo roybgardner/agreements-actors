@@ -189,7 +189,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown('<p class="maintitle">Signatories Network Example</p>', unsafe_allow_html=True) 
+st.markdown('<p class="title">Signatories Network Analysis</p>', unsafe_allow_html=True) 
 
 twenty_distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0',\
                           '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8',\
