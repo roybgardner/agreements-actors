@@ -1,6 +1,6 @@
 # Agreement-actor networks
 
-Port of Jupyter notebook into Streamlit. Supports:
+Port of Jupyter notebook into Streamlit app. Supports:
 
 1. Signatory data load.
 2. Generation of complete agreement-actor matrix (not an adjacency matrix). Column marginal provides counts of actors over all agreements.
@@ -10,3 +10,5 @@ Port of Jupyter notebook into Streamlit. Supports:
    Actor co-occurrence matrix $V=A^TA$, agreement co-occurrence matrix $V=AA^T$.
    The co-occurrence matrices diagonals provide the column and row marginals of peace process sub-matrix.
    Only need the upper triangle of the co-occurrence matrices for graph generation.
+
+The (as yet incomplete) app can be viewed here: https://agreements-actors-bdyi6dw35cqscfyy8emtzd.streamlit.app/
