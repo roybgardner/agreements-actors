@@ -273,7 +273,7 @@ with st.form("cooccurrence"):
         # Upper triangle without diagonal
         linked_pairs = []
         for i,row in enumerate(actor_upper): 
-            linked_pairs.extend([(i,v,j) for j,v in enumerate(row) if v >= actor_threshold])
+            linked_pairs.extend([(pp_data_dict['pp_actor_ids'][i],v,pp_data_dict['pp_actor_ids'][j]) for j,v in enumerate(row) if v >= actor_threshold])
 
         actor_graph = nx.Graph()
 
@@ -285,7 +285,8 @@ with st.form("cooccurrence"):
         for pair in linked_pairs:
             actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
-        actor_labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
+        actor_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if v in vertices}
+
         actor_indices = [v for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices]
         actor_colors = [data_dict['color_map'][pp_data_dict['pp_actor_ids'][index].split('_')[0]] for index in actor_indices]
         st.write(actor_indices,actor_colors)
