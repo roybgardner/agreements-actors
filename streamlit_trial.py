@@ -270,4 +270,30 @@ with st.form("cooccurrence"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        st.write('hit')
+        # Upper triangle without diagonal
+        linked_pairs = []
+        for i,row in enumerate(actor_upper): 
+ 
+            linked_pairs.extend([(pp_data_dict['pp_actor_ids'][i],v,pp_data_dict['pp_actor_ids'][j]) for j,v in enumerate(row) if v >= actor_threshold])
+
+        actor_graph = nx.Graph()
+
+        vertices = []
+        vertices.extend([t[0] for t in linked_pairs])
+        vertices.extend([t[2] for t in linked_pairs])
+        vertices = list(set(vertices))
+        actor_graph.add_nodes_from(vertices)
+        for pair in linked_pairs:
+            actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+
+        labels = {i:v+'\n'+data_dict['vertices_dict'][vertex_id][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if i in vertices}
+
+        f = plt.figure(figsize=(16,16))
+        pos = nx.spring_layout(actor_graph) 
+
+        nx.draw_networkx(actor_graph,pos,labels=labels,horizontalalignment='left',node_color='pink',node_size=1000)
+
+        st.pyplot(f)
+
+        plt.grid(False)
+
