@@ -273,7 +273,6 @@ with st.form("cooccurrence"):
         # Upper triangle without diagonal
         linked_pairs = []
         for i,row in enumerate(actor_upper): 
- 
             linked_pairs.extend([(pp_data_dict['pp_actor_ids'][i],v,pp_data_dict['pp_actor_ids'][j]) for j,v in enumerate(row) if v >= actor_threshold])
 
         actor_graph = nx.Graph()
@@ -286,7 +285,8 @@ with st.form("cooccurrence"):
         for pair in linked_pairs:
             actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
-        labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(vertices)}
+        labels = {i:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if v in vertices}
+        st.write(labels)
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
 
@@ -300,10 +300,10 @@ with st.form("cooccurrence"):
                             width=[t[1] for t in linked_pairs],
                             edge_color='lightblue',
                             alpha=0.6)
-        nx.draw_networkx_labels(actor_graph, pos=pos,
-                                labels=labels,
-                                horizontalalignment='left',
-                                font_color='black')
+        #nx.draw_networkx_labels(actor_graph, pos=pos,
+        #                        labels=labels,
+        #                        horizontalalignment='left',
+        #                        font_color='black')
         nx.draw_networkx_edge_labels(actor_graph, pos=pos,
                                 edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
                                 font_color='black')
