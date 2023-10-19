@@ -233,7 +233,7 @@ with st.form("my_form"):
     option_list.extend(pp_data_dict['pp_actor_ids'])
     option_list.extend(pp_data_dict['pp_agreement_ids'])
     option_list = sorted(option_list,reverse=True)
-    #option_list = [vertex_id + ' ' + data_dict['vertex_dict'][vertex_id][12] for vertex_id in option_list]
+    option_list = [vertex_id + ' ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
 
     options = st.multiselect(
     'Select actors and/or agreements',
