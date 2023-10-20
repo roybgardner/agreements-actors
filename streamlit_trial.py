@@ -172,7 +172,7 @@ def get_cooccurrence_matrices(pp_matrix):
     W = np.matmul(pp_matrix,pp_matrix.T)
     return (V,W)
 
-def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict):
+def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict,threshold):
     if key == 'actor':
         upper = np.triu(co_matrices[0],k=1)
         ids_key = 'pp_actor_ids'
@@ -183,7 +183,7 @@ def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict):
     # Upper triangle without diagonal
     linked_pairs = []
     for i,row in enumerate(upper): 
-        linked_pairs.extend([(pp_data_dict[ids_key][i],v,pp_data_dict[ids_key][j]) for j,v in enumerate(row) if v >= actor_threshold])
+        linked_pairs.extend([(pp_data_dict[ids_key][i],v,pp_data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
     actor_graph = nx.Graph()
 
     vertices = []
@@ -314,7 +314,7 @@ with st.form("cooccurrence"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict)
-        display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict)
+        display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
+        display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
 
  
