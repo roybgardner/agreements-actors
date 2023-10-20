@@ -353,6 +353,8 @@ st.pyplot(f)
 
 st.subheader("Actor engagement over time in selected peace process")
 
+st.write('We obviously can and need to obtain actor, agreement, and data information.')
+
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 
 t_list = []
