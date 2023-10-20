@@ -346,13 +346,15 @@ plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
 
-st.header("Analysis - all Agreements")
+st.header("Analysis - All Agreements")
 
 st.write('Number of agreements in full data set:',data_dict['matrix'].shape[0])
 st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 
 st.subheader("Distribution of number of agreements signed across actors")
+
+st.write('THIS IS ILLUSTRATIVE ONLY.')
 
 # Get the column marginals
 col_marginals = []
@@ -369,7 +371,7 @@ plt.ylabel('Number of agreements signed',fontsize='xx-large')
 st.pyplot(f)
 
 # Top-scoring 10 actors
-st.write('Top scoring actors across all agreements')
+st.write('Top scoring actors across all agreements.')
 x = np.argsort(col_marginals)[::-1][:10]
 for index in x:
     actor = data_dict['actor_vertices'][index]
