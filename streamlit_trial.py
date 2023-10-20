@@ -329,8 +329,8 @@ with st.form("cooccurrence"):
 
 st.subheader("Actor signatory counts in selected peace process")
 
-st.write('Number of agreements:',pp_data_dict['pp_matrix'].shape[0])
-st.write(pp_data_dict['pp_matrix'].shape[1])
+st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
+st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
 
 # Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
 actor_diag = np.diag(co_matrices[0])
@@ -346,5 +346,11 @@ plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
 
-st.header("Distribution of number of agreements signed across actors")
+st.header("All process analysis")
+
+st.write('Number of agreements in full data set:',data_dict['matrix'].shape[0])
+st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
+
+
+st.subheader("Distribution of number of agreements signed across actors")
 
