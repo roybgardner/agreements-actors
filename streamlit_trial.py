@@ -314,7 +314,6 @@ with st.form("cooccurrence"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        st.write('hit')
-        #display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict)
+        display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict)
 
  
