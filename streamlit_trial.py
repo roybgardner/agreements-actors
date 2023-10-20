@@ -172,6 +172,57 @@ def get_cooccurrence_matrices(pp_matrix):
     W = np.matmul(pp_matrix,pp_matrix.T)
     return (V,W)
 
+def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict):
+    if key == 'actor':
+        upper = np.triu(co_matrices[0],k=1)
+        ids_key = 'pp_actor_ids'
+    else:
+        upper = np.triu(co_matrices[1],k=1)
+        ids_key = 'pp_agreement_ids'
+
+    # Upper triangle without diagonal
+    linked_pairs = []
+    for i,row in enumerate(upper): 
+        linked_pairs.extend([(pp_data_dict[ids_key][i],v,pp_data_dict[ids_key][j]) for j,v in enumerate(row) if v >= actor_threshold])
+    actor_graph = nx.Graph()
+
+    vertices = []
+    vertices.extend([t[0] for t in linked_pairs])
+    vertices.extend([t[2] for t in linked_pairs])
+    vertices = list(set(vertices))
+    actor_graph.add_nodes_from(vertices)
+    for pair in linked_pairs:
+        actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+
+    vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict[ids_key]) if v in vertices}
+
+    vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_graph.nodes]
+
+    f = plt.figure(figsize=(16,16))
+    pos = nx.spring_layout(actor_graph) 
+
+    nx.draw_networkx_nodes(actor_graph,pos,
+                    nodelist=vertices,
+                    node_size=1500,
+                    node_color=vertex_colors,
+                    alpha=0.7)
+    nx.draw_networkx_edges(actor_graph,pos,
+                        edgelist = [(t[0],t[2]) for t in linked_pairs],
+                        width=[t[1] for t in linked_pairs],
+                        edge_color='lightblue',
+                        alpha=0.6)
+    nx.draw_networkx_labels(actor_graph, pos,
+                            labels=vertex_labels,
+                            horizontalalignment='left',
+                            font_color='black')
+    nx.draw_networkx_edge_labels(actor_graph, pos,
+                            edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
+                            font_color='black')
+
+    plt.grid(False)
+    st.pyplot(f)
+
+
 #define css for different classes 
 st.markdown("""
     <style>
@@ -250,6 +301,7 @@ with st.form("query"):
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
+co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
 
 # Query vertices using depth-first search
 with st.form("cooccurrence"):
@@ -260,56 +312,6 @@ with st.form("cooccurrence"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        def display_cooccurrence_network(key,pp_data_dict,data_dict):
-            co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
-            if key == 'actor':
-                upper = np.triu(co_matrices[0],k=1)
-                ids_key = 'pp_actor_ids'
-            else:
-                upper = np.triu(co_matrices[1],k=1)
-                ids_key = 'pp_agreement_ids'
-
-            # Upper triangle without diagonal
-            linked_pairs = []
-            for i,row in enumerate(upper): 
-                linked_pairs.extend([(pp_data_dict[ids_key][i],v,pp_data_dict[ids_key][j]) for j,v in enumerate(row) if v >= actor_threshold])
-            actor_graph = nx.Graph()
-
-            vertices = []
-            vertices.extend([t[0] for t in linked_pairs])
-            vertices.extend([t[2] for t in linked_pairs])
-            vertices = list(set(vertices))
-            actor_graph.add_nodes_from(vertices)
-            for pair in linked_pairs:
-                actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
-
-            vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict[ids_key]) if v in vertices}
-
-            vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_graph.nodes]
-
-            f = plt.figure(figsize=(16,16))
-            pos = nx.spring_layout(actor_graph) 
-
-            nx.draw_networkx_nodes(actor_graph,pos,
-                            nodelist=vertices,
-                            node_size=1500,
-                            node_color=vertex_colors,
-                            alpha=0.7)
-            nx.draw_networkx_edges(actor_graph,pos,
-                                edgelist = [(t[0],t[2]) for t in linked_pairs],
-                                width=[t[1] for t in linked_pairs],
-                                edge_color='lightblue',
-                                alpha=0.6)
-            nx.draw_networkx_labels(actor_graph, pos,
-                                    labels=vertex_labels,
-                                    horizontalalignment='left',
-                                    font_color='black')
-            nx.draw_networkx_edge_labels(actor_graph, pos,
-                                    edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
-                                    font_color='black')
-
-            plt.grid(False)
-            st.pyplot(f)
-        display_cooccurrence_network('actor',pp_data_dict,data_dict)
+        display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict)
 
  
