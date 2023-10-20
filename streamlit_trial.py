@@ -246,7 +246,8 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True) 
+st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
+st.write('Analysis of Niamh Henry\'s signatory data.') 
 
 twenty_distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0',\
                           '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8',\
@@ -314,7 +315,9 @@ with st.form("cooccurrence"):
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
+        st.write('Edge values are the number of agreements for which a pair of actors are co-signatories.')
         display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
+        st.write('Edge values are the number of co-signatories a pair of agreements have in common.')
         display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
 
  
