@@ -329,7 +329,7 @@ with st.form("cooccurrence"):
 
 st.subheader("Actor signatory counts in selected peace process")
 
-st.write(pp_data_dict['pp_matrix'].shape[0])
+st.write('Number of agreements:',pp_data_dict['pp_matrix'].shape[0])
 st.write(pp_data_dict['pp_matrix'].shape[1])
 
 # Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
