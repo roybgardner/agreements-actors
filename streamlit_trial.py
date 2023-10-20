@@ -228,9 +228,16 @@ display_graph(pp_graph,node_colors)
 
 
 #Query vertices using depth-first search
+with st.form("peaceprocess"):
+    st.subheader("Select a peace process")
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.write('hit')
+
+
 with st.form("query"):
     st.subheader("Query peace process network")
-    # Build the options
+    # Build the options - NEED TO WORK ON THIS
     option_list = []
     option_list.extend(pp_data_dict['pp_actor_ids'])
     option_list.extend(pp_data_dict['pp_agreement_ids'])
