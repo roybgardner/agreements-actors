@@ -71,6 +71,7 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     matrix = np.array(matrix)
     
     #data_dict['nodes_data'] = nodes_data - DON'T NEED THIS
+    data_dict['agreements_dict'] = agreements_dict # Dictionary of agreement metadata from semantic work
     data_dict['nodes_header'] = nodes_header
     data_dict['links_data'] = links_data
     data_dict['links_header'] = links_header
@@ -349,6 +350,56 @@ plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
 plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
+
+st.subheader("Actor engagement over time in selected peace process")
+
+pp_ag_ids = pp_data_dict['pp_agreement_ids']
+
+t_list = []
+for i,v in enumerate(pp_ag_ids):
+    agreement_id = v.split('_')[1]
+    # TODO - NEED DATA INTEGRITY CHECK
+    if not agreement_id in data_dict['agreements_dict']:
+        continue
+    ag_date = data_dict['agreements_dict'][agreement_id]['Signed Date']
+    ag_date = int(''.join(ag_date.split('-')))
+    t_list.append((i,ag_date))
+    
+t_list = sorted(t_list,key=lambda t:t[1])
+
+# Build a time-order agreement-actor matrix
+ordered_matrix = []
+for t in t_list:
+    ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
+    
+ordered_matrix = np.array(ordered_matrix)
+# Put actors in rows
+ordered_matrix = ordered_matrix.T
+
+# Now order actors by first appearance in process
+row_indices = []
+for i,row in enumerate(ordered_matrix):
+    where = np.where(row==1)
+    v = 0
+    if len(where[0]) > 0:
+        v = where[0][0]
+    row_indices.append((i,v))
+sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
+
+sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
+
+f = plt.figure(figsize=(16,8))
+for i,row in enumerate(sorted_matrix):
+    x = [j for j,x in enumerate(row) if x > 0]
+    y = [i]*len(x)
+    plt.scatter(x,y,alpha=0.9,linewidth=0.5,s=10)
+    plt.plot(x,y,alpha=0.9,linewidth=0.5)
+plt.xticks(fontsize='xx-large')    
+plt.yticks(fontsize='xx-large')    
+plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
+plt.xlabel('Agreement index in time order',fontsize='xx-large')
+st.pyplot(f)
+
 
 st.header("Analysis - All Agreements")
 
