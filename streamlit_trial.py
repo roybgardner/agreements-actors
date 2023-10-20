@@ -346,7 +346,7 @@ plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
 
-st.header("All process analysis")
+st.header("Analysis - all Agreements")
 
 st.write('Number of agreements in full data set:',data_dict['matrix'].shape[0])
 st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
@@ -354,3 +354,14 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Distribution of number of agreements signed across actors")
 
+# Get the column marginals
+col_marginals = []
+for row in data_dict['matrix'].T:
+    col_marginals.append(sum(row))
+
+
+f = plt.figure(figsize=(16,16))
+plt.plot(range(0,len(col_marginals)),col_marginals)
+plt.xlabel('Actor index')
+plt.ylabel('Number of agreements signed')
+st.pyplot(f)
