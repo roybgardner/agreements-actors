@@ -403,28 +403,6 @@ plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
-stage_dict = {}
-stage_dict['Cea'] = [1,'Ceasefire related']
-stage_dict['Pre'] = [2,'Pre-negotiation process']
-stage_dict['SubPar'] = [3,'Partial Framework - substantive']
-stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
-stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
-stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
-stage_dict['Oth'] = [0,'']
-
-y = []
-for i,t in enumerate(t_list):
-    stage = data_dict['agreements_dict'][t[1]]['Stage']
-    y.append(stage_dict[stage][0])
-    
-f = plt.figure(figsize=(16,8))
-plt.plot(range(0,len(t_list)),y,alpha=0.9,linewidth=0.5)
-plt.scatter(range(0,len(t_list)),y,alpha=0.9,linewidth=0.5)
-plt.yticks([0,1,2,3,4,5],[0,1,2,3,4,5],fontsize='xx-large')    
-plt.xticks(fontsize='xx-large')    
-plt.ylabel('Agreement stage',fontsize='xx-large')
-plt.xlabel('Agreement index in time order',fontsize='xx-large')
-st.pyplot(f)
 
 st.header("Analysis - All Agreements")
 
