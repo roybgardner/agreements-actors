@@ -370,4 +370,4 @@ st.pyplot(f)
 
 max_i = col_marginals.index(max(col_marginals))
 max_actor = data_dict['actor_vertices'][max_i]
-st.write(max_actor,data_dict['vertices_dict'][max_actor][5])
+st.write('The highest peak at index', max_i, 'belongs to',max_actor,data_dict['vertices_dict'][max_actor][5])
