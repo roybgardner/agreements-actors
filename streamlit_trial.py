@@ -366,9 +366,9 @@ for i,v in enumerate(pp_ag_ids):
         continue
     ag_date = data_dict['agreements_dict'][agreement_id]['Signed Date']
     ag_date = int(''.join(ag_date.split('-')))
-    t_list.append((i,ag_date))
+    t_list.append((i,agreement_id,ag_date))
     
-t_list = sorted(t_list,key=lambda t:t[1])
+t_list = sorted(t_list,key=lambda t:t[2])
 
 # Build a time-order agreement-actor matrix
 ordered_matrix = []
