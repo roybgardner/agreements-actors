@@ -362,6 +362,12 @@ for row in data_dict['matrix'].T:
 
 f = plt.figure(figsize=(16,16))
 plt.plot(range(0,len(col_marginals)),col_marginals)
+plt.xticks(fontsize='xx-large')
+plt.yticks(fontsize='xx-large')
 plt.xlabel('Actor index',fontsize='xx-large')
 plt.ylabel('Number of agreements signed',fontsize='xx-large')
 st.pyplot(f)
+
+max_i = col_marginals.index(max(col_marginals))
+max_actor = data_dict['actor_vertices'][max_i]
+st.write(max_actor,data_dict['vertices_dict'][max_actor][5])
