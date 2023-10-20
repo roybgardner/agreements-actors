@@ -266,7 +266,7 @@ st.write('Analysis of Niamh Henry\'s signatory data. Objectives are to support:'
 st.write('1. Simple extraction of peace process data.') 
 st.write('2. Querying of peace process networks.') 
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
-st.write('4. Access to descriptive statistics.') 
+st.write('4. Unlocking metadata analysis within and across proceses.') 
 
 
 st.header("Peace Process Network Analysis")
