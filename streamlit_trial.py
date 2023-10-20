@@ -214,17 +214,14 @@ agreements_dict = 'agreements_dict.json'
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
 # Select a peace process
-with st.form("peaceprocess"):
-    st.subheader("Select a peace process")
-    pp_names = get_peace_processes(data_dict)
-    pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
-    submit_process = st.form_submit_button("Submit")
-    if submit_process:
-        pp_data_dict = get_peace_process_data(pp_selection,data_dict)
-        # Display peace process graph
-        pp_graph = pp_data_dict['pp_graph']['graph']
-        node_colors = pp_data_dict['pp_graph']['node_colors']
-        display_graph(pp_graph,node_colors)
+st.subheader("Select a peace process")
+pp_names = get_peace_processes(data_dict)
+pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
+pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+# Display peace process graph
+pp_graph = pp_data_dict['pp_graph']['graph']
+node_colors = pp_data_dict['pp_graph']['node_colors']
+display_graph(pp_graph,node_colors)
 
 
 #Query vertices using depth-first search
