@@ -202,6 +202,7 @@ twenty_distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231',
                           '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff',\
                           '#000000']
 
+st.header("Peace Process Network Analysis")
 
 # Load data from CSV
 
@@ -214,6 +215,7 @@ data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data
 
 pp_names = get_peace_processes(data_dict)
 
+st.subheader("Select a peace process")
 #show selectbox for PP options to select
 pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
 
@@ -233,7 +235,7 @@ display_graph(pp_graph,node_colors)
 
 #Query vertices using depth-first search
 with st.form("query"):
-    st.title("Query peace process network")
+    st.subheader("Query peace process network")
     # Build the options
     option_list = []
     option_list.extend(pp_data_dict['pp_actor_ids'])
@@ -288,7 +290,7 @@ with st.form("cooccurrence"):
         actor_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_data_dict['pp_actor_ids']) if v in vertices}
 
         actor_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_graph.nodes]
-        
+
         f = plt.figure(figsize=(16,16))
         pos = nx.spring_layout(actor_graph) 
 
