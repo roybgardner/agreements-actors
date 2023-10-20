@@ -262,9 +262,7 @@ agreements_dict = 'agreements_dict.json'
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
 
-st.write('Analysis of Niamh Henry\'s signatory data.') 
-st.write('') 
-st.write('Objectives are to support:') 
+st.write('Analysis of Niamh Henry\'s signatory data. Objectives are to support:') 
 st.write('1. Simple extraction of peace process data.') 
 st.write('2. Querying of peace process networks.') 
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
@@ -314,10 +312,10 @@ with st.form("query"):
 
 # Co-occurrence networks
 with st.form("cooccurrence"):
+    st.subheader("Actor and agreement co-occurrences in peace process")
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
     agreement_upper = np.triu(co_matrices[1],k=1)
-    st.subheader("Actor and agreement co-occurrences in peace process")
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=np.amin(actor_upper), max_value=np.amax(actor_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=np.amin(agreement_upper), max_value=np.amax(agreement_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
@@ -328,5 +326,21 @@ with st.form("cooccurrence"):
         display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
         st.write('Edge values are the number of signatories a pair of agreements have in common.')
         display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
+
+st.subheader("Actor signatory counts")
+
+# Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
+actor_diag = np.diag(co_matrices[0])
+
+# Plot
+labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
+z = list(zip(labels,actor_diag))
+z = sorted(z,key=lambda t:t[1])
+
+f = plt.figure(figsize=(8,32))
+plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
+plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
+plt.xlabel('Number of agreements to which actor is signatory')
+st.pyplot(f)
 
  
