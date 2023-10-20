@@ -199,18 +199,18 @@ def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict,threshol
     vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_graph.nodes]
 
     f = plt.figure(figsize=(16,16))
-    pos = nx.spring_layout(actor_graph) 
+    pos = nx.circular_layout(actor_graph) 
 
     nx.draw_networkx_nodes(actor_graph,pos,
                     nodelist=vertices,
                     node_size=1500,
                     node_color=vertex_colors,
-                    alpha=0.7)
+                    alpha=0.8)
     nx.draw_networkx_edges(actor_graph,pos,
                         edgelist = [(t[0],t[2]) for t in linked_pairs],
                         width=[t[1] for t in linked_pairs],
                         edge_color='lightblue',
-                        alpha=0.6)
+                        alpha=0.8)
     nx.draw_networkx_labels(actor_graph, pos,
                             labels=vertex_labels,
                             horizontalalignment='left',
