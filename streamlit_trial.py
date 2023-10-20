@@ -354,7 +354,7 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Distribution of number of agreements signed across actors")
 
-st.write('THIS IS ILLUSTRATIVE ONLY.')
+st.write('THIS IS ILLUSTRATIVE ONLY. THERE ARE LOT\'S OF OPPORTUNITIES FOR MORE MEANINGFUL ANALYSES.')
 
 # Get the column marginals
 col_marginals = []
@@ -375,6 +375,6 @@ st.write('Top scoring actors across all agreements.')
 x = np.argsort(col_marginals)[::-1][:10]
 for index in x:
     actor = data_dict['actor_vertices'][index]
-    st.write(col_marginals[index], ': ',actor,data_dict['vertices_dict'][actor][5])
+    st.write(col_marginals[index],actor,data_dict['vertices_dict'][actor][5])
 
 
