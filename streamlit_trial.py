@@ -358,7 +358,7 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Distribution of number of agreements signed across actors")
 
-st.write('THIS IS ILLUSTRATIVE ONLY. THERE ARE LOT\'S OF OPPORTUNITIES FOR MORE MEANINGFUL ANALYSES.')
+st.write('THIS IS ILLUSTRATIVE ONLY. THERE ARE MANY OPPORTUNITIES FOR MORE MEANINGFUL ANALYSES.')
 
 # Get the column marginals
 col_marginals = []
