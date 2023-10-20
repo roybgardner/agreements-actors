@@ -371,3 +371,11 @@ st.pyplot(f)
 max_i = col_marginals.index(max(col_marginals))
 max_actor = data_dict['actor_vertices'][max_i]
 st.write('The highest peak at index', max_i, 'belongs to',max_actor,data_dict['vertices_dict'][max_actor][5])
+
+# Top-scoring 5 actors
+x = np.argsort(col_marginals)[::-1][:5]
+for index in x:
+    actor = data_dict['actor_vertices'][index]
+    st.write(index, 'belongs to',max_actor,data_dict['vertices_dict'][actor][5])
+
+
