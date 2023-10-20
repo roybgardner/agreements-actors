@@ -246,24 +246,33 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
-st.write('Analysis of Niamh Henry\'s signatory data.') 
 
 twenty_distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0',\
                           '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8',\
                           '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff',\
                           '#000000']
 
-st.header("Peace Process Network Analysis")
+st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
 
 # Load data from CSV
-
 data_path = './data/'
 nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
 agreements_dict = 'agreements_dict.json'
-
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
+
+
+st.write('Analysis of Niamh Henry\'s signatory data.') 
+st.write('') 
+st.write('Objectives are to support:') 
+st.write('1. Simple extraction of peace process data.') 
+st.write('2. Querying of peace process networks.') 
+st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
+st.write('4. Access to descriptive statistics.') 
+
+
+st.header("Peace Process Network Analysis")
+
 
 # Select a peace process
 st.subheader("Select a peace process")
@@ -303,7 +312,7 @@ with st.form("query"):
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
 
-# Query vertices using depth-first search
+# Co-occurrence networks
 with st.form("cooccurrence"):
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
