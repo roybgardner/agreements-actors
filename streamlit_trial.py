@@ -351,7 +351,7 @@ plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
 
-st.subheader("Actor engagement over time in selected peace process")
+st.subheader("Actor engagements over time in selected peace process")
 
 st.write('We obviously can and need to obtain actor, agreement, and data information.')
 
