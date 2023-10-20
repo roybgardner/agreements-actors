@@ -315,5 +315,6 @@ with st.form("cooccurrence"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict)
+        display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict)
 
  
