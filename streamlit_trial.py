@@ -301,10 +301,12 @@ with st.form("query"):
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
-co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
 
 # Query vertices using depth-first search
 with st.form("cooccurrence"):
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    actor_upper = np.triu(co_matrices[0],k=1)
+    agreement_upper = np.triu(co_matrices[1],k=1)
     st.subheader("Actor and agreement co-occurrences in peace process")
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=np.amin(actor_upper), max_value=np.amax(actor_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=np.amin(agreement_upper), max_value=np.amax(agreement_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
