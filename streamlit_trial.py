@@ -215,22 +215,17 @@ data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data
 
 pp_names = get_peace_processes(data_dict)
 
-st.subheader("Select a peace process")
-#show selectbox for PP options to select
-pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
-
-
-pp_data_dict = get_peace_process_data(pp_selection,data_dict)
-#
-# Display matrix
-#pp_matrix = pp_data_dict['pp_matrix']
-#plt.imshow(pp_matrix,cmap=plt.cm.Blues)
-#plt.show()
-
-# Display peace process graph
-pp_graph = pp_data_dict['pp_graph']['graph']
-node_colors = pp_data_dict['pp_graph']['node_colors']
-display_graph(pp_graph,node_colors)
+with st.form("peaceprocess"):
+    st.subheader("Select a peace process")
+    #show selectbox for PP options to select
+    pp_selection=st.selectbox("Select Peace Process", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+        # Display peace process graph
+        pp_graph = pp_data_dict['pp_graph']['graph']
+        node_colors = pp_data_dict['pp_graph']['node_colors']
+        display_graph(pp_graph,node_colors)
 
 
 #Query vertices using depth-first search
@@ -265,7 +260,7 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 
 # Query vertices using depth-first search
 with st.form("cooccurrence"):
-    st.title("Actor and agreement co-occurrences in peace process")
+    st.subheader("Actor and agreement co-occurrences in peace process")
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=np.amin(actor_upper), max_value=np.amax(actor_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=np.amin(agreement_upper), max_value=np.amax(agreement_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
