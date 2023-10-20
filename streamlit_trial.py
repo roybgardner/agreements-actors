@@ -362,6 +362,6 @@ for row in data_dict['matrix'].T:
 
 f = plt.figure(figsize=(16,16))
 plt.plot(range(0,len(col_marginals)),col_marginals)
-plt.xlabel('Actor index')
-plt.ylabel('Number of agreements signed')
+plt.xlabel('Actor index',fontsize='xx-large')
+plt.ylabel('Number of agreements signed',fontsize='xx-large')
 st.pyplot(f)
