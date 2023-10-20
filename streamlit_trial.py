@@ -70,7 +70,7 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
         matrix.append(row)
     matrix = np.array(matrix)
     
-    data_dict['nodes_data'] = nodes_data
+    #data_dict['nodes_data'] = nodes_data - DON'T NEED THIS
     data_dict['nodes_header'] = nodes_header
     data_dict['links_data'] = links_data
     data_dict['links_header'] = links_header
@@ -122,8 +122,8 @@ def get_peace_process_data(process_name,data_dict):
         pp_graph.add_edge(pair[0],pair[2],weight=pair[1])
     
     pp_data_dict['pp_graph'] = {}
-    pp_data_dict['pp_graph']['graph'] = pp_graph
-    pp_data_dict['pp_graph']['node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices]
+    pp_data_dict['pp_graph'] = pp_graph
+    pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices]
 
     return pp_data_dict
 
@@ -219,8 +219,8 @@ pp_names = get_peace_processes(data_dict)
 pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 # Display peace process graph
-pp_graph = pp_data_dict['pp_graph']['graph']
-node_colors = pp_data_dict['pp_graph']['node_colors']
+pp_graph = pp_data_dict['pp_graph']
+node_colors = pp_data_dict['pp_node_colors']
 display_graph(pp_graph,node_colors)
 
 
@@ -303,10 +303,8 @@ with st.form("cooccurrence"):
                                 edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
                                 font_color='black')
 
-    #nx.draw_networkx(actor_graph,pos,labels=labels,horizontalalignment='left',node_color='pink',node_size=1000)
 
         st.pyplot(f)
 
         plt.grid(False)
 
-st.header("Descriptive Stats")
