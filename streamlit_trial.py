@@ -369,6 +369,7 @@ plt.ylabel('Number of agreements signed',fontsize='xx-large')
 st.pyplot(f)
 
 # Top-scoring 10 actors
+st.write('Top scoring actors across all agreements')
 x = np.argsort(col_marginals)[::-1][:10]
 for index in x:
     actor = data_dict['actor_vertices'][index]
