@@ -230,6 +230,8 @@ display_graph(pp_graph,node_colors)
 #Query vertices using depth-first search
 with st.form("peaceprocess"):
     st.subheader("Select a peace process")
+    pp_names = get_peace_processes(data_dict)
+    pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
     submitted = st.form_submit_button("Submit")
     if submitted:
         st.write('hit')
