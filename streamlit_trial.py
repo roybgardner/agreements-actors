@@ -353,7 +353,8 @@ st.pyplot(f)
 
 st.subheader("Actor engagements over time in selected peace process")
 
-st.write('Actors on y-axis ordered by first appearance in peace process represented as a time-ordered set of agreements on the x-axis. Actor, agreement, and date information are available.')
+st.write('Actors on y-axis ordered by first appearance in peace process represented as a time-ordered set of agreements on the x-axis.\
+          Necessary actor, agreement, and date information are available.')
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 
