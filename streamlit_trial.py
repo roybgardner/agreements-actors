@@ -277,6 +277,9 @@ st.subheader("Select a peace process")
 pp_names = get_peace_processes(data_dict)
 pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
+st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
+
 # Display peace process graph
 pp_graph = pp_data_dict['pp_graph']
 node_colors = pp_data_dict['pp_node_colors']
