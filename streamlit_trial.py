@@ -316,6 +316,7 @@ with st.form("query"):
 # Co-occurrence networks
 with st.form("cooccurrence"):
     st.subheader("Actor and agreement co-occurrences in peace process")
+    st.write("Can also access actors who have never been co-signatories.")
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
     agreement_upper = np.triu(co_matrices[1],k=1)
