@@ -321,8 +321,23 @@ with st.form("cooccurrence"):
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
     agreement_upper = np.triu(co_matrices[1],k=1)
-    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=1, max_value=np.amax(actor_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=1, max_value=np.amax(agreement_upper), value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    actor_disabled = False
+    agreement_disabled = False
+    actor_min = 1
+    agreement_min = 1
+
+    actor_max = np.amax(actor_upper)
+    agreement_max = np.amax(agreement_upper)
+    if actor_max == 1:
+        actor_min = 0
+        actor_disabled = True
+        actor_threshold = 1
+    if agreement_max == 1:
+        agreement_min = 0
+        agreement_disabled = True
+        agreement_threshold = 1
+    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=actor_min, max_value=actor_max, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=actor_disabled, label_visibility="visible")
+    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=agreement_min, max_value=agreement_max, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=agreement_disabled, label_visibility="visible")
 
    # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
