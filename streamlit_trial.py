@@ -263,7 +263,7 @@ agreements_dict = 'agreements_dict.json'
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
 
-st.write('Analysis of Niamh Henry\'s signatory data. Objectives are to support:') 
+st.write('Analysis of Niamh Henry\'s signatory data. Objectives:') 
 st.write('1. Simple extraction of peace process data.') 
 st.write('2. Querying of peace process networks.') 
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
@@ -435,4 +435,7 @@ for index in x:
     actor = data_dict['actor_vertices'][index]
     st.write(col_marginals[index],actor,data_dict['vertices_dict'][actor][5])
 
+st.header("Caveats")
+
+st.write('1. Follows the happy path.\n2.Data integrity checks required.')
 
