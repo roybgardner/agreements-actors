@@ -437,5 +437,6 @@ for index in x:
 
 st.header("Caveats")
 
-st.write('1. Follows the happy path.\n2.Data integrity checks required.')
+st.write('1. Following the happy path.')
+st.write('2. Data integrity checks required.')
 
