@@ -41,7 +41,7 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         links_data = [row for row in reader]
     
     # Agreement are the from vertices - put in date order
-    agreement_data = [(row[links_header.index('from_node_id')],''.join(row[links_header.index('date')].split('-'))) for row in links_data]
+    agreement_data = [(row[links_header.index('from_node_id')],int(''.join(row[links_header.index('date')].split('-')))) for row in links_data]
     agreement_data = sorted(agreement_data,key=lambda t:t[1]) 
     agreement_vertices = list(set([t[0] for t in agreement_data]))
 
