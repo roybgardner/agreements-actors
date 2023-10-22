@@ -11,10 +11,17 @@ import os
 import csv
 import sys
 
-def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
+def load_agreement_actor_data(nodes_file,links_file,data_path):
     """
-    Hello world
+    Load node and links data from CSV files, process, and add processed data to a data dictionary 
+    The core data structure is a binary matrix defining the relationship between agreements and actors.
+    Agreements are in rows, actors are in columns. Both agreements and actors are indexed sets.
+    param nodes_file: The name of the CSV file containing node data
+    param links_file: The name of the CSV file containing links data
+    param data_path: The path to the folder containing the CSV files
+    return: dictionary of processed data in data_dict
     """
+
     # Stash data in a dictionary
     data_dict = {}
     
@@ -33,8 +40,12 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
         # Put the remaining rows into a list of lists
         links_data = [row for row in reader]
     
-    # Agreement are from vertices
-    agreement_vertices = list(set([row[links_header.index('from_node_id')] for row in links_data]))
+    # Agreement are from vertices - put in date order
+    agreement_data = [(row[links_header.index('from_node_id')],''.join(row[links_header.index('date')].split('-'))) for row in links_data]
+    agreement_data = sorted(agreement_data,key=lambda t:t[1]) 
+
+    agreement_vertices = list(set([t[0] for t in agreement_data]))
+
     # Actors are to vertices
     actor_vertices = list(set([row[links_header.index('to_node_id')] for row in links_data]))
 
@@ -66,6 +77,7 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Build a colour map for types
     color_map = {type_:twenty_distinct_colors[i] for i,type_ in enumerate(vertex_types)}
     
+    # This is the core 
     matrix = []
     for agreement in agreement_vertices:
         row = [0]*len(actor_vertices)
@@ -264,8 +276,7 @@ st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allo
 data_path = './data/'
 nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
-agreements_dict = 'agreements_dict.json'
-data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
+data_dict = load_agreement_actor_data(nodes_file,links_file,data_path)
 
 
 st.write('Analysis of Niamh Henry\'s signatory data. Objectives:') 
