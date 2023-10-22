@@ -362,8 +362,8 @@ with st.form("cooccurrence"):
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=agreement_min, max_value=agreement_max, value=agreement_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=agreement_disabled, label_visibility="visible")
 
    # Every form must have a submit button.
-    submitted = st.form_submit_button("Submit")
-    if submitted:
+    submitted_cooccur = st.form_submit_button("Submit")
+    if submitted_cooccur:
         st.write('Edge values are the number of agreements to which a pair of actors are co-signatories.')
         display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
         st.write('Edge values are the number of signatories a pair of agreements have in common.')
