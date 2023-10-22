@@ -40,10 +40,9 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         # Put the remaining rows into a list of lists
         links_data = [row for row in reader]
     
-    # Agreement are from vertices - put in date order
+    # Agreement are the from vertices - put in date order
     agreement_data = [(row[links_header.index('from_node_id')],''.join(row[links_header.index('date')].split('-'))) for row in links_data]
     agreement_data = sorted(agreement_data,key=lambda t:t[1]) 
-
     agreement_vertices = list(set([t[0] for t in agreement_data]))
 
     # Actors are to vertices
@@ -52,14 +51,11 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
     # Build an edge dict (not persistent) with agreement as key and actor as value
     # Build an dates dict (persistent) with agreement as key and date as YYYYMMDD integer as value
     edge_dict = {}
-    dates_dict = {}
     for row in links_data:
         if row[5] in edge_dict:
             edge_dict[row[5]].append(row[12])
         else:
             edge_dict[row[5]] = [row[12]]
-        if not row[5] in dates_dict:
-            dates_dict[row[5]] = int(''.join(row[1].split('-')))
     
     # Build a vertices dictionary with node_id as key and node row as the value
     vertices_dict = {row[nodes_header.index('node_id')]:row for row in nodes_data}
@@ -87,8 +83,6 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         matrix.append(row)
     matrix = np.array(matrix)
     
-    #data_dict['nodes_data'] = nodes_data - DON'T NEED THIS
-    data_dict['dates_dict'] = dates_dict
     data_dict['nodes_header'] = nodes_header
     data_dict['links_data'] = links_data
     data_dict['links_header'] = links_header
@@ -398,27 +392,27 @@ st.write('Actors on y-axis ordered by first appearance in a peace process. The p
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 # We want to sort agreements in date order so build list of agreement index-date tuples
-t_list = []
-for i,agreement_id in enumerate(pp_ag_ids):
-    if not agreement_id in data_dict['dates_dict']:
-        continue
-    ag_date = data_dict['dates_dict'][agreement_id]
-    t_list.append((i,ag_date))
+#t_list = []
+#for i,agreement_id in enumerate(pp_ag_ids):
+#    if not agreement_id in data_dict['dates_dict']:
+#        continue
+#    ag_date = data_dict['dates_dict'][agreement_id]
+#    t_list.append((i,ag_date))
 # Sort by date    
-t_list = sorted(t_list,key=lambda t:t[1])
+#t_list = sorted(t_list,key=lambda t:t[1])
 
 # Build a time-order agreement-actor matrix
-ordered_matrix = []
-for t in t_list:
-    ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
+#ordered_matrix = []
+#for t in t_list:
+#    ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
     
-ordered_matrix = np.array(ordered_matrix)
+#ordered_matrix = np.array(ordered_matrix)
 # Put actors in rows
-ordered_matrix = ordered_matrix.T
+#ordered_matrix = ordered_matrix.T
 
-# Now order actors by first appearance in process (process is defined as a sequence of agreements)
+# Order actors by first appearance in process (process is defined as a sequence of agreements)
 row_indices = []
-for i,row in enumerate(ordered_matrix):
+for i,row in enumerate(pp_data_dict['pp_matrix']):
     where = np.where(row==1)
     v = 0
     if len(where[0]) > 0:
@@ -426,7 +420,7 @@ for i,row in enumerate(ordered_matrix):
     row_indices.append((i,v))
 sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
 
-sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
+sorted_matrix = pp_data_dict['pp_matrix'][np.ix_(sorted_row_indices)]
 
 f = plt.figure(figsize=(16,8))
 for i,row in enumerate(sorted_matrix):
