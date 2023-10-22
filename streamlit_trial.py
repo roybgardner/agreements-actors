@@ -447,6 +447,9 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Peace process - actor relation matrix")
 
+st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
+st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
+
 process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
 
 for i,process_name in enumerate(pp_names):
@@ -460,7 +463,7 @@ for i,process_name in enumerate(pp_names):
 f = plt.figure(figsize=(8,8))
 plt.imshow(process_matrix,cmap=plt.cm.Blues)
 plt.ylabel('Peace process')
-plt.ylabel('Actor')
+plt.xlabel('Actor')
 st.pyplot(f)
 
 
