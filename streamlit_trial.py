@@ -128,8 +128,9 @@ def get_peace_process_data(process_name,data_dict):
     pp_graph = nx.Graph()
 
     vertices = []
-    vertices.extend([t[0] for t in linked_pairs])
-    vertices.extend([t[2] for t in linked_pairs])
+    # TODO FIX THIS - SOME DATA EROORS
+    vertices.extend([t[0] for t in linked_pairs if '_' in t[0]])
+    vertices.extend([t[2] for t in linked_pairs if '_' in t[2]])
     vertices = list(set(vertices))
 
     pp_graph.add_nodes_from(vertices)
