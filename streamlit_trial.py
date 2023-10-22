@@ -445,6 +445,22 @@ st.header("Analysis - All Agreements")
 st.write('Number of agreements in full data set:',data_dict['matrix'].shape[0])
 st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
+st.subheader("Peace process - actor relation matrix")
+
+process_matrix = np.zeros((len(processes),len(data_dict['actor_vertices'])), dtype=int)
+
+for i,process_name in enumerate(processes):
+    process_data = get_peace_process_data(process_name,data_dict)
+    actor_marginal = [sum(row) for row in process_data['pp_matrix'].T]
+    actor_indices = [data_dict['actor_vertices'].index(actor_id) for actor_id in process_data['pp_actor_ids']]
+    for j,v in enumerate(actor_marginal):
+        if v > 0:
+            process_matrix[i][actor_indices[j]] = 1
+
+f = plt.figure(figsize=(8,8))
+plt.imshow(process_matrix,cmap=plt.cm.Blues,aspect='auto')
+st.pyplot(f)
+
 
 st.subheader("Distribution of number of agreements signed across actors")
 
