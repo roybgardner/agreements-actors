@@ -129,8 +129,8 @@ def get_peace_process_data(process_name,data_dict):
 
     vertices = []
     # TODO FIX THIS - SOME DATA EROORS
-    vertices.extend([t[0] for t in linked_pairs if len(t[0].strip())>0 and '_' in v])
-    vertices.extend([t[2] for t in linked_pairs if len(t[0].strip())>0 and '_' in v])
+    vertices.extend([t[0] for t in linked_pairs if len(t[0].strip())>0 and '_' in t[0]])
+    vertices.extend([t[2] for t in linked_pairs if len(t[2].strip())>0 and '_' in t[2]])
     vertices = list(set(vertices))
 
     pp_graph.add_nodes_from(vertices)
