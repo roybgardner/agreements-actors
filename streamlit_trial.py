@@ -458,7 +458,9 @@ for i,process_name in enumerate(pp_names):
             process_matrix[i][actor_indices[j]] = 1
 
 f = plt.figure(figsize=(8,8))
-plt.imshow(process_matrix,cmap=plt.cm.Blues,aspect='auto')
+plt.imshow(process_matrix,cmap=plt.cm.Blues)
+plt.ylabel('Peace process')
+plt.ylabel('Actor')
 st.pyplot(f)
 
 
