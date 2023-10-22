@@ -139,7 +139,7 @@ def get_peace_process_data(process_name,data_dict):
     
     pp_data_dict['pp_graph'] = {}
     pp_data_dict['pp_graph'] = pp_graph
-    pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices]
+    pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices if '_' in v]
 
     return pp_data_dict
 
