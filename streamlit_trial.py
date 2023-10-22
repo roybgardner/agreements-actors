@@ -495,7 +495,8 @@ for index in x:
 st.header("Caveats")
 
 st.write('1. Following the happy path.')
-st.write('2. Systematic testing required.')
-st.write('3. Some bad data found - see DRC: Eastern DRC processes which contain node Congo, Democratic Republic of the.')
-st.write('4. Known error DRC: Eastern DRC processes - see above')
+st.write('2. Data integrity checks required - see 4 below.')
+st.write('3. Systematic testing required.')
+st.write('4. Some bad data found - see DRC: Eastern DRC processes which contain node Congo, Democratic Republic of the.')
+st.write('5. Known error DRC: Eastern DRC processes - see above')
 
