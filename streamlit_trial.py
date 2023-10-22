@@ -129,8 +129,8 @@ def get_peace_process_data(process_name,data_dict):
 
     vertices = []
     # TODO FIX THIS - SOME DATA EROORS
-    vertices.extend([t[0] for t in linked_pairs if '_' in t[0]])
-    vertices.extend([t[2] for t in linked_pairs if '_' in t[2]])
+    vertices.extend([t[0] for t in linked_pairs if len(t[0].strip())>0 and '_' in v])
+    vertices.extend([t[2] for t in linked_pairs if len(t[0].strip())>0 and '_' in v])
     vertices = list(set(vertices))
 
     pp_graph.add_nodes_from(vertices)
@@ -139,7 +139,7 @@ def get_peace_process_data(process_name,data_dict):
     
     pp_data_dict['pp_graph'] = {}
     pp_data_dict['pp_graph'] = pp_graph
-    pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices if '_' in v]
+    pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices]
 
     return pp_data_dict
 
