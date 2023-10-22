@@ -135,7 +135,8 @@ def get_peace_process_data(process_name,data_dict):
 
     pp_graph.add_nodes_from(vertices)
     for pair in linked_pairs:
-        pp_graph.add_edge(pair[0],pair[2],weight=pair[1])
+        if len(pair[0])>0 and '_' in pair[0] and len(pair[2])>0 and '_' in pair[2]:
+            pp_graph.add_edge(pair[0],pair[2],weight=pair[1])
     
     pp_data_dict['pp_graph'] = {}
     pp_data_dict['pp_graph'] = pp_graph
