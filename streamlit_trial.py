@@ -301,31 +301,30 @@ display_graph(pp_graph,node_colors)
 
 
 #Query vertices using depth-first search
-with st.container():
-    with st.form("query"):
-        st.subheader("Query peace process network")
-        # Build the options - NEED TO WORK ON THIS
-        option_list = []
-        option_list.extend(pp_data_dict['pp_actor_ids'])
-        option_list.extend(pp_data_dict['pp_agreement_ids'])
-        option_list = sorted(option_list,reverse=True)
-        option_list = [vertex_id + ': ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
+with st.form("query"):
+    st.subheader("Query peace process network")
+    # Build the options - NEED TO WORK ON THIS
+    option_list = []
+    option_list.extend(pp_data_dict['pp_actor_ids'])
+    option_list.extend(pp_data_dict['pp_agreement_ids'])
+    option_list = sorted(option_list,reverse=True)
+    option_list = [vertex_id + ': ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
 
-        options = st.multiselect(
-        'Select actors and/or agreements',
-        option_list,
-        [])
+    options = st.multiselect(
+    'Select actors and/or agreements',
+    option_list,
+    [])
 
-        operator=["AND", "OR"]
-        select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
-        depth=st.slider("Select depth", min_value=1, max_value=3, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    operator=["AND", "OR"]
+    select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
+    depth=st.slider("Select depth", min_value=1, max_value=3, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
-    # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            options = [v.split(':')[0] for v in options]
-            results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
-            display_graph(results_dict['graph'],results_dict['node_colors'])
+# Every form must have a submit button.
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        options = [v.split(':')[0] for v in options]
+        results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
+        display_graph(results_dict['graph'],results_dict['node_colors'])
 
 
 # Co-occurrence networks
