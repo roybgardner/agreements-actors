@@ -383,7 +383,7 @@ st.write('Actors on y-axis ordered by first appearance in a peace process. The p
           Necessary actor, agreement, and date information are available.')
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
-
+st.write(data_dict['dates_dict'])
 # We want to sort agreements in date order so build list of agreement index-date tuples
 t_list = []
 for i,agreement_id in enumerate(pp_ag_ids):
@@ -393,6 +393,7 @@ for i,agreement_id in enumerate(pp_ag_ids):
     t_list.append((i,ag_date))
 # Sort by date    
 t_list = sorted(t_list,key=lambda t:t[1])
+st.write(t_list)
 
 # Build a time-order agreement-actor matrix
 ordered_matrix = []
