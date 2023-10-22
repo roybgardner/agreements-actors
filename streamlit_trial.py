@@ -447,9 +447,9 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Peace process - actor relation matrix")
 
-process_matrix = np.zeros((len(processes),len(data_dict['actor_vertices'])), dtype=int)
+process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
 
-for i,process_name in enumerate(processes):
+for i,process_name in enumerate(pp_names):
     process_data = get_peace_process_data(process_name,data_dict)
     actor_marginal = [sum(row) for row in process_data['pp_matrix'].T]
     actor_indices = [data_dict['actor_vertices'].index(actor_id) for actor_id in process_data['pp_actor_ids']]
