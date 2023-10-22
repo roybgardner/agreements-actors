@@ -411,8 +411,9 @@ pp_ag_ids = pp_data_dict['pp_agreement_ids']
 #ordered_matrix = ordered_matrix.T
 
 # Order actors by first appearance in process (process is defined as a sequence of agreements)
+engagment_matrix = pp_data_dict['pp_matrix'].T
 row_indices = []
-for i,row in enumerate(pp_data_dict['pp_matrix']):
+for i,row in enumerate(engagment_matrix):
     where = np.where(row==1)
     v = 0
     if len(where[0]) > 0:
@@ -420,7 +421,7 @@ for i,row in enumerate(pp_data_dict['pp_matrix']):
     row_indices.append((i,v))
 sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
 
-sorted_matrix = pp_data_dict['pp_matrix'][np.ix_(sorted_row_indices)]
+sorted_matrix = engagment_matrix[np.ix_(sorted_row_indices)]
 
 f = plt.figure(figsize=(16,8))
 for i,row in enumerate(sorted_matrix):
