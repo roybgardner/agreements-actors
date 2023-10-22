@@ -29,22 +29,23 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
         links_header = next(reader)
         # Put the remaining rows into a list of lists
         links_data = [row for row in reader]
-
-    with open(data_path + agreements_dict) as f:
-        agreements_dict = json.load(f)
     
     # Agreement are from vertices
     agreement_vertices = list(set([row[links_header.index('from_node_id')] for row in links_data]))
     # Actors are to vertices
     actor_vertices = list(set([row[links_header.index('to_node_id')] for row in links_data]))
 
-    # Build an edge dict with agreement as key and actor as value
+    # Build an edge dict (not persistent) with agreement as key and actor as value
+    # Build an dates dict (persistent) with agreement as key and date as YYYYMMDD integer as value
     edge_dict = {}
+    dates_dict = {}
     for row in links_data:
         if row[5] in edge_dict:
             edge_dict[row[5]].append(row[12])
         else:
             edge_dict[row[5]] = [row[12]]
+        if not row[5] in dates_dict:
+            dates_dict[row[5]] = int(''.join(row[1].split('-')))
     
     # Build a vertices dictionary with node_id as key and node row as the value
     vertices_dict = {row[nodes_header.index('node_id')]:row for row in nodes_data}
@@ -72,7 +73,7 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     matrix = np.array(matrix)
     
     #data_dict['nodes_data'] = nodes_data - DON'T NEED THIS
-    data_dict['agreements_dict'] = agreements_dict # Dictionary of agreement metadata from semantic work
+    data_dict['dates_dict'] = dates_dict
     data_dict['nodes_header'] = nodes_header
     data_dict['links_data'] = links_data
     data_dict['links_header'] = links_header
@@ -383,17 +384,15 @@ st.write('Actors on y-axis ordered by first appearance in a peace process. The p
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 
+# We want to sort agreements in date order so build list of agreement index-date tuples
 t_list = []
-for i,v in enumerate(pp_ag_ids):
-    agreement_id = v.split('_')[1]
-    # TODO - NEED DATA INTEGRITY CHECK
-    if not agreement_id in data_dict['agreements_dict']:
+for i,agreement_id in enumerate(pp_ag_ids):
+    if not agreement_id in data_dict['dates_dict']:
         continue
-    ag_date = data_dict['agreements_dict'][agreement_id]['Signed Date']
-    ag_date = int(''.join(ag_date.split('-')))
-    t_list.append((i,agreement_id,ag_date))
-    
-t_list = sorted(t_list,key=lambda t:t[2])
+    ag_date = data_dict['dates_dict'][agreement_id]
+    t_list.append((i,ag_date))
+# Sort by date    
+t_list = sorted(t_list,key=lambda t:t[1])
 
 # Build a time-order agreement-actor matrix
 ordered_matrix = []
@@ -404,7 +403,7 @@ ordered_matrix = np.array(ordered_matrix)
 # Put actors in rows
 ordered_matrix = ordered_matrix.T
 
-# Now order actors by first appearance in process
+# Now order actors by first appearance in process (process is defined as a sequence of agreements)
 row_indices = []
 for i,row in enumerate(ordered_matrix):
     where = np.where(row==1)
@@ -463,5 +462,5 @@ for index in x:
 st.header("Caveats")
 
 st.write('1. Following the happy path.')
-st.write('2. Data integrity checks required.')
+st.write('2. Systematic testing required.')
 
