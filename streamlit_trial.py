@@ -479,6 +479,54 @@ plt.ylabel('Peace process')
 plt.xlabel('Actor')
 st.pyplot(f)
 
+proc_co_matrices = get_cooccurrence_matrices(process_matrix)
+upper = np.triu(proc_co_matrices[0],k=1)
+ids_key = 'actor_vertices'
+threshold = 40
+
+linked_pairs = []
+for i,row in enumerate(upper): 
+    linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
+actor_graph = nx.Graph()
+
+vertices = []
+vertices.extend([t[0] for t in linked_pairs])
+vertices.extend([t[2] for t in linked_pairs])
+vertices = list(set(vertices))
+actor_graph.add_nodes_from(vertices)
+for pair in linked_pairs:
+    actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+
+vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in vertices}
+
+vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in actor_graph.nodes]
+
+f = plt.figure(figsize=(16,16))
+pos = nx.spring_layout(actor_graph) 
+
+nx.draw_networkx_nodes(actor_graph,pos,
+                nodelist=vertices,
+                node_size=1500,
+                node_color=vertex_colors,
+                alpha=0.8)
+nx.draw_networkx_edges(actor_graph,pos,
+                    edgelist = [(t[0],t[2]) for t in linked_pairs],
+                    width=[t[1] for t in linked_pairs],
+                    edge_color='lightblue',
+                    alpha=0.8)
+nx.draw_networkx_labels(actor_graph, pos,
+                        labels=vertex_labels,
+                        horizontalalignment='left',
+                        font_color='black')
+nx.draw_networkx_edge_labels(actor_graph, pos,
+                        edge_labels={(t[0],t[2]):t[1] for t in linked_pairs},
+                        font_color='black')
+
+plt.grid(False)
+st.pyplot(f)
+
+
+
 
 st.subheader("Distribution of number of agreements signed across actors")
 
