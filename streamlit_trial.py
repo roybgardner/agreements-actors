@@ -463,7 +463,6 @@ st.subheader("Peace process - actor relation matrix")
 st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
 st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
 st.write('')
-st.write('Network diagram showing pairs of actors with 15 or more peace processes in common.')
 
 process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
 
@@ -480,6 +479,8 @@ plt.imshow(process_matrix,cmap=plt.cm.Blues)
 plt.ylabel('Peace process')
 plt.xlabel('Actor')
 st.pyplot(f)
+
+st.write('Network diagram showing pairs of actors with 15 or more peace processes in common.')
 
 proc_co_matrices = get_cooccurrence_matrices(process_matrix)
 upper = np.triu(proc_co_matrices[0],k=1)
