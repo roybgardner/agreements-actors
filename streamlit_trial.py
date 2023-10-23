@@ -56,7 +56,8 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         else:
             edge_dict[row[5]] = [row[12]]
         if not row[5] in dates_dict:
-            dates_dict[row[5]] = int(''.join(row[1].split('-')))
+            s = ''.join(row[1].split('/'))
+            dates_dict[row[5]] = int(s[::-1])
     
     # Build a vertices dictionary with node_id as key and node row as the value
     vertices_dict = {row[nodes_header.index('node_id')]:row for row in nodes_data}
@@ -281,7 +282,7 @@ st.write('Credits')
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
 st.write('Analysis/coding: Roy Gardner') 
 
-st.write('Analysis of signatory data based on binary-valued relation matrices including:') 
+st.write('Analysis of signatory data based on binary-valued relation matrices. Includes:') 
 st.write('1. Simple extraction of peace process data for network generation.') 
 st.write('2. Querying of peace process networks.') 
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
