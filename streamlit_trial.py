@@ -460,7 +460,7 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Peace process - actor relation matrix")
 
-# THIS IS HORRIBLY INLINE NEEDS TO BE TIDIED.
+# THIS IS HORRIBLY INLINE - NEEDS TO BE TIDIED AND REALITY CHECKED
 
 st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
 st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
