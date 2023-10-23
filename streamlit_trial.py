@@ -22,7 +22,7 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
     return: dictionary of processed data in data_dict
     """
 
-    # Stash data in a dictionary
+    # Stash data in this dictionary
     data_dict = {}
     
     # Read the CSVs
@@ -40,10 +40,10 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         # Put the remaining rows into a list of lists
         links_data = [row for row in reader]
     
-    # Agreement are from vertices
+    # Agreement are the from vertices
     agreement_vertices = list(set([row[links_header.index('from_node_id')] for row in links_data]))
     
-    # Actors are to vertices
+    # Actors are the to vertices
     actor_vertices = list(set([row[links_header.index('to_node_id')] for row in links_data]))
 
     # Build an edge dict (not persistent) with agreement as key and actor as value
@@ -84,25 +84,45 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
                 row[i] = 1
         matrix.append(row)
     matrix = np.array(matrix)
-    
-    #data_dict['nodes_data'] = nodes_data - DON'T NEED THIS
+
+    # Agreement:signed date as YYYYMMDD integer
     data_dict['dates_dict'] = dates_dict
+    # So we can index into node CSV rows using column names
     data_dict['nodes_header'] = nodes_header
+    # Rows from the links CSV excluding the header
     data_dict['links_data'] = links_data
+    # So we can index into links CSV rows using column names
     data_dict['links_header'] = links_header
+    # List of agreement vertex IDs
     data_dict['agreement_vertices'] = agreement_vertices
+    # List of actor vertex IDs
     data_dict['actor_vertices'] = actor_vertices
+    # Vertex ID:vertex row - convenient way to lookup vertex data
     data_dict['vertices_dict'] = vertices_dict
+    # Maps vertex types onto distinct colors
     data_dict['color_map'] = color_map
+    # Binary-valued relation matrix with agreements in rows and actors in columns. This is where the work is done.
     data_dict['matrix'] = matrix
 
     return data_dict
 
 def get_peace_processes(data_dict):
+    """
+    Get list of peace process names 
+    param data_dict: The application's data dictionary obtained from load_agreement_actor_data()
+    return: list of process names in alpha order
+    """
     processes = [row[data_dict['links_header'].index('PPName')].strip() for row in data_dict['links_data']]
     return sorted(list(set(processes)))
 
 def get_peace_process_data(process_name,data_dict):
+    """
+    Peace process data including the process agreement-actor relation matrix 
+    param process_name: Name of peace process
+    param data_dict: The application's data dictionary obtained from load_agreement_actor_data()
+    return: peace process data dictionary
+    """
+
     # Peace process data are in the links table so collect all edges assigned to the process
     pp_edges = [row for row in data_dict['links_data'] if row[data_dict['links_header'].\
                                                               index('PPName')].strip()==process_name]
@@ -111,25 +131,27 @@ def get_peace_process_data(process_name,data_dict):
     # sub-matrix
     pp_agreement_ids = list(set([row[data_dict['links_header'].index('from_node_id')] for row in pp_edges]))
     pp_agreement_indices = [data_dict['agreement_vertices'].index(agreement_id) for\
-                            agreement_id in pp_agreement_ids]
-    
+                            agreement_id in pp_agreement_ids]    
     pp_actor_ids = list(set([row[data_dict['links_header'].index('to_node_id')] for row in pp_edges]))
     pp_actor_indices = [data_dict['actor_vertices'].index(actor_id) for actor_id in pp_actor_ids]
 
+    # Lift the process sub-matrix from the complete agreement-actor relation matrix
     pp_matrix = data_dict['matrix'][np.ix_(pp_agreement_indices,pp_actor_indices)]
+
+    # Start populating the process data dictionary
     pp_data_dict = {}
     pp_data_dict['pp_actor_ids'] = pp_actor_ids
     pp_data_dict['pp_agreement_ids'] = pp_agreement_ids
     pp_data_dict['pp_matrix'] = pp_matrix
     
-    # Build a graph
+    # Build a graph from the process relation matrix
     linked_pairs = []
     for i,row in enumerate(pp_matrix):    
         linked_pairs.extend([(pp_agreement_ids[i],v,pp_actor_ids[j]) for j,v in enumerate(row) if v > 0])
     pp_graph = nx.Graph()
 
     vertices = []
-    # TODO FIX THIS - SOME DATA ERRORS
+    # Some simple integrity checks here
     vertices.extend([t[0] for t in linked_pairs if len(t[0])>0 and '_' in t[0]])
     vertices.extend([t[2] for t in linked_pairs if len(t[2])>0 and '_' in t[2]])
     vertices = list(set(vertices))
@@ -139,6 +161,7 @@ def get_peace_process_data(process_name,data_dict):
         if len(pair[0])>0 and '_' in pair[0] and len(pair[2])>0 and '_' in pair[2]:
             pp_graph.add_edge(pair[0],pair[2],weight=pair[1])
     
+    # Add the graph to the process data
     pp_data_dict['pp_graph'] = {}
     pp_data_dict['pp_graph'] = pp_graph
     pp_data_dict['pp_node_colors'] = [data_dict['color_map'][v.split('_')[0]] for v in vertices]
@@ -146,6 +169,15 @@ def get_peace_process_data(process_name,data_dict):
     return pp_data_dict
 
 def query_graph(graph,query_vertices=[],operator='AND',depth=1):
+    """
+    Query a peace process graph using networkx depth-first search 
+    param graph: A peace process graph
+    param query_vertices: A list of actor and/or agreement vertex IDs from which we search
+    param operator: Logical operator between found vertices of the query vertices
+    param depth: depth of search. Default = 1
+    return: dictionary containing found sub-graph and node colors
+    """
+
     tree_list = []
     for v in query_vertices:
          tree_list.append(nx.dfs_tree(graph,source=v,depth_limit=depth))
@@ -153,13 +185,16 @@ def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     found_vertices = set(tree_list[0].nodes) 
     for tree in tree_list:
         if operator == 'AND':
+            # Only include found vertices that are common to all query vertices
             found_vertices = found_vertices.intersection(set(tree.nodes))
         else:
             found_vertices = found_vertices.union(set(tree.nodes))
 
-    found_vertices = list(found_vertices)    
+    found_vertices = list(found_vertices) 
+    # Don't forget the query vertices  
     found_vertices.extend(query_vertices)
 
+    # Edges between the found vertices
     found_edges = []
     for tree in tree_list:
         for e in tree.edges:
@@ -171,26 +206,44 @@ def query_graph(graph,query_vertices=[],operator='AND',depth=1):
     for e in found_edges:
         found_graph.add_edge(e[0],e[1],weight=1)
     node_colors = [data_dict['color_map'][v.split('_')[0]] for v in found_graph.nodes()]
+    # Build a results dictionary
     results_dict = {}
     results_dict['graph'] = found_graph
     results_dict['node_colors'] = node_colors
     return results_dict
 
 def display_graph(graph,node_colors):
+    """
+    Display a graph 
+    param graph: A graph
+    param node_colors: Colors for the graph nodes
+    """
     f = plt.figure(figsize=(16,16))
     pos = nx.spring_layout(graph) 
     nx.draw_networkx(graph,pos,node_color=node_colors,font_size='8',alpha=0.8)
     plt.grid(False)
     st.pyplot(f)
 
-def get_cooccurrence_matrices(pp_matrix):
+def get_cooccurrence_matrices(matrix):
+    """
+    Get co-occurence matrices for a relation matrix 
+    param matrix: A is an agreement-actor or process-actor relation matrix
+    return: tuple of product matrices (A.T*A, A*A.T)
+    """
     # Actor-actor co-occurence matrix for a peace process
-    V = np.matmul(pp_matrix.T,pp_matrix)
+    V = np.matmul(matrix.T,matrix)
     # Agreement-agreement co-occurence matrix
-    W = np.matmul(pp_matrix,pp_matrix.T)
+    W = np.matmul(matrix,matrix.T)
     return (V,W)
 
 def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict,threshold):
+    """
+    TODO - GENERALISE TO PROCESS-ACTOR MATRICES
+    Display the uppoer triangle of a co-occurence matrix as a network 
+    param key: Key for accessing actor or agreement vertex data
+    param co_matrices: Key for accessing actor or agreement vertex data
+    return: tuple of product matrices (A.T*A, A*A.T)
+    """
     if key == 'actor':
         upper = np.triu(co_matrices[0],k=1)
         ids_key = 'pp_actor_ids'
