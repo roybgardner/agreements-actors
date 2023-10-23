@@ -552,7 +552,7 @@ proc_graph.add_nodes_from(proc_vertices)
 for pair in proc_linked_pairs:
     proc_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
-proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_names) if v in proc_vertices}
+proc_vertex_labels = {v:v for v in pp_names if v in proc_vertices}
 
 
 f = plt.figure(figsize=(16,16))
