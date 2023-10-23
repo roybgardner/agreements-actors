@@ -481,8 +481,9 @@ st.pyplot(f)
 
 proc_co_matrices = get_cooccurrence_matrices(process_matrix)
 upper = np.triu(proc_co_matrices[0],k=1)
+st.write(np.amin(upper),np.amax(upper))
 ids_key = 'actor_vertices'
-threshold = 40
+threshold = math.ceil(np.amax(upper)/2)
 
 proc_linked_pairs = []
 for i,row in enumerate(upper): 
