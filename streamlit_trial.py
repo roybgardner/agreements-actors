@@ -289,9 +289,7 @@ st.write('2. Querying of peace process networks.')
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
 
-
 st.header("Peace Process Network Analysis")
-
 
 # Select a peace process
 st.subheader("Select a peace process")
@@ -306,20 +304,30 @@ pp_graph = pp_data_dict['pp_graph']
 node_colors = pp_data_dict['pp_node_colors']
 display_graph(pp_graph,node_colors)
 
-
 #Query vertices using depth-first search
 with st.form("query"):
     st.subheader("Query peace process network")
     # Build the options - NEED TO WORK ON THIS
+
+    # Get actor options
+    actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
+    actor_options = sorted(actor_options,key=lambda t:t[1])
+    actor_options = [t[0] + ': ' + t[1] for t in actor_options]
+
+    agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
+    # Sort by date
+    agreement_options = sorted(agreement_options,key=lambda t:t[2])
+    agreement_options = [t[0] + ': ' + t[1] for t in agreement_options]
+
     option_list = []
     option_list.extend(pp_data_dict['pp_actor_ids'])
     option_list.extend(pp_data_dict['pp_agreement_ids'])
     option_list = sorted(option_list,reverse=True)
     option_list = [vertex_id + ': ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
 
-    options = st.multiselect(
-    'Select actors and/or agreements',
-    option_list,
+    options_actor = st.multiselect(
+    'Select one or more actors',
+    actor_options,
     [])
 
     operator=["AND", "OR"]
@@ -329,10 +337,9 @@ with st.form("query"):
 # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        options = [v.split(':')[0] for v in options]
+        options = [v.split(':')[0] for v in options_actor]
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
-
 
 # Co-occurrence networks
 with st.form("cooccurrence"):
@@ -368,7 +375,7 @@ with st.form("cooccurrence"):
     actor_threshold=st.slider("Actor co-occurrence threshold", min_value=actor_min, max_value=actor_max, value=actor_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=actor_disabled, label_visibility="visible")
     agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=agreement_min, max_value=agreement_max, value=agreement_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=agreement_disabled, label_visibility="visible")
 
-   # Every form must have a submit button.
+    # Every form must have a submit button.
     submitted_cooccur = st.form_submit_button("Submit")
     if submitted_cooccur:
         st.write('Edge values are the number of agreements to which a pair of actors are co-signatories.')
