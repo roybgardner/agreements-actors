@@ -502,7 +502,7 @@ for pair in proc_linked_pairs:
 proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
 st.write(proc_vertex_labels)
 
-proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_linked_pairs.nodes]
+proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_actor_graph.nodes]
 
 f = plt.figure(figsize=(16,16))
 pos = nx.spring_layout(proc_actor_graph) 
