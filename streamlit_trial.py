@@ -307,31 +307,26 @@ display_graph(pp_graph,node_colors)
 #Query vertices using depth-first search
 with st.form("query"):
     st.subheader("Query peace process network")
-    # Build the options - NEED TO WORK ON THIS
-
-    # Get actor options
+    st.write('Critical UX/UI for formulating queries and providing users with insight into process actors and agreements.')
+    st.write('Mix and match actors and agreements.')
+ 
+    # Get actors in alpha order
     actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
     actor_options = sorted(actor_options,key=lambda t:t[1])
     actor_options = [t[0] + ': ' + t[1] for t in actor_options]
 
+    # Get agreements in date order
     agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
-    # Sort by date
     agreement_options = sorted(agreement_options,key=lambda t:t[2])
     agreement_options = [t[0] + ': ' + t[1] for t in agreement_options]
 
-    option_list = []
-    option_list.extend(pp_data_dict['pp_actor_ids'])
-    option_list.extend(pp_data_dict['pp_agreement_ids'])
-    option_list = sorted(option_list,reverse=True)
-    option_list = [vertex_id + ': ' + data_dict['vertices_dict'][vertex_id][5] for vertex_id in option_list]
-
     options_actor = st.multiselect(
-    'Select one or more actors',
+    'Select zero or more actors (alpha order).',
     actor_options,
     [])
 
     options_agreement = st.multiselect(
-    'Select one or more agreements',
+    'Select zero or more agreements (date order)',
     agreement_options,
     [])
 
