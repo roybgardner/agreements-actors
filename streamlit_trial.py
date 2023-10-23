@@ -482,13 +482,13 @@ plt.ylabel('Peace process')
 plt.xlabel('Actor')
 st.pyplot(f)
 
-st.write('Network diagram showing pairs of actors with 15 or more peace processes in common.')
 
 proc_co_matrices = get_cooccurrence_matrices(process_matrix)
 upper = np.triu(proc_co_matrices[0],k=1)
-st.write(np.amin(upper),np.amax(upper))
 ids_key = 'actor_vertices'
 threshold = math.ceil(np.amax(upper)/2)
+
+st.write('Network diagram showing pairs of actors with', threshold, 'or more peace processes in common.')
 
 proc_linked_pairs = []
 for i,row in enumerate(upper): 
@@ -532,12 +532,12 @@ nx.draw_networkx_edge_labels(proc_graph, pos,
 plt.grid(False)
 st.pyplot(f)
 
-st.write('Network diagram showing pairs of peace processes with 15 or more peace processes in common.')
 
 upper = np.triu(proc_co_matrices[1],k=1)
-st.write(np.amin(upper),np.amax(upper))
 ids_key = 'agreement_vertices'
 threshold = math.ceil(np.amax(upper)/2)
+
+st.write('Network diagram showing pairs of peace processes with', threshold ,'or more actors in common.')
 
 proc_linked_pairs = []
 for i,row in enumerate(upper): 
