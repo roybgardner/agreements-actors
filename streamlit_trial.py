@@ -278,10 +278,11 @@ nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
 data_dict = load_agreement_actor_data(nodes_file,links_file,data_path)
 
-st.write('Credits') 
+st.subheader('Credits') 
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
 st.write('Analysis/coding: Roy Gardner') 
 
+st.subheader('Approach') 
 st.write('Analysis of signatory data based on binary-valued relation matrices. Includes:') 
 st.write('1. Simple extraction of peace process data for network generation.') 
 st.write('2. Querying of peace process networks.') 
