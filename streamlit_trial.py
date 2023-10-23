@@ -463,7 +463,7 @@ st.subheader("Peace process - actor relation matrix")
 # THIS IS HORRIBLY INLINE - NEEDS TO BE TIDIED AND REALITY CHECKED
 
 st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
-st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
+st.write('Scope for analysis by process attributes (e.g., number of agreements, duration, messiness) and metadata, and actor attributes.')
 st.write('')
 
 process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
