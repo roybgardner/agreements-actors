@@ -460,6 +460,8 @@ st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
 st.subheader("Peace process - actor relation matrix")
 
+# THIS IS HORRIBLY INLINE NEEDS TO BE TIDIED.
+
 st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
 st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
 st.write('')
@@ -492,43 +494,92 @@ proc_linked_pairs = []
 for i,row in enumerate(upper): 
     proc_linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
 
-proc_actor_graph = nx.Graph()
+proc_graph = nx.Graph()
 
 proc_vertices = []
 proc_vertices.extend([t[0] for t in proc_linked_pairs])
 proc_vertices.extend([t[2] for t in proc_linked_pairs])
 proc_vertices = list(set(proc_vertices))
-proc_actor_graph.add_nodes_from(proc_vertices)
+proc_graph.add_nodes_from(proc_vertices)
 for pair in proc_linked_pairs:
-    proc_actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+    proc_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
 proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
 
-proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_actor_graph.nodes]
+proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_graph.nodes]
 
 f = plt.figure(figsize=(16,16))
-pos = nx.spring_layout(proc_actor_graph) 
+pos = nx.spring_layout(proc_graph) 
 
-nx.draw_networkx_nodes(proc_actor_graph,pos,
+nx.draw_networkx_nodes(proc_graph,pos,
                 nodelist=proc_vertices,
                 node_size=1500,
                 node_color=proc_vertex_colors,
                 alpha=0.8)
-nx.draw_networkx_edges(proc_actor_graph,pos,
+nx.draw_networkx_edges(proc_graph,pos,
                     edgelist = [(t[0],t[2]) for t in proc_linked_pairs],
                     width=[t[1] for t in proc_linked_pairs],
                     edge_color='lightblue',
                     alpha=0.8)
-nx.draw_networkx_labels(proc_actor_graph, pos,
+nx.draw_networkx_labels(proc_graph, pos,
                         labels=proc_vertex_labels,
                         horizontalalignment='left',
                         font_color='black')
-nx.draw_networkx_edge_labels(proc_actor_graph, pos,
+nx.draw_networkx_edge_labels(proc_graph, pos,
                         edge_labels={(t[0],t[2]):t[1] for t in proc_linked_pairs},
                         font_color='black')
 
 plt.grid(False)
 st.pyplot(f)
+
+st.write('Network diagram showing pairs of peace processes with 15 or more peace processes in common.')
+
+upper = np.triu(proc_co_matrices[1],k=1)
+st.write(np.amin(upper),np.amax(upper))
+ids_key = 'agreement_vertices'
+threshold = math.ceil(np.amax(upper)/2)
+
+proc_linked_pairs = []
+for i,row in enumerate(upper): 
+    proc_linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
+
+proc_graph = nx.Graph()
+
+proc_vertices = []
+proc_vertices.extend([t[0] for t in proc_linked_pairs])
+proc_vertices.extend([t[2] for t in proc_linked_pairs])
+proc_vertices = list(set(proc_vertices))
+proc_graph.add_nodes_from(proc_vertices)
+for pair in proc_linked_pairs:
+    proc_graph.add_edge(pair[0],pair[2],weight=pair[1])
+
+proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
+
+
+f = plt.figure(figsize=(16,16))
+pos = nx.spring_layout(proc_graph) 
+
+nx.draw_networkx_nodes(proc_graph,pos,
+                nodelist=proc_vertices,
+                node_size=1500,
+                node_color='pink',
+                alpha=0.8)
+nx.draw_networkx_edges(proc_graph,pos,
+                    edgelist = [(t[0],t[2]) for t in proc_linked_pairs],
+                    width=[t[1] for t in proc_linked_pairs],
+                    edge_color='lightblue',
+                    alpha=0.8)
+nx.draw_networkx_labels(proc_graph, pos,
+                        labels=proc_vertex_labels,
+                        horizontalalignment='left',
+                        font_color='black')
+nx.draw_networkx_edge_labels(proc_graph, pos,
+                        edge_labels={(t[0],t[2]):t[1] for t in proc_linked_pairs},
+                        font_color='black')
+
+plt.grid(False)
+st.pyplot(f)
+
 
 
 st.subheader("Distribution of number of agreements signed across actors")
