@@ -330,6 +330,11 @@ with st.form("query"):
     actor_options,
     [])
 
+    options_agreement = st.multiselect(
+    'Select one or more agreements',
+    agreement_options,
+    [])
+
     operator=["AND", "OR"]
     select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
     depth=st.slider("Select depth", min_value=1, max_value=3, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
@@ -338,6 +343,7 @@ with st.form("query"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         options = [v.split(':')[0] for v in options_actor]
+        options.extend([v.split(':')[0] for v in options_agreement])
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
 
