@@ -462,6 +462,8 @@ st.subheader("Peace process - actor relation matrix")
 
 st.write('Placeholder and aide-mémoire. Can use the matrix (visualised below) to examine process and actor co-occurence networks.')
 st.write('Scope for analysis by process attributes (e.g. number of agreements, duration, messiness) and metadata.')
+st.write('')
+st.write('Network diagram showing pairs of actors with 15 or more peace processes in common.')
 
 process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
 
@@ -500,7 +502,6 @@ for pair in proc_linked_pairs:
     proc_actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
 proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
-st.write(proc_vertex_labels)
 
 proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_actor_graph.nodes]
 
