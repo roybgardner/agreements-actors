@@ -277,9 +277,12 @@ nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
 data_dict = load_agreement_actor_data(nodes_file,links_file,data_path)
 
+st.write('Credits') 
+st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
+st.write('Analysis/coding: Roy Gardner') 
 
-st.write('Analysis of Niamh Henry\'s signatory data. Objectives:') 
-st.write('1. Simple extraction of peace process data.') 
+st.write('Analysis of signatory data based on binary-valued relation matrices including:') 
+st.write('1. Simple extraction of peace process data for network generation.') 
 st.write('2. Querying of peace process networks.') 
 st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
@@ -495,8 +498,6 @@ for index in x:
 st.header("Caveats")
 
 st.write('1. Following the happy path.')
-st.write('2. Data integrity checks required - see 4 below.')
+st.write('2. Data integrity checks required.')
 st.write('3. Systematic testing required.')
-st.write('4. Some bad data found - see DRC: Eastern DRC processes which contain node Congo, Democratic Republic of the.')
-st.write('5. Known error DRC: Eastern DRC processes - see above')
 
