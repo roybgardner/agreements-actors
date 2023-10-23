@@ -502,6 +502,33 @@ for pair in proc_linked_pairs:
 proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
 st.write(proc_vertex_labels)
 
+proc_vertex_colors = [data_dict['color_map'][v.split('_')[0]] for v in proc_linked_pairs.nodes]
+
+f = plt.figure(figsize=(16,16))
+pos = nx.spring_layout(proc_actor_graph) 
+
+nx.draw_networkx_nodes(proc_actor_graph,pos,
+                nodelist=proc_vertices,
+                node_size=1500,
+                node_color=proc_vertex_colors,
+                alpha=0.8)
+nx.draw_networkx_edges(proc_actor_graph,pos,
+                    edgelist = [(t[0],t[2]) for t in proc_linked_pairs],
+                    width=[t[1] for t in proc_linked_pairs],
+                    edge_color='lightblue',
+                    alpha=0.8)
+nx.draw_networkx_labels(proc_actor_graph, pos,
+                        labels=proc_vertex_labels,
+                        horizontalalignment='left',
+                        font_color='black')
+nx.draw_networkx_edge_labels(proc_actor_graph, pos,
+                        edge_labels={(t[0],t[2]):t[1] for t in proc_linked_pairs},
+                        font_color='black')
+
+plt.grid(False)
+st.pyplot(f)
+
+
 st.subheader("Distribution of number of agreements signed across actors")
 
 st.write('THIS IS ILLUSTRATIVE ONLY. THERE ARE MANY OPPORTUNITIES FOR MORE MEANINGFUL ANALYSES.')
