@@ -488,15 +488,17 @@ linked_pairs = []
 for i,row in enumerate(upper): 
     linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
 
-actor_graph = nx.Graph()
+proc_actor_graph = nx.Graph()
 
 vertices = []
 vertices.extend([t[0] for t in linked_pairs])
 vertices.extend([t[2] for t in linked_pairs])
 vertices = list(set(vertices))
-actor_graph.add_nodes_from(vertices)
+proc_actor_graph.add_nodes_from(vertices)
 for pair in linked_pairs:
-    actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+    proc_actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
+
+proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in vertices}
 
 st.subheader("Distribution of number of agreements signed across actors")
 
