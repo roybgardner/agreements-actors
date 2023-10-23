@@ -534,14 +534,13 @@ st.pyplot(f)
 
 
 upper = np.triu(proc_co_matrices[1],k=1)
-ids_key = 'agreement_vertices'
 threshold = math.ceil(np.amax(upper)/2)
 
 st.write('Network diagram showing pairs of peace processes with', threshold ,'or more actors in common.')
 
 proc_linked_pairs = []
 for i,row in enumerate(upper): 
-    proc_linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
+    proc_linked_pairs.extend([(pp_names[i],v,pp_names[j]) for j,v in enumerate(row) if v >= threshold])
 
 proc_graph = nx.Graph()
 
@@ -553,7 +552,7 @@ proc_graph.add_nodes_from(proc_vertices)
 for pair in proc_linked_pairs:
     proc_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
-proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(data_dict[ids_key]) if v in proc_vertices}
+proc_vertex_labels = {v:v+'\n'+data_dict['vertices_dict'][v][5] for i,v in enumerate(pp_names) if v in proc_vertices}
 
 
 f = plt.figure(figsize=(16,16))
