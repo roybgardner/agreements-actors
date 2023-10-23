@@ -56,8 +56,8 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         else:
             edge_dict[row[5]] = [row[12]]
         if not row[5] in dates_dict:
-            s = ''.join(row[1].split('/'))
-            dates_dict[row[5]] = int(s[::-1])
+            a = row[1].split('/')
+            dates_dict[row[5]] = int(''.join(a[::-1]))
     
     # Build a vertices dictionary with node_id as key and node row as the value
     vertices_dict = {row[nodes_header.index('node_id')]:row for row in nodes_data}
@@ -75,7 +75,7 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
     # Build a colour map for types
     color_map = {type_:twenty_distinct_colors[i] for i,type_ in enumerate(vertex_types)}
     
-    # This is the core 
+    # This is the core data structure - the binary-valued relation matrix
     matrix = []
     for agreement in agreement_vertices:
         row = [0]*len(actor_vertices)
