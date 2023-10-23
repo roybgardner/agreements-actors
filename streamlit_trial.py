@@ -308,7 +308,7 @@ display_graph(pp_graph,node_colors)
 with st.form("query"):
     st.subheader("Query peace process network")
     st.write('Critical UX/UI for formulating queries and providing users with insight into process actors and agreements.')
-    st.write('Mix and match actors and agreements.')
+    st.write('Mix and match actors and agreements using the selectors below.')
  
     # Get actors in alpha order
     actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
