@@ -479,6 +479,24 @@ plt.ylabel('Peace process')
 plt.xlabel('Actor')
 st.pyplot(f)
 
+proc_co_matrices = get_cooccurrence_matrices(process_matrix)
+upper = np.triu(proc_co_matrices[0],k=1)
+ids_key = 'actor_vertices'
+threshold = 40
+
+linked_pairs = []
+for i,row in enumerate(upper): 
+    linked_pairs.extend([(data_dict[ids_key][i],v,data_dict[ids_key][j]) for j,v in enumerate(row) if v >= threshold])
+
+actor_graph = nx.Graph()
+
+vertices = []
+vertices.extend([t[0] for t in linked_pairs])
+vertices.extend([t[2] for t in linked_pairs])
+vertices = list(set(vertices))
+actor_graph.add_nodes_from(vertices)
+for pair in linked_pairs:
+    actor_graph.add_edge(pair[0],pair[2],weight=pair[1])
 
 st.subheader("Distribution of number of agreements signed across actors")
 
