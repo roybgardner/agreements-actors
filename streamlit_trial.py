@@ -536,7 +536,10 @@ f = plt.figure(figsize=(16,8))
 x = range(0,len(stages_list))
 plt.plot(x,stages_list,alpha=0.8,linewidth=0.5)
 plt.scatter(x,stages_list,alpha=0.8,s=5)
-plt.yticks([1,2,3,4,5],[1,2,3,4,5])
+plt.yticks([1,2,3,4,5],[1,2,3,4,5],fontsize='xx-large')
+plt.xticks(fontsize='xx-large')    
+plt.ylabel('Stage',fontsize='xx-large')
+plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
 # *********************************************************************************************************************
