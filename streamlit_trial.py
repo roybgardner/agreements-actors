@@ -470,9 +470,9 @@ for i,agreement_id in enumerate(pp_ag_ids):
     if not agreement_id in data_dict['dates_dict']:
         continue
     ag_date = data_dict['dates_dict'][agreement_id]
-    t_list.append((i,ag_date))
+    t_list.append((i,agreement_id,ag_date))
 # Sort by date    
-t_list = sorted(t_list,key=lambda t:t[1])
+t_list = sorted(t_list,key=lambda t:t[2])
 
 # Build a time-order agreement-actor matrix
 ordered_matrix = []
@@ -491,7 +491,7 @@ for i,row in enumerate(ordered_matrix):
     if len(where[0]) > 0:
         v = where[0][0]
     row_indices.append((i,v))
-sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
+sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[2])]
 
 sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
 
@@ -506,6 +506,20 @@ plt.yticks(fontsize='xx-large')
 plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
+
+st.header("Messy timeline")
+
+with open('./data/agreements_dict.json') as f:
+    agreements_dict = json.load(f)
+
+stage_dict = {}
+stage_dict['Cea'] = [1,'Ceasefire related']
+stage_dict['Pre'] = [2,'Pre-negotiation process']
+stage_dict['SubPar'] = [3,'Partial Framework - substantive']
+stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
+stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Oth'] = [0,'']
 
 
 st.header("Analysis - All Agreements")
