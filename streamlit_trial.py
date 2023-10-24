@@ -507,7 +507,7 @@ plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
-st.header("Messy timeline")
+st.subheader("Messy timeline")
 
 with open('./data/agreements_dict.json') as f:
     agreements_dict = json.load(f)
@@ -521,6 +521,25 @@ stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
 stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
 stage_dict['Oth'] = [0,'']
 
+stages_list = []
+for t in t_list:
+    agreement_id = t[1].split('_')[1]
+    if not agreement_id in agreements_dict:
+        continue
+    agreement_stage = agreements_dict[agreement_id]['Stage']
+    stages_list.append(stage_dict[agreement_stage][0])
+    f = plt.figure(figsize=(16,8))
+
+
+f = plt.figure(figsize=(8,8))
+        
+x = range(0,len(stages_list))
+plt.plot(x,stages_list,alpha=1.0)
+plt.scatter(x,stages_list,alpha=1.0)
+st.pyplot(f)
+
+# *********************************************************************************************************************
+# *********************************************************************************************************************
 
 st.header("Analysis - All Agreements")
 
@@ -647,6 +666,9 @@ nx.draw_networkx_edge_labels(proc_graph, pos,
 
 plt.grid(False)
 st.pyplot(f)
+
+# *********************************************************************************************************************
+
 
 st.subheader("Distribution of number of agreements signed across actors")
 
