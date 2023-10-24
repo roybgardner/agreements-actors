@@ -454,9 +454,6 @@ plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
-st.subheader("Agreements in actor space")
-
-
 
 st.header("Analysis - All Agreements")
 
