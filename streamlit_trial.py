@@ -531,11 +531,11 @@ for t in t_list:
     f = plt.figure(figsize=(16,8))
 
 
-f = plt.figure(figsize=(8,16))
+f = plt.figure(figsize=(16,8))
         
 x = range(0,len(stages_list))
-plt.plot(x,stages_list,alpha=1.0)
-plt.scatter(x,stages_list,alpha=1.0)
+plt.plot(x,stages_list,alpha=0.8,linewidth=0.5)
+plt.scatter(x,stages_list,alpha=0.8,s=5)
 plt.yticks([1,2,3,4,5],[1,2,3,4,5])
 st.pyplot(f)
 
