@@ -6,6 +6,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+from scipy.spatial.distance import *
+
 import json
 import os
 import csv
@@ -631,8 +633,6 @@ nx.draw_networkx_edge_labels(proc_graph, pos,
 
 plt.grid(False)
 st.pyplot(f)
-
-
 
 st.subheader("Distribution of number of agreements signed across actors")
 
