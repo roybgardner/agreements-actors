@@ -6,6 +6,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+from scipy.spatial.distance import *
+
 import json
 import os
 import csv
@@ -452,6 +454,9 @@ plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
+st.subheader("Agreements in actor space")
+
+
 
 st.header("Analysis - All Agreements")
 
@@ -578,8 +583,6 @@ nx.draw_networkx_edge_labels(proc_graph, pos,
 
 plt.grid(False)
 st.pyplot(f)
-
-
 
 st.subheader("Distribution of number of agreements signed across actors")
 
