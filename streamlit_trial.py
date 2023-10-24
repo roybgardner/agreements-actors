@@ -491,7 +491,7 @@ for i,row in enumerate(ordered_matrix):
     if len(where[0]) > 0:
         v = where[0][0]
     row_indices.append((i,v))
-sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[2])]
+sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
 
 sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
 
