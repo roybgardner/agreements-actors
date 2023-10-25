@@ -295,6 +295,8 @@ def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict,threshol
     plt.grid(False)
     st.pyplot(f)
 
+# *********************************************************************************************************************
+
 
 #define css for different classes 
 st.markdown("""
@@ -327,6 +329,8 @@ twenty_distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231',
 
 st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
 
+# *********************************************************************************************************************
+
 # Load data from CSV
 data_path = './data/'
 nodes_file = 'node_table.csv'
@@ -358,6 +362,8 @@ st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1]
 pp_graph = pp_data_dict['pp_graph']
 node_colors = pp_data_dict['pp_node_colors']
 display_graph(pp_graph,node_colors)
+
+# *********************************************************************************************************************
 
 #Query vertices using depth-first search
 with st.form("query"):
@@ -396,6 +402,8 @@ with st.form("query"):
         options.extend([v.split(':')[0] for v in options_agreement])
         results_dict = query_graph(pp_graph,query_vertices=options,operator=select_operator,depth=depth)
         display_graph(results_dict['graph'],results_dict['node_colors'])
+
+# *********************************************************************************************************************
 
 # Co-occurrence networks
 with st.form("cooccurrence"):
@@ -439,6 +447,8 @@ with st.form("cooccurrence"):
         st.write('Edge values are the number of signatories a pair of agreements have in common.')
         display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
 
+# *********************************************************************************************************************
+
 st.subheader("Actor signatory counts in selected peace process")
 
 st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
@@ -457,6 +467,8 @@ plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
 plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
 st.pyplot(f)
+
+# *********************************************************************************************************************
 
 st.subheader("Actor engagements over time in selected peace process")
 
@@ -507,41 +519,6 @@ plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
-st.subheader("Messy timeline")
-
-with open('./data/agreements_dict.json') as f:
-    agreements_dict = json.load(f)
-
-stage_dict = {}
-stage_dict['Cea'] = [1,'Ceasefire related']
-stage_dict['Pre'] = [2,'Pre-negotiation process']
-stage_dict['SubPar'] = [3,'Partial Framework - substantive']
-stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
-stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
-stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
-stage_dict['Oth'] = [0,'']
-
-stages_list = []
-for t in t_list:
-    agreement_id = t[1].split('_')[1]
-    if not agreement_id in agreements_dict:
-        continue
-    agreement_stage = agreements_dict[agreement_id]['Stage']
-    stages_list.append(stage_dict[agreement_stage][0])
-    f = plt.figure(figsize=(16,8))
-
-
-f = plt.figure(figsize=(16,8))
-        
-x = range(0,len(stages_list))
-plt.plot(x,stages_list,alpha=0.8,linewidth=0.5)
-plt.scatter(x,stages_list,alpha=0.8,s=5)
-plt.yticks([1,2,3,4,5],[1,2,3,4,5],fontsize='xx-large')
-plt.xticks(fontsize='xx-large')    
-plt.ylabel('Stage',fontsize='xx-large')
-plt.xlabel('Agreement index in time order',fontsize='xx-large')
-st.pyplot(f)
-
 # *********************************************************************************************************************
 # *********************************************************************************************************************
 
@@ -579,6 +556,8 @@ proc_co_matrices = get_cooccurrence_matrices(process_matrix)
 upper = np.triu(proc_co_matrices[0],k=1)
 ids_key = 'actor_vertices'
 threshold = math.ceil(np.amax(upper)/2)
+
+# *********************************************************************************************************************
 
 st.write('Network diagram showing pairs of actors with', threshold, 'or more peace processes in common.')
 
@@ -627,6 +606,8 @@ st.pyplot(f)
 
 upper = np.triu(proc_co_matrices[1],k=1)
 threshold = math.ceil(np.amax(upper)/2)
+
+# *********************************************************************************************************************
 
 st.write('Network diagram showing pairs of peace processes with', threshold ,'or more actors in common.')
 
