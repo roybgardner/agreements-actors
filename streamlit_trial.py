@@ -476,14 +476,15 @@ st.write('Actors on y-axis ordered by first appearance in a peace process. The p
           Necessary actor, agreement, and date information are available.')
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
-# We want to sort agreements in date order so build list of agreement index-date tuples
+# We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
 t_list = []
 for i,agreement_id in enumerate(pp_ag_ids):
     if not agreement_id in data_dict['dates_dict']:
         continue
     ag_date = data_dict['dates_dict'][agreement_id]
+    # Might use the agreement_id later but currently not used
     t_list.append((i,agreement_id,ag_date))
-# Sort by date    
+# Sort the agreements by date by date    
 t_list = sorted(t_list,key=lambda t:t[2])
 
 # Build a time-order agreement-actor matrix
@@ -535,6 +536,7 @@ st.write('Can use the process-actor relation matrix (visualised below) to examin
 st.write('Scope for analysis by process attributes (e.g., number of agreements, duration, messiness) and metadata, and actor attributes.')
 st.write('')
 
+# Build a process-actor matrix
 process_matrix = np.zeros((len(pp_names),len(data_dict['actor_vertices'])), dtype=int)
 
 for i,process_name in enumerate(pp_names):
