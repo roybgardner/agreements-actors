@@ -407,8 +407,8 @@ with st.form("query"):
 
 # Co-occurrence networks
 with st.form("cooccurrence"):
-    st.write("NOTE: Co-occurrence networks can queried to ask question like 'What is the number of agreements to which countries X and Y were both co-signatories?'")
     st.subheader("Actor and agreement co-occurrences in peace process")
+    st.write("NOTE: Co-occurrence networks can queried to ask question like 'What is the number of agreements to which countries X and Y were both co-signatories?'")
     st.write("It would also be possible to find actors who have never been co-signatories.")
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
