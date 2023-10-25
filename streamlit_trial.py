@@ -407,6 +407,7 @@ with st.form("query"):
 
 # Co-occurrence networks
 with st.form("cooccurrence"):
+    st.write("NOTE: Co-occurrence networks can queried to ask question like 'What is the number of agreements to which countries X and Y were both co-signatories?'")
     st.subheader("Actor and agreement co-occurrences in peace process")
     st.write("It would also be possible to find actors who have never been co-signatories.")
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
@@ -528,6 +529,7 @@ st.header("Analysis - All Agreements")
 st.write('Number of agreements in full data set:',data_dict['matrix'].shape[0])
 st.write('Number of actors in full data set:',data_dict['matrix'].shape[1])
 
+st.write("NOTE: Co-occurrence networks can queried to ask question like 'What is the number of peace processes in which countries X and Y were both signatory actors?'")
 st.subheader("Peace process - actor relation matrix")
 
 # THIS IS HORRIBLY INLINE - NEEDS TO BE TIDIED AND REALITY CHECKED
