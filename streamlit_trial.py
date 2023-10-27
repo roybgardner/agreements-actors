@@ -511,15 +511,16 @@ actor_diag = np.diag(co_matrices[0])
 labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
 z = list(zip(labels,actor_diag))
 z = sorted(z,key=lambda t:t[1])
+values = [t[1] for t in z]
         
         
-fig = plt.figure(figsize=(32,32),layout="constrained")
+fig = plt.figure(figsize=(16,16),layout="constrained")
 
 gs = GridSpec(1, 6, figure=fig)
 ax1 = fig.add_subplot(gs[0,0])
-ax1.barh(range(0,len(actor_diag)),[t[1] for t in z])
+ax1.barh(range(0,len(actor_diag)),values)
 ax1.set_yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
-ax1.set_xlim(0,70)
+ax1.set_xlim(0,max(values)+5)
 ax1.margins(y=0)
 ax1.set_title('All Stages',fontsize='xx-large')
 
@@ -540,7 +541,7 @@ for i,stage_level in enumerate(stage_levels):
     ax.barh(range(0,len(actor_diag)),[t[1] for t in x])
 
     ax.set_yticks([],[])
-    ax.set_xlim(0,70)
+    ax.set_xlim(0,max(values)+5)
     ax.margins(y=0)
     ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
 
