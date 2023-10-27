@@ -467,6 +467,7 @@ f = plt.figure(figsize=(8,32))
 plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
 plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 plt.xlabel('Number of agreements to which actor is signatory')
+plt.margins(y=0)
 st.pyplot(f)
 
 # *********************************************************************************************************************
