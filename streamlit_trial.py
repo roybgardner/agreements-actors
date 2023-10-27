@@ -341,7 +341,7 @@ st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allo
 data_path = './data/'
 nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
-agreements_dict = 'links_table.csv'
+agreements_dict = 'agreements_dict.json'
 
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
