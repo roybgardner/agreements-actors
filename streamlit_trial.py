@@ -479,6 +479,27 @@ plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large'
 plt.margins(y=0)
 st.pyplot(f)
 
+stage_dict = {}
+stage_dict['Cea'] = [1,'Ceasefire related']
+stage_dict['Pre'] = [2,'Pre-negotiation process']
+stage_dict['SubPar'] = [3,'Partial Framework - substantive']
+stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
+stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Oth'] = [0,'']
+
+# Map agreements on to stages
+stage_map = {}
+for i,agreement_id in enumerate(pp_data_dict['pp_agreement_ids']):
+    ss_id = agreement_id.split('_')[1]
+    if ss_id in data_dict['agreements_dict']:
+        stage_map[i] = stage_dict[data_dict['agreements_dict'][ss_id]['Stage']][0]
+    else:
+        stage_map[i] = 0
+    
+print(len(stage_map))
+print(len(pp_data_dict['pp_agreement_ids']))
+
 # *********************************************************************************************************************
 
 st.subheader("Actor engagements over time in selected peace process")
