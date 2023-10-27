@@ -5,6 +5,7 @@ from networkx.readwrite import json_graph
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
 
 from scipy.spatial.distance import *
 
@@ -479,6 +480,7 @@ plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large'
 plt.margins(y=0)
 st.pyplot(f)
 
+# Analysis by stage
 stage_dict = {}
 stage_dict['Cea'] = [1,'Ceasefire related']
 stage_dict['Pre'] = [2,'Pre-negotiation process']
@@ -500,19 +502,14 @@ for i,agreement_id in enumerate(pp_data_dict['pp_agreement_ids']):
 print(len(stage_map))
 print(len(pp_data_dict['pp_agreement_ids']))
 
-from matplotlib.gridspec import GridSpec
-
-
 co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
 actor_diag = np.diag(co_matrices[0])
 
 # Plot
-
 labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
 z = list(zip(labels,actor_diag))
 z = sorted(z,key=lambda t:t[1])
 values = [t[1] for t in z]
-        
         
 fig = plt.figure(figsize=(16,16),layout="constrained")
 
@@ -523,7 +520,6 @@ ax1.set_yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
 ax1.set_xlim(0,max(values)+5)
 ax1.margins(y=0)
 ax1.set_title('All Stages',fontsize='xx-large')
-
 
 stage_levels = [1,2,3,4,5]
 for i,stage_level in enumerate(stage_levels):
