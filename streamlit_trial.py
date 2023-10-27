@@ -13,13 +13,14 @@ import os
 import csv
 import sys
 
-def load_agreement_actor_data(nodes_file,links_file,data_path):
+def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     """
     Load node and links data from CSV files, process, and add processed data to a data dictionary 
     The core data structure is a binary matrix defining the relationship between agreements and actors.
     Agreements are in rows, actors are in columns. Both agreements and actors are indexed sets.
     param nodes_file: The name of the CSV file containing node data
     param links_file: The name of the CSV file containing links data
+    param agreements_dict: Dictionary from semantic work containing agreement metadata
     param data_path: The path to the folder containing the CSV files
     return: dictionary of processed data in data_dict
     """
@@ -42,7 +43,10 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         # Put the remaining rows into a list of lists
         links_data = [row for row in reader]
     
-    # Agreement are the from vertices
+    with open(data_path + agreements_dict) as f:
+        agreements_dict = json.load(f)
+
+   # Agreement are the from vertices
     agreement_vertices = list(set([row[links_header.index('from_node_id')] for row in links_data]))
     
     # Actors are the to vertices
@@ -87,6 +91,8 @@ def load_agreement_actor_data(nodes_file,links_file,data_path):
         matrix.append(row)
     matrix = np.array(matrix)
 
+    # Agreements dictionary from semantic work
+    data_dict['agreements_dict'] = agreements_dict
     # Agreement:signed date as YYYYMMDD integer
     data_dict['dates_dict'] = dates_dict
     # So we can index into node CSV rows using column names
@@ -335,7 +341,9 @@ st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allo
 data_path = './data/'
 nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
-data_dict = load_agreement_actor_data(nodes_file,links_file,data_path)
+agreements_dict = 'links_table.csv'
+
+data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
 st.subheader('Credits') 
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
@@ -466,8 +474,8 @@ z = sorted(z,key=lambda t:t[1])
 f = plt.figure(figsize=(8,32))
 plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
 plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
-plt.xticks(fontsize='xx-large')
-plt.xlabel('Number of agreements to which actor is signatory',fontsize='xx-large')
+plt.xticks(fontsize='x-large')
+plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large')
 plt.margins(y=0)
 st.pyplot(f)
 
