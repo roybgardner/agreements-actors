@@ -354,7 +354,7 @@ st.subheader('Approach')
 st.write('Analysis of signatory data based on binary-valued relation matrices. Includes:') 
 st.write('1. Simple extraction of peace process data for network generation.') 
 st.write('2. Querying of peace process networks.') 
-st.write('3. Generation of co-occurrence networks measuring a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
+st.write('3. Generation of co-occurrence networks measuring, for example, a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
 
 st.subheader('Co-occurrence Matrices') 
