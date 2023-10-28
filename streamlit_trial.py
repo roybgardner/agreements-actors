@@ -359,8 +359,9 @@ st.write('4. Unlocking metadata analysis within and across peace processes.')
 
 st.subheader('Co-occurrence Matrices') 
 
-st.write('The indices of the entities in a cell{SUPERSCRIPT TWO} (i,j) of a co-occurrence matrix (C=AB) can be retrieved by finding\
-        non-zero indices in the result of a bitwise AND operation between the ith row of A and the jth column of B.')
+st.write('The indices of the entities in a cell c(i,j) of a co-occurrence matrix (C=A.TA or C=AA.T) can be retrieved by finding\
+        non-zero indices in the result of a bitwise AND operation between the ith row of the first matrix (A.T or A)\
+        and the jth column of the second matrix (A or A.T).')
 
 
 st.header("Peace Process Network Analysis")
