@@ -357,12 +357,6 @@ st.write('2. Querying of peace process networks.')
 st.write('3. Generation of co-occurrence networks measuring, for example, a) the number of agreements to which a pair of actors are co-signatories, b) the number of signatories a pair of agreements have in common.') 
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
 
-st.subheader('Co-occurrence Matrices') 
-
-st.write('The indices of the entities in a cell c(ij) of a co-occurrence matrix (C=A.TA or C=AA.T) can be retrieved by finding\
-        indices containing non-zero values in the result of a bitwise AND operation between the ith row of the first matrix (A.T or A)\
-        and the jth column of the second matrix (A or A.T).')
-
 
 st.header("Peace Process Network Analysis")
 
