@@ -461,10 +461,16 @@ with st.form("cooccurrence"):
     # Every form must have a submit button.
     submitted_cooccur = st.form_submit_button("Submit")
     if submitted_cooccur:
-        st.write('Edge values are the number of agreements to which a pair of actors are co-signatories.')
-        display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
-        st.write('Edge values are the number of signatories a pair of agreements have in common.')
-        display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
+        if actor_max > 0:
+            st.write('Edge values are the number of agreements to which a pair of actors are co-signatories.')
+            display_cooccurrence_network('actor',co_matrices,pp_data_dict,data_dict,actor_threshold)
+        else:
+            st.write('No non-zero actor co-occurence values.')
+        if agreement_max > 0:
+            st.write('Edge values are the number of signatories a pair of agreements have in common.')
+            display_cooccurrence_network('agreement',co_matrices,pp_data_dict,data_dict,agreement_threshold)
+        else:
+            st.write('No non-zero agreement co-occurence values. For example, there may be only one agreement.')
 
 # *********************************************************************************************************************
 
