@@ -454,9 +454,16 @@ with st.form("cooccurrence"):
         agreement_threshold = 1
     else:
         agreement_default = math.ceil(agreement_max/2)
-
-    actor_threshold=st.slider("Actor co-occurrence threshold", min_value=actor_min, max_value=actor_max, value=actor_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=actor_disabled, label_visibility="visible")
-    agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=agreement_min, max_value=agreement_max, value=agreement_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=agreement_disabled, label_visibility="visible")
+        
+    # Check we have non-zero co-occurrence values
+    if actor_max > 0:
+        actor_threshold=st.slider("Actor co-occurrence threshold", min_value=actor_min, max_value=actor_max, value=actor_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=actor_disabled, label_visibility="visible")
+    else:
+        st.write('No non-zero actor co-occurence values.')
+    if agreement_max > 0:
+        agreement_threshold=st.slider("Agreement co-occurrence threshold", min_value=agreement_min, max_value=agreement_max, value=agreement_default, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=agreement_disabled, label_visibility="visible")
+    else:
+        st.write('No non-zero agreement co-occurence values. For example, there may be only one agreement.')
 
     # Every form must have a submit button.
     submitted_cooccur = st.form_submit_button("Submit")
