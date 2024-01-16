@@ -464,7 +464,7 @@ st.caption(str(s))
 s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
 st.caption(str(s))
 
-st.write('3. Obtaining the agreements in a cell of an actor co-occurrence matrix.\
+st.write('3. Obtaining the agreements from a cell in an actor co-occurrence matrix.\
           In this example, the agreements for the pair of actors with the most agreements in common (see above).')
 
 # Get the row from the transpose of pp matrix
