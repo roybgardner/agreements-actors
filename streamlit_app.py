@@ -439,6 +439,9 @@ cbar = plt.colorbar()
 cbar.set_label('Number of actors',rotation=270,labelpad=15,fontsize='x-large')
 st.pyplot(f)
 
+st.write('Various operations on co-occurrence matrices are supported. Some examples are given below.')
+st.write('1. Number of agreements to which a pair of actors are co-signatories.\
+          The example below gives the pair of actors with the most agreements in common.')
 
 # Actors with max agreements between them
 indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
@@ -450,6 +453,9 @@ st.write(s)
 st.write('Number of agreements:',actor_upper[indices])
 st.write('\n')
 
+st.write('2. Number of actors that are co-signatories to a pair of agreements.\
+          The example below gives the pair of agreements with the most co-signatories.')
+
 # Agreements with max actors between them
 indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
@@ -458,3 +464,6 @@ s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + '
 st.caption('Agreements with the greatest number of co-signatories:')
 st.write(s)
 st.write('Number of co-signatories:',agreement_upper[indices])
+
+st.write('3. Retrieving the agreements in the cell of the actor co-occurrence matrix.')
+
