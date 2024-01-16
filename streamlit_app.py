@@ -306,7 +306,7 @@ display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_d
 #Query vertices using depth-first search
 with st.form("query"):
     st.subheader("Query peace process network")
-    st.write('X/UI for formulating queries and providing users with insight into peace process actors and agreements.')
+    st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
     st.write('Select actors (in alpha order) with agreements (in date order) using the selectors below.')
     st.write('Mixing and matching actor and agreements is supported but might not be sensible.')
     st.write('Because agreement-actor graphs are bipartitie the maximum depth for the search is 2.')
@@ -394,4 +394,26 @@ plt.xticks(fontsize='xx-large')
 plt.yticks(fontsize='xx-large')    
 plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
+st.pyplot(f)
+
+# *********************************************************************************************************************
+
+st.subheader("Actor and agreement co-occurrences in peace process")
+
+co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+actor_upper = np.triu(co_matrices[0],k=1)
+agreement_upper = np.triu(co_matrices[1],k=1)
+
+actor_max = np.amax(actor_upper)
+agreement_max = np.amax(agreement_upper)
+
+print(actor_max)
+print(agreement_max)
+
+f = plt.imshow(actor_upper,cmap=plt.cm.Blues)
+plt.colorbar()
+st.pyplot(f)
+
+f = plt.imshow(agreement_upper,cmap=plt.cm.Blues)
+plt.colorbar()
 st.pyplot(f)
