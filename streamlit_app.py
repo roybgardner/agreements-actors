@@ -440,7 +440,8 @@ st.pyplot(f)
 indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in indices]
-st.write('Actors who are co-signatories to the greatest number of agreements:',actors)
+s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
+st.write('Actors who are co-signatories to the greatest number of agreements:',s)
 st.write('Number of agreements:',actor_upper[indices])
 st.write('\n')
 
@@ -448,5 +449,6 @@ st.write('\n')
 indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in indices]
-st.write('Agreements with the greatest number of co-signatories:',agreements)
+s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
+st.write('Agreements with the greatest number of co-signatories:',s)
 st.write('Number of co-signatories:',agreement_upper[indices])
