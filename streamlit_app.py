@@ -279,6 +279,8 @@ st.write('3. Generation of co-occurrence matrices measuring, a)\
          The indices of entities in co-occurrence matrix cells can be recovered.') 
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
 
+# *********************************************************************************************************************
+st.divider()
 
 st.header("Peace Process Analysis")
 
