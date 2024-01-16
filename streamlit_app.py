@@ -435,20 +435,18 @@ cbar = plt.colorbar()
 cbar.set_label('Number of actors',rotation=270,labelpad=15,fontsize='x-large')
 st.pyplot(f)
 
-st.subsubheader("Analysis of co-occurrence matrices")
 
 # Actors with max agreements between them
 indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in indices]
-print('Actors who are co-signatories to the greatest number of agreements:',actors)
-print('Number of agreements:',actor_upper[indices])
-print()
+st.write('Actors who are co-signatories to the greatest number of agreements:',actors)
+st.write('Number of agreements:',actor_upper[indices])
+st.write('\n')
 
 # Agreements with max actors between them
 indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in indices]
-print('Agreements with the greatest number of co-signatories:',agreements)
-print('Number of co-signatories:',agreement_upper[indices])
-print()
+st.write('Agreements with the greatest number of co-signatories:',agreements)
+st.write('Number of co-signatories:',agreement_upper[indices])
