@@ -419,7 +419,7 @@ agreement_max = np.amax(agreement_upper)
 
 f = plt.figure(figsize=(8,8))
 plt.imshow(actor_upper,cmap=plt.cm.Blues)
-plt.xticks(fontsize='x-large')    
+plt.xticks(range(0,actor_upper.shape[0]),range(0,actor_upper.shape[0]),fontsize='x-large')    
 plt.yticks(fontsize='x-large')    
 plt.ylabel('Actor indices',fontsize='x-large')
 plt.xlabel('Actor indices',fontsize='x-large')
