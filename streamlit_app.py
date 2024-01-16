@@ -407,13 +407,10 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 actor_max = np.amax(actor_upper)
 agreement_max = np.amax(agreement_upper)
 
-print(actor_max)
-print(agreement_max)
-
 f = plt.imshow(actor_upper,cmap=plt.cm.Blues)
 plt.colorbar()
-st.pyplot(f)
+st.pyplot()
 
 f = plt.imshow(agreement_upper,cmap=plt.cm.Blues)
 plt.colorbar()
-st.pyplot(f)
+st.pyplot()
