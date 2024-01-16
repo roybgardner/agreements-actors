@@ -13,4 +13,7 @@ Port of Jupyter notebook into Streamlit app. Supports:
    Recovery of coocurring entities.
 6. Various visualisations based on metadata attributie values.
 
+
+The new app can be viewed here: https://agreements-actors-svcwidvdva3xltocggywpc.streamlit.app/
+
 The legacy app can be viewed here: https://agreements-actors-9pafsttx3wp7useyyqgmug.streamlit.app/
