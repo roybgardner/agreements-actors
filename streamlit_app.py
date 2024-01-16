@@ -450,7 +450,7 @@ actors = [(pp_data_dict['pp_actor_ids'][index],\
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
 st.caption(str(s))
 s = 'Number of co-agreements: ' + str(actor_upper[actor_indices])
-st.write(str(s))
+st.caption(str(s))
 
 st.write('2. Number of actors who are co-signatories to a pair of agreements.\
           The example below gives the pair of agreements with the most co-signatories.')
