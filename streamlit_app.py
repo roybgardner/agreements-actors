@@ -467,3 +467,15 @@ st.write('Number of co-signatories:',agreement_upper[indices])
 
 st.write('3. Retrieving the agreements in the cell of the actor co-occurrence matrix.')
 
+actors = ['CON_20','CON_21']
+actor_indices = [pp_data_dict['pp_actor_ids'].index(actor_id) for actor_id in actors]
+
+# Get the row from the transpose of pp matrix
+row1 = pp_data_dict['pp_matrix'].T[actor_indices[0]]
+# Get the row from the pp BVRM
+row2 = pp_data_dict['pp_matrix'].T[actor_indices[1]]
+x = np.bitwise_and(row1,row2)
+for index,value in enumerate(x): 
+    if value == 1:
+        print(pp_data_dict['pp_agreement_ids'][index],\
+              data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5])
