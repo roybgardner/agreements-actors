@@ -295,7 +295,7 @@ if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1]
 st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
 st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
 
-# Display peace process graph
+# Build peace process adjacency matrix and display graph using networkX
 adj_matrix,adj_vertices = binary_to_adjacency(pp_data_dict)
 display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
 
