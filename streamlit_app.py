@@ -405,7 +405,7 @@ st.divider()
 
 st.subheader("Actor and agreement co-occurrences in peace process")
 
-st.write('Peace process co-occurrence matrices are generated from the peace process binary-valued relation matrix by matrix multiplication operations.\
+st.write('Peace process co-occurrence matrices are generated from a peace process BVRM by matrix multiplication operations.\
          The actor co-occurrence matrix provides the number of agreements to which a pair of actors are co-signatories.\
          The agreement co-occurrence matrices provides the number of actors that are co-signatories to a pair of agreements.')
 
