@@ -302,6 +302,7 @@ adj_matrix,adj_vertices = binary_to_adjacency(pp_data_dict)
 display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
 
 # *********************************************************************************************************************
+st.divider()
 
 #Query vertices using depth-first search
 with st.form("query"):
@@ -345,6 +346,7 @@ with st.form("query"):
         display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
 
 # *********************************************************************************************************************
+st.divider()
 
 st.subheader("Actor engagements over time in selected peace process")
 
@@ -397,6 +399,7 @@ plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
 
 # *********************************************************************************************************************
+st.divider()
 
 st.subheader("Actor and agreement co-occurrences in peace process")
 
@@ -441,7 +444,7 @@ indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
-st.write('Actors who are co-signatories to the greatest number of agreements:')
+st.caption('Actors who are co-signatories to the greatest number of agreements:')
 st.write(s)
 st.write('Number of agreements:',actor_upper[indices])
 st.write('\n')
@@ -451,6 +454,6 @@ indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in indices]
 s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-st.write('Agreements with the greatest number of co-signatories:')
+st.caption('Agreements with the greatest number of co-signatories:')
 st.write(s)
 st.write('Number of co-signatories:',agreement_upper[indices])
