@@ -473,7 +473,7 @@ x = np.bitwise_and(row1,row2)
 for index,value in enumerate(x): 
     if value == 1:
         s = pp_data_dict['pp_agreement_ids'][index] + ' ' + data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]
-        st.caption(s)
+        st.caption(str(s))
 
 # *********************************************************************************************************************
 st.divider()
