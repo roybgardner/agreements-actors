@@ -472,8 +472,8 @@ row2 = pp_data_dict['pp_matrix'].T[actor_indices[1]]
 x = np.bitwise_and(row1,row2)
 for index,value in enumerate(x): 
     if value == 1:
-        st.write(pp_data_dict['pp_agreement_ids'][index],\
-              data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5])
+        s = pp_data_dict['pp_agreement_ids'][index] + ' ' + data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]
+        st.caption(s)
 
 # *********************************************************************************************************************
 st.divider()
