@@ -444,31 +444,29 @@ st.write('1. Number of agreements to which a pair of actors are co-signatories.\
           The example below gives the pair of actors with the most agreements in common.')
 
 # Actors with max agreements between them
-indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
+actor_indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
 actors = [(pp_data_dict['pp_actor_ids'][index],\
-           data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in indices]
+           data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in actor_indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
 st.caption('Actors who are co-signatories to the greatest number of agreements:')
 st.write(s)
-st.write('Number of agreements:',actor_upper[indices])
+st.write('Number of agreements:',actor_upper[actor_indices])
 st.write('\n')
 
 st.write('2. Number of actors that are co-signatories to a pair of agreements.\
           The example below gives the pair of agreements with the most co-signatories.')
 
 # Agreements with max actors between them
-indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
+agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
-               data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in indices]
+               data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
 s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
 st.caption('Agreements with the greatest number of co-signatories:')
 st.write(s)
-st.write('Number of co-signatories:',agreement_upper[indices])
+st.write('Number of co-signatories:',agreement_upper[agreement_indices])
 
 st.write('3. Retrieving the agreements in the cell of the actor co-occurrence matrix.')
-
-actors = ['CON_20','CON_21']
-actor_indices = [pp_data_dict['pp_actor_ids'].index(actor_id) for actor_id in actors]
+# Get the max actors
 
 # Get the row from the transpose of pp matrix
 row1 = pp_data_dict['pp_matrix'].T[actor_indices[0]]
