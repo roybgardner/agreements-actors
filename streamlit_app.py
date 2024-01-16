@@ -448,7 +448,7 @@ actor_indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.sh
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in actor_indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
-st.write("Actors:",s)
+st.write(s)
 st.write('Number of agreements:',actor_upper[actor_indices])
 
 st.write('2. Number of actors who are co-signatories to a pair of agreements.\
@@ -459,11 +459,11 @@ agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreem
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
 s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-st.write("Agreements:",s)
+st.write(s)
 st.write('Number of co-signatories:',agreement_upper[agreement_indices])
 
-st.write('3. Retrieving the agreements in the cell of an actor co-occurrence matrix.\
-          In this example, the agreements for the pair of actors with the most agreements in common.')
+st.write('3. Obtaining the agreements in a cell of an actor co-occurrence matrix.\
+          In this example, the agreements for the pair of actors with the most agreements in common (see above).')
 
 # Get the row from the transpose of pp matrix
 row1 = pp_data_dict['pp_matrix'].T[actor_indices[0]]
@@ -474,3 +474,82 @@ for index,value in enumerate(x):
     if value == 1:
         st.write(pp_data_dict['pp_agreement_ids'][index],\
               data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5])
+
+# *********************************************************************************************************************
+st.divider()
+st.subheader("Actor signatory counts in selected peace process")
+
+st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
+st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
+
+# Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
+actor_diag = np.diag(co_matrices[0])
+
+# Plot
+labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
+z = list(zip(labels,actor_diag))
+z = sorted(z,key=lambda t:t[1])
+
+f = plt.figure(figsize=(8,32))
+plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
+plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
+plt.xticks(fontsize='x-large')
+plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large')
+plt.margins(y=0)
+st.pyplot(f)
+
+# Stage analysis
+stage_dict = {}
+stage_dict['Cea'] = [1,'Ceasefire related']
+stage_dict['Pre'] = [2,'Pre-negotiation process']
+stage_dict['SubPar'] = [3,'Partial Framework - substantive']
+stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
+stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
+stage_dict['Oth'] = [0,'']
+
+# Map agreements on to stages
+stage_map = {}
+for i,agreement_id in enumerate(pp_data_dict['pp_agreement_ids']):
+    ss_id = agreement_id.split('_')[1]
+    if ss_id in data_dict['agreements_dict']:
+        stage_map[i] = stage_dict[data_dict['agreements_dict'][ss_id]['Stage']][0]
+    else:
+        stage_map[i] = 0
+
+co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+actor_diag = np.diag(co_matrices[0])
+
+# Plot
+labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
+z = list(zip(labels,actor_diag))
+z = sorted(z,key=lambda t:t[1])
+values = [t[1] for t in z]
+                
+fig = plt.figure(figsize=(16,16),layout="constrained")
+
+gs = GridSpec(1, 6, figure=fig)
+ax1 = fig.add_subplot(gs[0,0])
+ax1.barh(range(0,len(actor_diag)),values)
+ax1.set_yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
+ax1.set_xlim(0,max(values)+5)
+ax1.margins(y=0)
+ax1.set_title('All Stages',fontsize='xx-large')
+
+stage_levels = [1,2,3,4,5]
+for i,stage_level in enumerate(stage_levels):
+    stage_agreement_indices = [k for k,v in stage_map.items() if v == stage_level]
+    stage_matrix = pp_data_dict['pp_matrix'][np.ix_(stage_agreement_indices)]
+    co_matrices = get_cooccurrence_matrices(stage_matrix)
+    # Same order as all agreements so y-axes are consistent
+    actor_diag = np.diag(co_matrices[0])
+    x = list(zip(labels,actor_diag))
+    x = sorted(x,key=lambda t:[g[0] for g in z].index(t[0]))
+    ax = fig.add_subplot(gs[0,i+1])
+    ax.barh(range(0,len(actor_diag)),[t[1] for t in x])
+    ax.set_yticks([],[])
+    ax.set_xlim(0,max(values)+5)
+    ax.margins(y=0)
+    ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
+fig.suptitle('Actor Signatory Counts by Agreement Stage',fontsize='xx-large')
+st.pyplot(fig)
