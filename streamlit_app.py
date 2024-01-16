@@ -448,7 +448,7 @@ actor_indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.sh
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in actor_indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
-st.write(s)
+st.write("Actors:",s)
 st.write('Number of agreements:',actor_upper[actor_indices])
 
 st.write('2. Number of actors who are co-signatories to a pair of agreements.\
@@ -459,7 +459,7 @@ agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreem
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
 s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-st.write(s)
+st.write("Agreements:",s)
 st.write('Number of co-signatories:',agreement_upper[agreement_indices])
 
 st.write('3. Retrieving the agreements in the cell of an actor co-occurrence matrix.\
