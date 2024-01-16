@@ -448,8 +448,8 @@ actor_indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.sh
 actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in actor_indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
-st.caption(s)
-st.caption('Number of agreements:',actor_upper[actor_indices])
+st.write(s)
+st.write('Number of agreements:',actor_upper[actor_indices])
 
 st.write('2. Number of actors who are co-signatories to a pair of agreements.\
           The example below gives the pair of agreements with the most co-signatories.')
@@ -459,8 +459,8 @@ agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreem
 agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
 s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-st.caption(s)
-st.caption('Number of co-signatories:',agreement_upper[agreement_indices])
+st.write(s)
+st.write('Number of co-signatories:',agreement_upper[agreement_indices])
 
 st.write('3. Retrieving the agreements in the cell of an actor co-occurrence matrix.\
           In this example, the agreements for the pair of actors with the most agreements in common.')
@@ -472,5 +472,5 @@ row2 = pp_data_dict['pp_matrix'].T[actor_indices[1]]
 x = np.bitwise_and(row1,row2)
 for index,value in enumerate(x): 
     if value == 1:
-        st.caption(pp_data_dict['pp_agreement_ids'][index],\
+        st.write(pp_data_dict['pp_agreement_ids'][index],\
               data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5])
