@@ -271,9 +271,9 @@ st.write('Analysis/coding: Roy Gardner')
 
 st.subheader('Approach') 
 st.write('Analysis of signatory data based on binary-valued relation matrices (BVRMs). Includes:') 
-st.write('1. Extraction BVRMs containing data from individual peace processes.') 
+st.write('1. Extraction of BVRMs containing data from individual peace processes.') 
 st.write('2. Generation of adjacency matrices for querying and displaying peace process graphs.')  
-st.write('3. Generation of co-occurrence networks measuring, for example, a)\
+st.write('3. Generation of co-occurrence matrices measuring, a)\
           the number of agreements to which a pair of actors are co-signatories, b)\
           the number of signatories a pair of agreements have in common.\
          The indices of entities in co-occurrence matrix cells can be recovered.') 
@@ -404,7 +404,7 @@ st.write('Peace process co-occurrence matrices are generated from the peace proc
          The actor co-occurrence matrix provides the number of agreements to which a pair of actors are co-signatories.\
          The agreement co-occurrence matrices provides the number of actors that are co-signatories to a pair of agreements.')
 
-st.write('Co-occurrence matrices are visualised below as heatmaps — the more blue a cell the greater the count of agreements or actors in the cell.')
+st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the count of agreements or actors in the cell.')
 
 co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
 actor_upper = np.triu(co_matrices[0],k=1)
@@ -434,3 +434,21 @@ plt.title('Agreements co-occurrence matrix')
 cbar = plt.colorbar()
 cbar.set_label('Number of actors',rotation=270,labelpad=15,fontsize='x-large')
 st.pyplot(f)
+
+st.subsubheader("Analysis of co-occurrence matrices")
+
+# Actors with max agreements between them
+indices = np.unravel_index(np.argmax(actor_upper,axis=None),actor_upper.shape)
+actors = [(pp_data_dict['pp_actor_ids'][index],\
+           data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in indices]
+print('Actors who are co-signatories to the greatest number of agreements:',actors)
+print('Number of agreements:',actor_upper[indices])
+print()
+
+# Agreements with max actors between them
+indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
+agreements = [(pp_data_dict['pp_agreement_ids'][index],\
+               data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in indices]
+print('Agreements with the greatest number of co-signatories:',agreements)
+print('Number of co-signatories:',agreement_upper[indices])
+print()
