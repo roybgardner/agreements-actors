@@ -280,7 +280,7 @@ st.write('3. Generation of co-occurrence networks measuring, for example, a)\
 st.write('4. Unlocking metadata analysis within and across peace processes.') 
 
 
-st.header("Peace Process Network Analysis")
+st.header("Peace Process Analysis")
 
 # Select a peace process
 st.subheader("Select a peace process")
@@ -294,6 +294,8 @@ if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1]
 
 st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
 st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
+
+st.subheader("Peace Process Agreement-Actor Network")
 
 # Build peace process adjacency matrix and get adjacency matrix vertices and display graph using networkX
 adj_matrix,adj_vertices = binary_to_adjacency(pp_data_dict)
@@ -346,8 +348,8 @@ with st.form("query"):
 
 st.subheader("Actor engagements over time in selected peace process")
 
-st.write('Actors on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
-          Necessary actor, agreement, and date information are available.')
+st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
+          Actor, agreement, and date information are available but are not shown on this plot.')
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
