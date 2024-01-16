@@ -337,6 +337,6 @@ with st.form("query"):
         options = [v.split(':')[0] for v in options_actor]
         options.extend([v.split(':')[0] for v in options_agreement])
         query_indices = [adj_vertices.index(vertex) for vertex in options]
-        query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=depth,operator=operator)
+        query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=depth,operator=select_operator)
         display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
 
