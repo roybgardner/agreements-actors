@@ -449,7 +449,7 @@ actors = [(pp_data_dict['pp_actor_ids'][index],\
            data_dict['vertices_dict'][pp_data_dict['pp_actor_ids'][index]][5]) for index in actor_indices]
 s = actors[0][1] + ' (' + actors[0][0] + ') and ' + actors[1][1] + ' (' + actors[1][0] + ')'
 st.caption(str(s))
-s = 'Number of co-agreements: ' + actor_upper[actor_indices]
+s = 'Number of co-agreements: ' + str(actor_upper[actor_indices])
 st.write(str(s))
 
 st.write('2. Number of actors who are co-signatories to a pair of agreements.\
