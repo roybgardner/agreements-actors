@@ -34,7 +34,7 @@ def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visite
             vertices = depth_first_search(matrix,i,max_depth=1,depth=1,vertices=vertices,visited=visited)
     return vertices
 
-def binary_to_adjacency(pp_data_dict):
+def adjacency_from_biadjacency(pp_data_dict):
     """
     Convert a binary-valued peace process agreement-actor relations matrix to an adjacency matrix
     Rows and columns of the adjacency matrix are identical and
@@ -299,7 +299,7 @@ st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1]
 st.subheader("Peace Process Agreement-Actor Network")
 
 # Build peace process adjacency matrix and get adjacency matrix vertices and display graph using networkX
-adj_matrix,adj_vertices = binary_to_adjacency(pp_data_dict)
+adj_matrix,adj_vertices = adjacency_from_biadjacency(pp_data_dict)
 display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
 
 # *********************************************************************************************************************
