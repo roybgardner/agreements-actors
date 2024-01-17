@@ -18,16 +18,14 @@ def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visite
     """
     Recursive function to visit all vertices that are reachable from a query vertex.
     param matrix: The adjacency matrix representation of a graph
-    param query_index: The row/column index which defines the query vertex
+    param query_index: The index of the query vertex
     param max_depth: How deep to go (for a bipartite graph the maximum is 2)
     param depth: Keeps track of how deep we have gone
     param vertices: Store found vertices
-    param visited: Store visited vertices so we have a terminating condition
+    param visited: Track visited vertices so we have a terminating condition
     return list of vertices
     """
     visited.append(query_index)
-    # Index row - find connected head vertices in the query index row. In other words,
-    # find the vertices that the query vertex point to
     vertices.extend([i for i,v in enumerate(matrix[query_index]) if v > 0 and not i in visited])
     if depth < max_depth:
         for i in vertices:
