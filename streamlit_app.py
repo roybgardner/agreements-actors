@@ -41,7 +41,7 @@ def binary_to_adjacency(pp_data_dict):
     are constructed from the binary-valued matrix in row-column order.
     The number of rows (and columns) in the adjacency matrix is therefore:
     binary_matix.shape[0] +  binary_matix.shape[1]
-    param pp_data_dict: A dictionary containing peace process network data inclusing the BVRM
+    param pp_data_dict: A dictionary containing peace process data including the BVRM
     return adjacency matrix and list of vertex labels. The latter is the concatenated lists of
     agreement and actor vertex labels
     """    
@@ -80,6 +80,7 @@ def get_query_matrix(query_indices,matrix,max_depth=1,operator='OR'):
         if i == 0:
             found_indices.extend(vertices)
         else:
+            # Apply the Boolean operator
             if operator == 'OR':
                 found_indices = list(set(found_indices).union(set(vertices)))
             else:
@@ -87,7 +88,7 @@ def get_query_matrix(query_indices,matrix,max_depth=1,operator='OR'):
     # Add the query vertex to the found vertices
     found_indices.extend(query_indices)    
     found_indices = sorted(found_indices)
-    # Extract the sub-matrix containing only the found vertices
+    # Extract the sub-matrix containing only the found and query vertices from the complete adjacency matrix
     query_matrix = matrix[np.ix_(found_indices,found_indices)]
     return query_matrix,found_indices
 
