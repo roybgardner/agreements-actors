@@ -18,16 +18,14 @@ def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visite
     """
     Recursive function to visit all vertices that are reachable from a query vertex.
     param matrix: The adjacency matrix representation of a graph
-    param query_index: The row/column index which defines the query vertex
+    param query_index: The index of the query vertex
     param max_depth: How deep to go (for a bipartite graph the maximum is 2)
     param depth: Keeps track of how deep we have gone
     param vertices: Store found vertices
-    param visited: Store visited vertices so we have a terminating condition
+    param visited: Track visited vertices so we have a terminating condition
     return list of vertices
     """
     visited.append(query_index)
-    # Index row - find connected head vertices in the query index row. In other words,
-    # find the vertices that the query vertex point to
     vertices.extend([i for i,v in enumerate(matrix[query_index]) if v > 0 and not i in visited])
     if depth < max_depth:
         for i in vertices:
@@ -43,7 +41,7 @@ def binary_to_adjacency(pp_data_dict):
     are constructed from the binary-valued matrix in row-column order.
     The number of rows (and columns) in the adjacency matrix is therefore:
     binary_matix.shape[0] +  binary_matix.shape[1]
-    param pp_data_dict: A dictionary containing peace process network data inclusing the BVRM
+    param pp_data_dict: A dictionary containing peace process data including the BVRM
     return adjacency matrix and list of vertex labels. The latter is the concatenated lists of
     agreement and actor vertex labels
     """    
@@ -82,6 +80,7 @@ def get_query_matrix(query_indices,matrix,max_depth=1,operator='OR'):
         if i == 0:
             found_indices.extend(vertices)
         else:
+            # Apply the Boolean operator
             if operator == 'OR':
                 found_indices = list(set(found_indices).union(set(vertices)))
             else:
@@ -89,7 +88,7 @@ def get_query_matrix(query_indices,matrix,max_depth=1,operator='OR'):
     # Add the query vertex to the found vertices
     found_indices.extend(query_indices)    
     found_indices = sorted(found_indices)
-    # Extract the sub-matrix containing only the found vertices
+    # Extract the sub-matrix containing only the found and query vertices from the complete adjacency matrix
     query_matrix = matrix[np.ix_(found_indices,found_indices)]
     return query_matrix,found_indices
 
