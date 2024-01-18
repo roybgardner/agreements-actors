@@ -309,7 +309,7 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 
 # *********************************************************************************************************************
 st.divider()
-st.subheader("Actor signatory counts in selected peace process")
+st.subheader("Actor signatory counts by stage")
 
 # Stage analysis
 stage_dict = {}
