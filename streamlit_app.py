@@ -369,6 +369,56 @@ st.pyplot(fig)
 
 # *********************************************************************************************************************
 st.divider()
+st.subheader("Actor signatory counts by year")
+
+labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
+z = list(zip(range(0,len(labels)),labels))
+z = sorted(z,key=lambda t:t[1])
+
+# Get a sorted list of years
+
+pp_ag_ids = pp_data_dict['pp_agreement_ids']
+
+year_list = []
+for i,agreement_id in enumerate(pp_ag_ids):
+    if not agreement_id in data_dict['dates_dict']:
+        continue
+    ag_year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
+    year_list.append(ag_year)
+# Sort by year    
+year_list = sorted(set(year_list))
+print(year_list)
+
+year_matrix = np.zeros((len(pp_data_dict['pp_actor_ids']),len(year_list)))
+
+matrix_t = pp_data_dict['pp_matrix'].T
+for i,row in enumerate(matrix_t):
+    for j,v in enumerate(row):
+        if v == 0:
+            continue
+        agreement_id = pp_data_dict['pp_agreement_ids'][j]
+        year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
+        year_index = year_list.index(year)
+        year_matrix[i][year_index] += 1
+        
+# Get matrix in actor alpha order
+ordered_year_matrix = []
+for t in z:
+    ordered_year_matrix.append(year_matrix[t[0]])
+    
+ordered_year_matrix = np.array(ordered_year_matrix)
+        
+        
+fig = plt.figure(figsize=(16,16),layout="constrained")
+plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
+plt.xticks(range(0,len(year_list)),year_list)
+plt.yticks(range(0,len(labels)),[t[1] for t in z])
+cbar = plt.colorbar()
+cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='x-large')
+st.pyplot(fig)
+
+# *********************************************************************************************************************
+st.divider()
 
 #Query vertices using depth-first search
 with st.form("query"):
