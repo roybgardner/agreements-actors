@@ -311,24 +311,6 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 st.divider()
 st.subheader("Actor signatory counts in selected peace process")
 
-# Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
-#actor_diag = np.diag(co_matrices[0])
-
-# Plot
-"""
-abels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
-z = list(zip(labels,actor_diag))
-z = sorted(z,key=lambda t:t[1])
-
-f = plt.figure(figsize=(8,32))
-plt.barh(range(0,len(actor_diag)),[t[1] for t in z])
-plt.yticks(range(0,len(actor_diag)),[t[0] for t in z],fontsize='large')
-plt.xticks(fontsize='x-large')
-plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large')
-plt.margins(y=0)
-st.pyplot(f)
-"""
-
 # Stage analysis
 stage_dict = {}
 stage_dict['Cea'] = [1,'Ceasefire related']
