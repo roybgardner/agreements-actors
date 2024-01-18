@@ -311,6 +311,7 @@ agreement_upper = np.triu(co_matrices[1],k=1)
 st.divider()
 st.subheader("Actor signatory counts in selected peace process")
 
+"""
 # Get the actor co-occurrence matrix diagonal - it's equal to the columns marginal of the peace process matrix
 actor_diag = np.diag(co_matrices[0])
 
@@ -326,6 +327,7 @@ plt.xticks(fontsize='x-large')
 plt.xlabel('Number of agreements to which actor is signatory',fontsize='x-large')
 plt.margins(y=0)
 st.pyplot(f)
+"""
 
 # Stage analysis
 stage_dict = {}
