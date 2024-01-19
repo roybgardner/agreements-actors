@@ -269,14 +269,20 @@ st.write('Signatory data: Niamh Henry and Sanja Badanjak')
 st.write('Analysis/coding: Roy Gardner') 
 
 st.subheader('Approach') 
-st.write('Analysis of signatory data based on binary-valued relation matrices (BVRMs). Includes:') 
-st.write('1. Extraction of BVRMs containing data from individual peace processes.') 
-st.write('2. Generation of adjacency matrices for querying and displaying peace process graphs.')  
+st.write('Agreement-actor signatory data are an example of an undirected bipartite graph, i.e.,\
+          there are edges (links) between agreements and actors, but not between agreements or between actors.') 
+st.write('Agreement-actor bipartite graphs are represented by binary-valued biadjacency matrices (BMs).\
+          The rows of the matrix correspond to agreements and the columns to actors. Cell values contain\
+          the value 1 if an actor is a signatory to an agreement, otherwise cells values are 0.') 
+st.write('Agreement-actor biadjacency matrices provide the basis of peace process network analysis as follows:') 
+st.write('1. Extraction of BMs containing data from individual peace processes.') 
+st.write('2. Generation of complete adjacency matrices used by network visualisation\
+          packages to display agreement-actor network diagrams, and for depth-first search of networks.') 
 st.write('3. Generation of co-occurrence matrices measuring, a)\
           the number of agreements to which a pair of actors are co-signatories, b)\
           the number of signatories a pair of agreements have in common.\
          The indices of entities in co-occurrence matrix cells can be recovered.') 
-st.write('4. Unlocking metadata analysis within and across peace processes.') 
+st.write('4. Support for metadata-based analysis within and across peace processes.') 
 
 # *********************************************************************************************************************
 st.divider()
@@ -522,7 +528,7 @@ st.divider()
 
 st.subheader("Actor and agreement co-occurrences in peace process")
 
-st.write('Peace process co-occurrence matrices are generated from a peace process BVRM by matrix multiplication operations.\
+st.write('Peace process co-occurrence matrices are generated from a peace process BM by matrix multiplication operations.\
          The actor co-occurrence matrix provides the number of agreements to which a pair of actors are co-signatories.\
          The agreement co-occurrence matrices provides the number of actors that are co-signatories to a pair of agreements.')
 
@@ -586,7 +592,7 @@ st.write('3. Obtaining the agreements from a cell in an actor co-occurrence matr
 
 # Get the row from the transpose of pp matrix
 row1 = pp_data_dict['pp_matrix'].T[actor_indices[0]]
-# Get the row from the pp BVRM
+# Get the row from the pp BM
 row2 = pp_data_dict['pp_matrix'].T[actor_indices[1]]
 x = np.bitwise_and(row1,row2)
 for index,value in enumerate(x): 
