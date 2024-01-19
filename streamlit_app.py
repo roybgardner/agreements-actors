@@ -416,7 +416,7 @@ plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
 plt.ylabel('Actor',fontsize='large')
 plt.xlabel('Year',fontsize='xx-large')
 cbar = plt.colorbar()
-cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='x-large')
+cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
 st.pyplot(fig)
 
 # *********************************************************************************************************************
