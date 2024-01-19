@@ -426,7 +426,7 @@ st.subheader("Actor engagements in peace process over time")
 
 st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
           Actor, agreement, and date information are available but are not shown on this plot.\
-          A dot indicates that the actor is a cosignatory to the agreement.')
+          A dot indicates that the actor is a cosignatory to an agreement.')
 
 pp_ag_ids = pp_data_dict['pp_agreement_ids']
 # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
