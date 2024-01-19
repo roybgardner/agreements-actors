@@ -411,54 +411,13 @@ ordered_year_matrix = np.array(ordered_year_matrix)
         
 fig = plt.figure(figsize=(16,16),layout="constrained")
 plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
-plt.xticks(range(0,len(year_list)),year_list)
-plt.yticks(range(0,len(labels)),[t[1] for t in z])
+plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large')
+plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
+plt.ylabel('Actor',fontsize='large')
+plt.ylabel('Year',fontsize='xx-large')
 cbar = plt.colorbar()
 cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='x-large')
 st.pyplot(fig)
-
-# *********************************************************************************************************************
-st.divider()
-
-#Query vertices using depth-first search
-with st.form("query"):
-    st.subheader("Query peace process network")
-    st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
-    st.write('Select actors (in alpha order) with agreements (in date order) using the selectors below.')
-    st.write('Mixing and matching actor and agreements is supported but might not be sensible.')
- 
-    # Get actors in alpha order
-    actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
-    actor_options = sorted(actor_options,key=lambda t:t[1])
-    actor_options = [t[0] + ': ' + t[1] for t in actor_options]
-
-    # Get agreements in date order
-    agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
-    agreement_options = sorted(agreement_options,key=lambda t:t[2])
-    agreement_options = [t[0] + ': ' + t[1] for t in agreement_options]
-
-    options_actor = st.multiselect(
-    'Select zero or more actors.',
-    actor_options,
-    [])
-
-    options_agreement = st.multiselect(
-    'Select zero or more agreements',
-    agreement_options,
-    [])
-
-    operator=["AND", "OR"]
-    select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
-    #depth=st.slider("Select depth", min_value=1, max_value=2, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-
-# Every form must have a submit button.
-    submitted = st.form_submit_button("Submit")
-    if submitted:
-        options = [v.split(':')[0] for v in options_actor]
-        options.extend([v.split(':')[0] for v in options_agreement])
-        query_indices = [adj_vertices.index(vertex) for vertex in options]
-        query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
-        display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
 
 # *********************************************************************************************************************
 st.divider()
@@ -512,6 +471,50 @@ plt.yticks(fontsize='xx-large')
 plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
 plt.xlabel('Agreement index in time order',fontsize='xx-large')
 st.pyplot(f)
+
+# *********************************************************************************************************************
+st.divider()
+
+#Query vertices using depth-first search
+with st.form("query"):
+    st.subheader("Query peace process network")
+    st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
+    st.write('Select actors (in alpha order) with agreements (in date order) using the selectors below.')
+    st.write('Mixing and matching actor and agreements is supported but might not be sensible.')
+ 
+    # Get actors in alpha order
+    actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
+    actor_options = sorted(actor_options,key=lambda t:t[1])
+    actor_options = [t[0] + ': ' + t[1] for t in actor_options]
+
+    # Get agreements in date order
+    agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
+    agreement_options = sorted(agreement_options,key=lambda t:t[2])
+    agreement_options = [t[0] + ': ' + t[1] for t in agreement_options]
+
+    options_actor = st.multiselect(
+    'Select zero or more actors.',
+    actor_options,
+    [])
+
+    options_agreement = st.multiselect(
+    'Select zero or more agreements',
+    agreement_options,
+    [])
+
+    operator=["AND", "OR"]
+    select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
+    #depth=st.slider("Select depth", min_value=1, max_value=2, value=1, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+
+# Every form must have a submit button.
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        options = [v.split(':')[0] for v in options_actor]
+        options.extend([v.split(':')[0] for v in options_agreement])
+        query_indices = [adj_vertices.index(vertex) for vertex in options]
+        query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
+        display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
+
 
 # *********************************************************************************************************************
 st.divider()
