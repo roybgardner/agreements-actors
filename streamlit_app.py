@@ -141,6 +141,12 @@ def get_cooccurrence_matrices(matrix):
     W = np.matmul(matrix,matrix.T)
     return (V,W)
 
+def get_consignatories(actor_id,pp_data_dict):
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    actor_index = pp_data_dict['pp_actor_ids'].index(actor_id)
+    cosign_ids = [pp_data_dict['pp_actor_ids'][i] for i,v in enumerate(co_matrices[0][actor_index]) if v > 0]
+    return cosign_ids
+
 def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Stash data in a dictionary
     data_dict = {}

@@ -245,6 +245,12 @@ def get_cooccurrence_matrices(matrix):
     W = np.matmul(matrix,matrix.T)
     return (V,W)
 
+def get_consignatories(actor_id,pp_data_dict):
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    actor_index = pp_data_dict['pp_actor_ids'].index(actor_id)
+    cosign_ids = [pp_data_dict['pp_actor_ids'][i] for i,v in enumerate(co_matrices[0][actor_index]) if v > 0]
+    return cosign_ids
+
 def display_cooccurrence_network(key,co_matrices,pp_data_dict,data_dict,threshold):
     """
     TODO - GENERALISE TO PROCESS-ACTOR MATRICES
