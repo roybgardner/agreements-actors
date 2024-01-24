@@ -762,3 +762,18 @@ with st.form("actors"):
         for t in tuples:
             st.write(t[0],t[1])
         st.write()
+
+        st.write(':blue[Cosignatories of]',actor,'organised by agreement')
+        agreement_cosign_dict = {}
+        for cosign in cosigns:
+            agreements = get_consignatory_agreements([actor,cosign],pp_data_dict)
+            for agreement in agreements:
+                if agreement in agreement_cosign_dict:
+                    agreement_cosign_dict[agreement].append((cosign,get_actor_name(cosign,data_dict)))
+                else:
+                    agreement_cosign_dict[agreement] = [(cosign,get_actor_name(cosign,data_dict))]
+        for agreement,actors in agreement_cosign_dict.items():
+            st.write(agreement,get_agreement_name(agreement,data_dict))
+            st.write(actors)
+            st.write()
+        st.write()
