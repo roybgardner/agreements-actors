@@ -755,3 +755,10 @@ with st.form("actors"):
             st.write(t[0],t[1])
         st.write()
 
+        st.write(':blue[Cosignatories of]',actor,get_actor_name(actor,data_dict))
+        cosigns = get_consignatories(actor,pp_data_dict)
+        tuples = [(cosign,get_actor_name(cosign,data_dict)) for cosign in cosigns]
+        tuples = sorted(tuples,key=lambda t:t[1])
+        for t in tuples:
+            st.write(t[0],t[1])
+        st.write()
