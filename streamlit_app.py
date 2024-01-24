@@ -757,8 +757,10 @@ with st.form("actors"):
         for agreement,actors in agreement_cosign_dict.items():
             s = agreement + ' ' + get_agreement_name(agreement,data_dict)
             st.write(str(s))
-            for actor in actors:
-                s = '\t' + actor[0] + ' ' + actor[1]
+            for a in actors:
+                if a[0] == actor:
+                    continue
+                s = '\t' + a[0] + ' ' + a[1]
                 st.caption(str(s))
         st.write()
 
