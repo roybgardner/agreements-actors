@@ -732,19 +732,5 @@ st.divider()
 
 st.subheader("Exploring actor data")
 
-with st.form("actors"):
- 
-    # Get actors in alpha order
-    actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
-    actor_options = sorted(actor_options,key=lambda t:t[1])
-    actor_options = [t[0] + ': ' + t[1] for t in actor_options]
 
-    options_actor = st.selectbox(
-    'Select an actor.',
-    actor_options,
-    [])
-
-
-# Every form must have a submit button.
-    submitted = st.form_submit_button("Submit")
 
