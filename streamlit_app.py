@@ -744,12 +744,13 @@ with st.form("actors"):
             st.caption(str(s))
         st.write()
 
-        st.write(':blue[Cosignatories of]',actor,get_actor_name(actor,data_dict))
+        st.write(':blue[Co-signatories of]',actor,get_actor_name(actor,data_dict))
         cosigns = get_consignatories(actor,pp_data_dict)
         tuples = [(cosign,get_actor_name(cosign,data_dict)) for cosign in cosigns]
         tuples = sorted(tuples,key=lambda t:t[1])
         for t in tuples:
-            st.write(t[0],t[1])
+            s = t[0] + ' ' + t[1]
+            st.caption(str(s))
         st.write()
 
         st.write(':blue[Cosignatories of]',actor,'organised by agreement')
@@ -762,7 +763,9 @@ with st.form("actors"):
                 else:
                     agreement_cosign_dict[agreement] = [(cosign,get_actor_name(cosign,data_dict))]
         for agreement,actors in agreement_cosign_dict.items():
-            st.write(agreement,get_agreement_name(agreement,data_dict))
-            st.write(actors)
-            st.write()
+            s = agreement + ' ' + get_agreement_name(agreement,data_dict)
+            st.caption(str(s))
+            for actor in actors:
+                s = '\t' + actor[0] + ' ' + actor[1]
+                st.caption(str(s))
         st.write()
