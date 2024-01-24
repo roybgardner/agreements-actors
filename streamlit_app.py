@@ -739,7 +739,7 @@ with st.form("actors"):
     actor_options = sorted(actor_options,key=lambda t:t[1])
     actor_options = [t[0] + ': ' + t[1] for t in actor_options]
 
-    options_actor = st.select(
+    options_actor = st.selectbox(
     'Select an actor.',
     actor_options,
     [])
