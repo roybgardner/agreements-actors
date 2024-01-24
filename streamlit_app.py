@@ -741,8 +741,7 @@ with st.form("actors"):
 
     options_actor = st.selectbox(
     'Select an actor.',
-    actor_options,
-    [])
+    actor_options)
 
 
 # Every form must have a submit button.
