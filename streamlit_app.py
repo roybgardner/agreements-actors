@@ -714,18 +714,6 @@ st.caption(str(s))
 s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
 st.caption(str(s))
 
-st.write('3. Obtaining the agreements from a cell in an actor co-occurrence matrix.\
-          In this example, the agreements for the pair of actors with the most agreements in common (see above).')
-
-# Get the row from the transpose of pp matrix
-row1 = pp_data_dict['pp_matrix'].T[actor_indices[0]]
-# Get the row from the pp BM
-row2 = pp_data_dict['pp_matrix'].T[actor_indices[1]]
-x = np.bitwise_and(row1,row2)
-for index,value in enumerate(x): 
-    if value == 1:
-        s = pp_data_dict['pp_agreement_ids'][index] + ' ' + data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]
-        st.caption(str(s))
 
 # *********************************************************************************************************************
 st.divider()
@@ -752,7 +740,8 @@ with st.form("actors"):
         tuples = [(agreement,get_agreement_name(agreement,data_dict)) for agreement in agreements]
         tuples = sorted(tuples,key=lambda t:t[1])
         for t in tuples:
-            st.write(t[0],t[1])
+            s = t[0] + ' ' + t[1]
+            st.caption(str(s))
         st.write()
 
         st.write(':blue[Cosignatories of]',actor,get_actor_name(actor,data_dict))
