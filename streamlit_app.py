@@ -745,6 +745,7 @@ with st.form("actors"):
         st.write()
 
         st.write(':blue[Co-signatories of]',actor,'organised by agreement')
+        cosigns = get_consignatories(actor,pp_data_dict)
         agreement_cosign_dict = {}
         for cosign in cosigns:
             agreements = get_consignatory_agreements([actor,cosign],pp_data_dict)
