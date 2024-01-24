@@ -764,9 +764,9 @@ with st.form("actors"):
                     agreement_cosign_dict[agreement] = [(cosign,get_actor_name(cosign,data_dict))]
         for agreement,actors in agreement_cosign_dict.items():
             s = agreement + ' ' + get_agreement_name(agreement,data_dict)
-            st.caption(str(s))
+            st.write(str(s))
             for actor in actors:
                 s = '\t' + actor[0] + ' ' + actor[1]
                 st.caption(str(s))
         st.write()
-        
+
