@@ -747,7 +747,7 @@ with st.form("actors"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         actor = actor_option.split(':')[0]
-        st.write('Agreements signed by',actor,get_actor_name(actor,data_dict))
+        st.write(':blue[Agreements signed by]',actor,get_actor_name(actor,data_dict))
         agreements = get_agreements(actor,pp_data_dict)
         tuples = [(agreement,get_agreement_name(agreement,data_dict)) for agreement in agreements]
         tuples = sorted(tuples,key=lambda t:t[1])
