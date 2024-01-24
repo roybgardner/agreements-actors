@@ -769,3 +769,4 @@ with st.form("actors"):
                 s = '\t' + actor[0] + ' ' + actor[1]
                 st.caption(str(s))
         st.write()
+        
