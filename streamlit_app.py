@@ -740,12 +740,13 @@ with st.form("actors"):
     actor_options = sorted(actor_options,key=lambda t:t[1])
     actor_options = [t[0] + ': ' + t[1] for t in actor_options]
 
-    actor = st.selectbox(
+    actor_option = st.selectbox(
     'Select an actor:',
     actor_options)
 
     submitted = st.form_submit_button("Submit")
     if submitted:
+        actor = actor_option.split(':')[0]
         st.write('Agreements signed by',actor,get_actor_name(actor,data_dict))
         agreements = get_agreements(actor,pp_data_dict)
         tuples = [(agreement,get_agreement_name(agreement,data_dict)) for agreement in agreements]
