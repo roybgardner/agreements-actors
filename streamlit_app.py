@@ -403,8 +403,8 @@ st.write('Agreement-actor bipartite graphs are represented by binary-valued biad
           the value 1 if an actor is a signatory to an agreement, otherwise cells values are 0.') 
 st.write('Agreement-actor biadjacency matrices provide the basis of peace process network analysis as follows:') 
 st.write('1. Extraction of BMs containing data from individual peace processes.') 
-st.write('2. Generation of complete adjacency matrices used by network visualisation\
-          packages to display agreement-actor network diagrams, and for depth-first search of networks.') 
+st.write('2. Generation of adjacency matrices used for depth-first search network queries,\
+          and for passing to network packages for network visualisation.') 
 st.write('3. Generation of co-occurrence matrices measuring, a)\
           the number of agreements to which a pair of actors are co-signatories, b)\
           the number of signatories a pair of agreements have in common.\
