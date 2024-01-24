@@ -731,6 +731,7 @@ for index,value in enumerate(x):
 st.divider()
 
 st.subheader("Exploring actor data")
+st.write("Matrix-based access to actor data.")
 
 with st.form("actors"):
  
@@ -739,11 +740,17 @@ with st.form("actors"):
     actor_options = sorted(actor_options,key=lambda t:t[1])
     actor_options = [t[0] + ': ' + t[1] for t in actor_options]
 
-    options_actor = st.selectbox(
-    'Select an actor.',
+    actor = st.selectbox(
+    'Select an actor:',
     actor_options)
 
-
-# Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.write('Agreements signed by',actor,get_actor_name(actor,data_dict))
+        agreements = get_agreements(actor,pp_data_dict)
+        tuples = [(agreement,get_agreement_name(agreement,data_dict)) for agreement in agreements]
+        tuples = sorted(tuples,key=lambda t:t[1])
+        for t in tuples:
+            st.write(t[0],t[1])
+        st.write()
 
