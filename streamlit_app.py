@@ -141,11 +141,6 @@ def get_cooccurrence_matrices(matrix):
     W = np.matmul(matrix,matrix.T)
     return (V,W)
 
-def get_consignatories(actor_id,pp_data_dict):
-    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
-    actor_index = pp_data_dict['pp_actor_ids'].index(actor_id)
-    cosign_ids = [pp_data_dict['pp_actor_ids'][i] for i,v in enumerate(co_matrices[0][actor_index]) if v > 0]
-    return cosign_ids
 
 def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Stash data in a dictionary
@@ -225,6 +220,132 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     data_dict['matrix'] = matrix
 
     return data_dict
+
+def get_agreement_cosignatories(agreement_ids,pp_data_dict):
+    """
+    Given a list of agreements get the signatories in common
+    Works within a peace process only
+    param agreement_ids: List of agreement IDs
+    param pp_data_dict: Peace process data dictionary
+    return: List of actor IDs who a signatories to all the agreements in agreement_ids
+    """
+    if len(agreement_ids) < 2:        
+        return []
+    for agreement_id in agreement_ids:
+        if not agreement_id in pp_data_dict['pp_agreement_ids']:
+            return []
+    agreement_indices = [pp_data_dict['pp_agreement_ids'].index(agreement_id) for\
+                         agreement_id in agreement_ids]
+    for i,agreement_index in enumerate(agreement_indices):
+        row = pp_data_dict['pp_matrix'][agreement_index]
+        if i == 0:
+            actors_bitset = row
+        else:
+            actors_bitset = np.bitwise_and(actors_bitset,row)
+    actor_ids = []
+    for index,value in enumerate(actors_bitset): 
+        if value == 1:
+            actor_ids.append(pp_data_dict['pp_actor_ids'][index])
+    return actor_ids
+
+def get_consignatory_agreements(actor_ids,pp_data_dict):
+    """
+    Given a list of actors get the agreements in common
+    Works within a peace process only
+    param actor_ids: List of actor IDs
+    param pp_data_dict: Peace process data dictionary
+    return: List of agreements to which the actors in actor_ids are cosignatories
+    """
+    # Given a list of actors get the agreements in common
+    if len(actor_ids) < 2:        
+        return []
+    for actor_id in actor_ids:
+        if not actor_id in pp_data_dict['pp_actor_ids']:
+            return []
+    actor_indices = [pp_data_dict['pp_actor_ids'].index(actor_id) for actor_id in actor_ids]
+    for i,actor_index in enumerate(actor_indices):
+        row = pp_data_dict['pp_matrix'].T[actor_index]
+        if i == 0:
+            agreements_bitset = row
+        else:
+            agreements_bitset = np.bitwise_and(agreements_bitset,row)
+    agreement_ids = []
+    for index,value in enumerate(agreements_bitset): 
+        if value == 1:
+            agreement_ids.append(pp_data_dict['pp_agreement_ids'][index])
+    return agreement_ids
+
+def get_consignatories(actor_id,pp_data_dict):
+    """
+    Get the cosignatories of an actor
+    Works within a peace process only
+    param actor_id: Actor ID
+    param pp_data_dict: Peace process data dictionary
+    return: List of actors who are cosignatories with the actor in actor_id
+    """
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    actor_index = pp_data_dict['pp_actor_ids'].index(actor_id)
+    cosign_ids = [pp_data_dict['pp_actor_ids'][i] for i,v in enumerate(co_matrices[0][actor_index]) if v > 0]
+    return cosign_ids
+
+def get_coagreements(agreement_id,pp_data_dict):
+    """
+    Get the coagreements of an agreement, i.e., the agreements that have signatories in 
+    common with the agreement in agreement_id
+    Works within a peace process only
+    param agreement_id: agreement ID
+    param pp_data_dict: Peace process data dictionary
+    return: List of agreements with actors in common with the agreement in agreement_id
+    """
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    agreement_index = pp_data_dict['pp_agreement_ids'].index(agreement_id)
+    coagree_ids = [pp_data_dict['pp_agreement_ids'][i] for\
+                   i,v in enumerate(co_matrices[1][agreement_index]) if v > 0]
+    return coagree_ids
+
+def get_agreements(actor_id,pp_data_dict):
+    """
+    Get the agreements to which an actor is a signatory
+    Works within a peace process only
+    param actor_id: Actor ID
+    param pp_data_dict: Peace process data dictionary
+    return: List of agreements to which the actor in actor_id is a signatory
+    """
+    actor_index = pp_data_dict['pp_actor_ids'].index(actor_id)
+    agreement_ids = [pp_data_dict['pp_agreement_ids'][i] for\
+                     i,v in enumerate(pp_data_dict['pp_matrix'][:,actor_index]) if v > 0]
+    return agreement_ids
+
+def get_actors(agreement_id,pp_data_dict):
+    """
+    Get the actors who are signatories to the agreement in agreement_id
+    Works within a peace process only
+    param agreement_id: agreement ID
+    param pp_data_dict: Peace process data dictionary
+    return: List of actors who a signatories to the agreement in agreement_id
+    """
+    agreement_index = pp_data_dict['pp_agreement_ids'].index(agreement_id)
+    actor_ids = [pp_data_dict['pp_actor_ids'][i] for\
+                     i,v in enumerate(pp_data_dict['pp_matrix'][agreement_index]) if v > 0]
+    return actor_ids
+
+def get_actor_name(actor_id,data_dict):
+    """
+    Get the name of an actor
+    param actor_id: actor ID
+    param data_dict: Global data dictionary
+    return: Name of actor
+    """
+    return data_dict['vertices_dict'][actor_id][data_dict['nodes_header'].index('node_name')]
+
+def get_agreement_name(agreement_id,data_dict):
+    """
+    Get the name of an agreement
+    param agreement_id: agreement ID
+    param data_dict: Global data dictionary
+    return: Name of agreement
+    """
+    return data_dict['vertices_dict'][agreement_id][data_dict['nodes_header'].index('node_name')]
 
 # *********************************************************************************************************************
 
