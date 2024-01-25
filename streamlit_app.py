@@ -36,11 +36,11 @@ def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visite
 
 def adjacency_from_biadjacency(pp_data_dict):
     """
-    Convert a binary-valued peace process agreement-actor relations matrix to an adjacency matrix
+    Convert a peace process agreement-actor biadjacency matrix to an adjacency matrix
     Rows and columns of the adjacency matrix are identical and
-    are constructed from the binary-valued matrix in row-column order.
+    are constructed from the biadjacency matrix in row-column order.
     The number of rows (and columns) in the adjacency matrix is therefore:
-    binary_matix.shape[0] +  binary_matix.shape[1]
+    biadjacency.shape[0] +  biadjacency.shape[1]
     param pp_data_dict: A dictionary containing peace process data including the BVRM
     return adjacency matrix and list of vertex labels. The latter is the concatenated lists of
     agreement and actor vertex labels
