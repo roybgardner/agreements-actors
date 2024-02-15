@@ -107,6 +107,22 @@ def display_networkx_graph(query_matrix,vertex_indices,adj_vertices,data_dict):
     plt.grid(False)
     plt.show()
     
+def display_comatrix_as_networkx_graph(co_matrix,vertex_indices,vertex_list,data_dict):
+    co_matrix = np.triu(co_matrix,k=1)
+    node_labels = {i:vertex_list[index] for i,index in enumerate(vertex_indices)}
+    node_colors = [data_dict['color_map'][v.split('_')[0]] for _,v in node_labels.items()]
+    graph = nx.from_numpy_array(co_matrix, create_using=nx.Graph)
+    f = plt.figure(figsize=(16,16))
+    pos = nx.spring_layout(graph) 
+    nx.draw_networkx(graph,pos,labels=node_labels,node_color=node_colors,node_size=400,alpha=0.6)
+    # Get the edge labels
+    rc = np.nonzero(co_matrix) # Row and column indices of non-zero pairs
+    z = list(zip(list(rc[0]),list(rc[1])))
+    edge_labels = {t:co_matrix[t[0]][t[1]] for t in z}
+    nx.draw_networkx_edge_labels(graph, pos,edge_labels,font_color='red',font_size=12)
+    plt.grid(False)
+    plt.show()
+
 def get_peace_processes(data_dict):
     """
     Get list of peace process names 
