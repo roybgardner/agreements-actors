@@ -1,15 +1,11 @@
 import networkx as nx
-from networkx.readwrite import json_graph
 
 import numpy as np
 import matplotlib.pyplot as plt
 
 import json
-import os
 import csv
-import sys
 
-import ipywidgets as widgets
 
 from scipy.spatial.distance import *
 
