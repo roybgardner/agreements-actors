@@ -39,7 +39,7 @@
 \tableofcontents
 \newpage
 
-\section{Introduction}
+\section{Preliminaries}
 
 \subsection{List of UN Actors}
 
@@ -147,12 +147,12 @@
      \hline
      Agreements signed by UN actors as a percentage of all agreements  & 22.6  \\
      \hline
-     UN actor co-signatories as a percentage of all actors & 46.7  \\
+     Non-UN co-signatories as a percentage of all actors & 46.7  \\
      \hline
 \end{tabularx}
 \end{center}
 \normalsize
-\caption{Derived numerical data.}
+\caption{Statistical data.}
 \end{table}
 
 \subsection{Number of agreements signed by UN actors}
@@ -231,6 +231,163 @@ United Nations Population Fund & 1 \\
 \caption{Number of agreements signed by UN actors in descending order. See Figure 1 above.}
 \end{table}
 
+\section{UN actor co-signatory analysis}
+
+\subsection{UN--UN co-signatories}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.38]{./assets/figure_2.png}
+\caption{Heat map showing the number of agreements co-signed by pairs of UN actors. See Table 5 for further information.}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.38]{./assets/figure_3.png}
+\caption{Network diagram of UN co-signatories. The number of agreements signed by a pair of UN actors is the red number in the connection between the pair. Isolated nodes (known as singletons) have no UN co-signatories. See Table 5 for further information.}
+\end{center}
+\end{figure}
+
+\begin{table}[H]
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|r|}
+    \hline
+    \textbf{Actor 1} & \textbf{Actor 2} & \textbf{Agts} \\
+    \hline
+    \hline
+Group of Friends UNSG (COA\_51) & United Nations (General) (IGO\_49) & 12 \\
+\hline
+UN Secretary General (IGO\_386) & United Nations (General) (IGO\_49) & 12 \\
+\hline
+UNOMIG (IGO\_480) & United Nations (General) (IGO\_49) & 7 \\
+\hline
+UNPROFOR (IGO\_355) & United Nations (General) (IGO\_49) & 5 \\
+\hline
+UN Security Council (IGO\_8) & United Nations (General) (IGO\_49) & 4 \\
+\hline
+UNOMB (IGO\_274) & United Nations (General) (IGO\_49) & 4 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Development Programme (IGO\_64) & 4 \\
+\hline
+Group of Friends UNSG (COA\_51) & UN Secretary General (IGO\_386) & 2 \\
+\hline
+Group of Friends UNSG (COA\_51) & UNOMIG (IGO\_480) & 2 \\
+\hline
+Group of Friends UNSG (COA\_51) & United Nations Development Programme (IGO\_64) & 2 \\
+\hline
+UN Secretary General (IGO\_386) & UNSMIL (IGO\_750) & 2 \\
+\hline
+UNPOS (IGO\_536) & United Nations (General) (IGO\_49) & 2 \\
+\hline
+UNSMIL (IGO\_750) & United Nations (General) (IGO\_49) & 2 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Human Rights Council (IGO\_440) & 2 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Secretariat (IGO\_391) & 2 \\
+\hline
+Office of the United Nations High Commissioner for Human Rights (IGO\_640) & United Nations (General) (IGO\_49) & 1 \\
+\hline
+UN General Assembly (IGO\_315) & United Nations (General) (IGO\_49) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations (General) (IGO\_49) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations Children's Fund (IGO\_459) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations Development Programme (IGO\_64) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations Educational, Scientific and Cultural Organization (IGO\_678) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations Population Fund (IGO\_674) & 1 \\
+\hline
+UN Office on Drugs and Crimes (IGO\_672) & United Nations Secretariat (IGO\_391) & 1 \\
+\hline
+\end{tabularx}
+\end{center}
+\normalsize
+\end{table}
+
+
+\begin{table}[H]
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|r|}
+    \hline
+    \textbf{Actor 1 (cont)} & \textbf{Actor 2 (cont)} & \textbf{Agts} \\
+    \hline
+    \hline
+UN Secretary General (IGO\_386) & UN Security Council (IGO\_8) & 1 \\
+\hline
+UN Security Council (IGO\_8) & UNPOS (IGO\_536) & 1 \\
+\hline
+UNAMID (IGO\_950) & United Nations (General) (IGO\_49) & 1 \\
+\hline
+UNMOT (IGO\_454) & United Nations (General) (IGO\_49) & 1 \\
+\hline
+UNOMIG (IGO\_480) & United Nations Development Programme (IGO\_64) & 1 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Children's Fund (IGO\_459) & 1 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Educational, Scientific and Cultural Organization (IGO\_678) & 1 \\
+\hline
+United Nations (General) (IGO\_49) & United Nations Population Fund (IGO\_674) & 1 \\
+\hline
+United Nations Children's Fund (IGO\_459) & United Nations Development Programme (IGO\_64) & 1 \\
+\hline
+United Nations Children's Fund (IGO\_459) & United Nations Educational, Scientific and Cultural Organization (IGO\_678) & 1 \\
+\hline
+United Nations Children's Fund (IGO\_459) & United Nations Population Fund (IGO\_674) & 1 \\
+\hline
+United Nations Children's Fund (IGO\_459) & United Nations Secretariat (IGO\_391) & 1 \\
+\hline
+United Nations Development Programme (IGO\_64) & United Nations Educational, Scientific and Cultural Organization (IGO\_678) & 1 \\
+\hline
+United Nations Development Programme (IGO\_64) & United Nations Human Rights Council (IGO\_440) & 1 \\
+\hline
+United Nations Development Programme (IGO\_64) & United Nations Population Fund (IGO\_674) & 1 \\
+\hline
+United Nations Development Programme (IGO\_64) & United Nations Secretariat (IGO\_391) & 1 \\
+\hline
+United Nations Educational, Scientific and Cultural Organization (IGO\_678) & United Nations Population Fund (IGO\_674) & 1 \\
+\hline
+United Nations Educational, Scientific and Cultural Organization (IGO\_678) & United Nations Secretariat (IGO\_391) & 1 \\
+\hline
+United Nations Population Fund (IGO\_674) & United Nations Secretariat (IGO\_391) & 1 \\
+\hline
+\end{tabularx}
+\end{center}
+\normalsize
+\caption{List of UN actor co-signatories with number of agreements.}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|}
+    \hline
+    \textbf{UN Actor} \\
+    \hline
+UNAMSIL (IGO\_652) \\
+\hline
+UNCRO (IGO\_795) \\
+\hline
+UNISFA (IGO\_616) \\
+\hline
+UNMIBH (IGO\_405) \\
+\hline
+UNMIS (IGO\_854) \\
+\hline
+UNMISS (IGO\_831) \\
+\hline
+\end{tabularx}
+\end{center}
+\normalsize
+\caption{UN actors that are not co-signatories with other UN actors.}
+\end{table}
+
+
+\subsection{UN and non-UN co-signatories}
 
 \end{document}
 
