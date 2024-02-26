@@ -199,16 +199,18 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Actors are to vertices
     actor_vertices = list(set([row[links_header.index('to_node_id')] for row in links_data]))
 
+    # edge_dict links each agreement to a list of actors
     edge_dict = {}
+    # dates_dict stores link each agreement to an integer date in YYYYMMDD format
     dates_dict = {}
     for row in links_data:
-        if row[5] in edge_dict:
-            edge_dict[row[5]].append(row[12])
+        if row[links_header.index('from_node_id')] in edge_dict:
+            edge_dict[row[links_header.index('from_node_id')]].append(row[links_header.index('to_node_id')])
         else:
-            edge_dict[row[5]] = [row[12]]
+            edge_dict[row[links_header.index('from_node_id')]] = [row[links_header.index('to_node_id')]]
         if not row[5] in dates_dict:
             a = row[1].split('-')
-            dates_dict[row[5]] = int(''.join(a[::-1]))
+            dates_dict[row[links_header.index('from_node_id')]] = int(''.join(a[::-1]))
     
     # Build a vertices dictionary with node_id as key and node row as the value
     vertices_dict = {row[nodes_header.index('node_id')]:row for row in nodes_data}
@@ -226,8 +228,8 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
     # Build a colour map for types
     color_map = {type_:twenty_distinct_colors[i] for\
                  i,type_ in enumerate(vertex_types)}
-    
-    # Build the agreement-actor BVRM matrix - the core data structure
+        
+    # Build the agreement-actor biadjacency matrix - the core data structure
     matrix = []
     for agreement in agreement_vertices:
         row = [0]*len(actor_vertices)

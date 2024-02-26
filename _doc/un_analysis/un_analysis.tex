@@ -41,6 +41,7 @@
 
 \section{Introduction}
 
+\subsection{Data sources}
 The analysis is based on the following signatory data files supplied by Niamh Henry on 03/11/2023:
 
 \begin{itemize}
@@ -48,12 +49,22 @@ The analysis is based on the following signatory data files supplied by Niamh He
 \item node\_table.csv
 \end{itemize}
 
+\subsection{Search criteria}
+
 The search criteria for UN actors are as follows:
 
 \begin{itemize}
 \item The actor \texttt{node\_id} value must start with 'IGO\_' or 'COA\_'.
 \item The actor \texttt{node\_name} value must contain 'United Nations' or ' UN', or start with 'UN'.
 \end{itemize}
+
+\subsection{Data integrity}
+
+There are unresolved data integrity issues. For example, the analysis described here finds that United Nations (General) (IGO\_49) is a signatory to 272 agreements. However, a search in links\_table.csv for  finds 313 rows containing IGO\_49 in the  \texttt{to\_node\_id} field. \newline
+
+The anomaly is caused by duplicate row in inks\_table.csv. For example, rows with \texttt{signatory\_id} values \texttt{1290} and \texttt{1292} are identical in all other fields.\newline
+
+The analysis software does not support duplicate agreement-actor pairs.
 
 
 \section{Preliminaries}
@@ -185,62 +196,62 @@ The search criteria for UN actors are as follows:
 \begin{table}[H]
 \begin{center}
 \small
-\begin{tabularx}{\textwidth}{|X|r|}
+\begin{tabularx}{\textwidth}{|X|l|r|}
     \hline
-    \textbf{UN actor} & \textbf{Number of agreements signed} \\
+    \textbf{UN actor name} & \textbf{UN actor ID}  & \textbf{Agts} \\
     \hline
     \hline
-United Nations (General) & 272 \\
+United Nations (General) & IGO\_49 & 272 \\
 \hline
-UNPROFOR & 48 \\
+UNPROFOR & IGO\_355 & 48 \\
 \hline
-UN Secretary General & 27 \\
+UN Secretary General & IGO\_386 & 27 \\
 \hline
-UN Security Council & 27 \\
+UN Security Council & IGO\_8 & 27 \\
 \hline
-Group of Friends UNSG & 15 \\
+Group of Friends UNSG & COA\_51 & 15 \\
 \hline
-UNOMIG & 9 \\
+UNOMIG & IGO\_480 & 9 \\
 \hline
-UNOMB & 8 \\
+UNOMB & IGO\_274 & 8 \\
 \hline
-UNSMIL & 5 \\
+UNSMIL & IGO\_750 & 5 \\
 \hline
-United Nations Development Programme & 4 \\
+United Nations Development Programme & IGO\_64 & 4 \\
 \hline
-United Nations Children's Fund & 3 \\
+United Nations Children's Fund & IGO\_459 & 3 \\
 \hline
-UN Office on Drugs and Crimes & 2 \\
+UN Office on Drugs and Crimes & IGO\_672 & 2 \\
 \hline
-UNPOS & 2 \\
+UNPOS & IGO\_536 & 2 \\
 \hline
-United Nations Human Rights Council & 2 \\
+United Nations Human Rights Council & IGO\_440 & 2 \\
 \hline
-United Nations Secretariat & 2 \\
+United Nations Secretariat & IGO\_391 & 2 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights & 1 \\
+Office of the United Nations High Commissioner for Human Rights & IGO\_640 & 1 \\
 \hline
-UN General Assembly & 1 \\
+UN General Assembly & IGO\_315 & 1 \\
 \hline
-UNAMID & 1 \\
+UNAMID & IGO\_950 & 1 \\
 \hline
-UNAMSIL & 1 \\
+UNAMSIL & IGO\_652 & 1 \\
 \hline
-UNCRO & 1 \\
+UNCRO & IGO\_795 & 1 \\
 \hline
-UNISFA & 1 \\
+UNISFA & IGO\_616 & 1 \\
 \hline
-UNMIBH & 1 \\
+UNMIBH & IGO\_405 & 1 \\
 \hline
-UNMIS & 1 \\
+UNMIS & IGO\_854 & 1 \\
 \hline
-UNMISS & 1 \\
+UNMISS & IGO\_831 & 1 \\
 \hline
-UNMOT & 1 \\
+UNMOT & IGO\_454 & 1 \\
 \hline
-United Nations Educational, Scientific and Cultural Organization & 1 \\
+United Nations Educational, Scientific and Cultural Organization & IGO\_678 & 1 \\
 \hline
-United Nations Population Fund & 1 \\
+United Nations Population Fund & IGO\_674 & 1 \\
 \hline
 \end{tabularx}
 \end{center}
@@ -320,20 +331,6 @@ UN Office on Drugs and Crimes (IGO\_672) & United Nations Population Fund (IGO\_
 \hline
 UN Office on Drugs and Crimes (IGO\_672) & United Nations Secretariat (IGO\_391) & 1 \\
 \hline
-\end{tabularx}
-\end{center}
-\normalsize
-\end{table}
-
-
-\begin{table}[H]
-\begin{center}
-\small
-\begin{tabularx}{\textwidth}{|X|X|r|}
-    \hline
-    \textbf{Actor 1 (cont)} & \textbf{Actor 2 (cont)} & \textbf{Agts} \\
-    \hline
-    \hline
 UN Secretary General (IGO\_386) & UN Security Council (IGO\_8) & 1 \\
 \hline
 UN Security Council (IGO\_8) & UNPOS (IGO\_536) & 1 \\
@@ -348,6 +345,20 @@ United Nations (General) (IGO\_49) & United Nations Children's Fund (IGO\_459) &
 \hline
 United Nations (General) (IGO\_49) & United Nations Educational, Scientific and Cultural Organization (IGO\_678) & 1 \\
 \hline
+\end{tabularx}
+\end{center}
+\normalsize
+\end{table}
+
+
+\begin{table}[H]
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|r|}
+    \hline
+    \textbf{Actor 1 (cont)} & \textbf{Actor 2 (cont)} & \textbf{Agts} \\
+    \hline
+    \hline
 United Nations (General) (IGO\_49) & United Nations Population Fund (IGO\_674) & 1 \\
 \hline
 United Nations Children's Fund (IGO\_459) & United Nations Development Programme (IGO\_64) & 1 \\
@@ -449,27 +460,27 @@ United Nations (General) (IGO\_49) & Congo, Democratic Republic of the (CON\_264
 \hline
 United Nations (General) (IGO\_49) & Organization for Security and Cooperation in Europe (IGO\_50) & 21 \\
 \hline
-United Nations (General) (IGO\_49) & Economic Community of West African States (IGO\_89) & 20 \\
+United Nations (General) (IGO\_49) & Uganda (CON\_176) & 20 \\
 \hline
 United Nations (General) (IGO\_49) & China (CON\_20) & 20 \\
 \hline
+United Nations (General) (IGO\_49) & Economic Community of West African States (IGO\_89) & 20 \\
+\hline
 United Nations (General) (IGO\_49) & Nigeria (CON\_90) & 20 \\
-\hline
-United Nations (General) (IGO\_49) & Uganda (CON\_176) & 20 \\
-\hline
-United Nations (General) (IGO\_49) & Norway (CON\_81) & 19 \\
-\hline
-United Nations (General) (IGO\_49) & Canada (CON\_11) & 19 \\
 \hline
 United Nations (General) (IGO\_49) & Somalia (CON\_358) & 19 \\
 \hline
 United Nations (General) (IGO\_49) & League of Arab States (IGO\_346) & 19 \\
 \hline
-United Nations (General) (IGO\_49) & Kenya (CON\_172) & 18 \\
+United Nations (General) (IGO\_49) & Canada (CON\_11) & 19 \\
+\hline
+United Nations (General) (IGO\_49) & Norway (CON\_81) & 19 \\
+\hline
+UNPROFOR (IGO\_355) & Republika Srpska (ARM\_313) & 18 \\
 \hline
 United Nations (General) (IGO\_49) & Tajikistan (CON\_62) & 18 \\
 \hline
-UNPROFOR (IGO\_355) & Republika Srpska (ARM\_313) & 18 \\
+United Nations (General) (IGO\_49) & Kenya (CON\_172) & 18 \\
 \hline
 United Nations (General) (IGO\_49) & Italy (CON\_139) & 17 \\
 \hline
@@ -477,9 +488,9 @@ United Nations (General) (IGO\_49) & Guatemala  (CON\_306) & 17 \\
 \hline
 UNPROFOR (IGO\_355) & Bosnia and Herzegovina (CON\_0) & 16 \\
 \hline
-United Nations (General) (IGO\_49) & Organisation of Islamic Cooperation (IGO\_226) & 15 \\
-\hline
 United Nations (General) (IGO\_49) & Guatemalan National Revolutionary Unity (ARM\_307) & 15 \\
+\hline
+United Nations (General) (IGO\_49) & Organisation of Islamic Cooperation (IGO\_226) & 15 \\
 \hline
 \end{tabularx}
 \end{center}
@@ -497,35 +508,35 @@ United Nations (General) (IGO\_49) & Guatemalan National Revolutionary Unity (AR
     \textbf{UN actor} & \textbf{Non-UN actor} & \textbf{Agts} \\
     \hline
     \hline
-United Nations Secretariat (IGO\_391) & World Food Program (IGO\_673) & 1 \\
+UNSMIL (IGO\_750) & Switzerland (CON\_202) & 1 \\
 \hline
-United Nations Secretariat (IGO\_391) & UN Office on Drugs and Crimes (IGO\_672) & 1 \\
+UNSMIL (IGO\_750) & Libyan Army (MIL\_941) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & North Macedonia (CON\_610) & 1 \\
+UNSMIL (IGO\_750) & Tunisia (CON\_590) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Luxembourg (CON\_611) & 1 \\
+UNSMIL (IGO\_750) & Turkey (CON\_562) & 1 \\
 \hline
-UN Office on Drugs and Crimes (IGO\_672) & Luxembourg (CON\_611) & 1 \\
+UNSMIL (IGO\_750) & Germany (CON\_2) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Finland (CON\_171) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Liberia (CON\_83) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Bulgaria (CON\_589) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Mali (CON\_93) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Slovenia (CON\_14) & 1 \\
+United Nations Human Rights Council (IGO\_440) & International Committee of the Red Cross (NGO\_201) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Sweden (CON\_593) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Côte d’Ivoire (CON\_88) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & Organization for Security and Cooperation in Europe (IGO\_50) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Togo (CON\_85) & 1 \\
 \hline
-Office of the United Nations High Commissioner for Human Rights (IGO\_640) & High Commission for Refugees (IGO\_65) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Cape Verde (CON\_354) & 1 \\
 \hline
-UN Office on Drugs and Crimes (IGO\_672) & Finland (CON\_171) & 1 \\
+United Nations Human Rights Council (IGO\_440) & International Monetary Fund (IGO\_438) & 1 \\
 \hline
-UNSMIL (IGO\_750) & Congo (CON\_42) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Niger (CON\_142) & 1 \\
 \hline
-UN Office on Drugs and Crimes (IGO\_672) & Iran (Islamic Republic of) (CON\_289) & 1 \\
+United Nations Human Rights Council (IGO\_440) & Nigeria (CON\_90) & 1 \\
 \hline
-UN Office on Drugs and Crimes (IGO\_672) & World Food Program (IGO\_673) & 1 \\
+United Nations Human Rights Council (IGO\_440) & High Commission for Refugees (IGO\_65) & 1 \\
 \hline
 \end{tabularx}
 \end{center}
