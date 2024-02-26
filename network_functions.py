@@ -207,7 +207,7 @@ def load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path):
         else:
             edge_dict[row[5]] = [row[12]]
         if not row[5] in dates_dict:
-            a = row[1].split('/')
+            a = row[1].split('-')
             dates_dict[row[5]] = int(''.join(a[::-1]))
     
     # Build a vertices dictionary with node_id as key and node row as the value
