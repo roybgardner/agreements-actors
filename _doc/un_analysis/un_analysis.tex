@@ -62,9 +62,7 @@ The search criteria for UN actors are as follows:
 
 There are unresolved data integrity issues. For example, the analysis described here finds that United Nations (General) (IGO\_49) is a signatory to 272 agreements. However, a search in links\_table.csv for  finds 313 rows containing IGO\_49 in the  \texttt{to\_node\_id} field. \newline
 
-The anomaly is caused by duplicate row in inks\_table.csv. For example, rows with \texttt{signatory\_id} values \texttt{1290} and \texttt{1292} are identical in all other fields.\newline
-
-The analysis software does not support duplicate agreement-actor pairs.
+The anomaly is caused by duplicate row in links\_table.csv. For example, rows with \texttt{signatory\_id} values \texttt{1290} and \texttt{1292} are identical in all other fields.\newline
 
 
 \section{Preliminaries}
@@ -149,7 +147,7 @@ The analysis software does not support duplicate agreement-actor pairs.
     \hline
      Number of agreements in dataset & 1642 \\
      \hline
-     Number of actors in dataset & 1092 \\
+     Number of actors in dataset & 1096 \\
      \hline
      Number of UN actors in dataset (see Table 1 above) & 26 \\
      \hline
@@ -175,7 +173,7 @@ The analysis software does not support duplicate agreement-actor pairs.
      \hline
      Agreements signed by UN actors as a percentage of all agreements  & 22.6  \\
      \hline
-     Non-UN co-signatories as a percentage of all actors & 46.7  \\
+     Non-UN co-signatories as a percentage of all actors & 46.5  \\
      \hline
 \end{tabularx}
 \end{center}
@@ -259,7 +257,7 @@ United Nations Population Fund & IGO\_674 & 1 \\
 \caption{Number of agreements signed by UN actors in descending order. See Figure 1 above.}
 \end{table}
 
-\section{UN actor co-signatory analysis}
+\section{UN Actors Co-signatory Analysis}
 
 \subsection{UN--UN co-signatories}
 
