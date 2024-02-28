@@ -5,10 +5,12 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
+
 import json
 import csv
 
 
+from scipy import stats
 from scipy.spatial.distance import *
 
 
@@ -279,6 +281,33 @@ def get_agreement_cosignatories(agreement_ids,pp_data_dict):
         if value == 1:
             actor_ids.append(pp_data_dict['pp_actor_ids'][index])
     return actor_ids
+
+def get_consignatory_agreements_from_data_dict(actor_ids,data_dict):
+    """
+    Given a list of actors get the agreements in common form the entire data set
+    param actor_ids: List of actor IDs
+    param data_dict: Data dictionary
+    return: List of agreements to which the actors in actor_ids are cosignatories
+    """
+    # Given a list of actors get the agreements in common
+    if len(actor_ids) < 2:        
+        return []
+    for actor_id in actor_ids:
+        if not actor_id in data_dict['actor_vertices']:
+            return []
+    actor_indices = [data_dict['actor_vertices'].index(actor_id) for actor_id in actor_ids]
+    for i,actor_index in enumerate(actor_indices):
+        row = data_dict['matrix'].T[actor_index]
+        if i == 0:
+            agreements_bitset = row
+        else:
+            agreements_bitset = np.bitwise_and(agreements_bitset,row)
+    agreement_ids = []
+    for index,value in enumerate(agreements_bitset): 
+        if value == 1:
+            agreement_ids.append(data_dict['agreement_vertices'][index])
+    return agreement_ids
+
 
 def get_consignatory_agreements(actor_ids,pp_data_dict):
     """

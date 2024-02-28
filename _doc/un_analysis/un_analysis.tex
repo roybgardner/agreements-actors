@@ -60,7 +60,7 @@ The search criteria for UN actors are as follows:
 
 \subsection{Data integrity}
 
-There are unresolved data integrity issues. For example, the analysis described here finds that United Nations (General) (IGO\_49) is a signatory to 272 agreements. However, a search in links\_table.csv for  finds 313 rows containing IGO\_49 in the  \texttt{to\_node\_id} field. \newline
+There are unresolved data integrity issues. For example, the analysis described here finds that United Nations (General) (IGO\_49) is a signatory to 272 agreements. However, a search in links\_table.csv finds 313 rows containing IGO\_49 in the  \texttt{to\_node\_id} field. \newline
 
 The anomaly is caused by duplicate row in links\_table.csv. For example, rows with \texttt{signatory\_id} values \texttt{1290} and \texttt{1292} are identical in all other fields.\newline
 
@@ -547,31 +547,20 @@ United Nations Human Rights Council (IGO\_440) & High Commission for Refugees (I
 \section{Case Study: United Nations (General) }
 
 The analysis described below can be applied to any actor.
-
-Analysis by:
-
-\begin{itemize}
-\item Co-signatories
-\item Agreements with co-signatories (top-n)
-\item Year - time series
-\item Peace Process
-\item Agreement stage
-\item Other metadata (region?)
-\end{itemize}
  
 \subsection{Time series analysis}
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.36]{./assets/figure_5.png}
-\caption{Number of agreements signed in a year by United Nations (General) (blue) and all actors (orange).}
+\caption{Number of agreements signed in a year by United Nations (General) (blue) and aggregated actors (orange). The Pearson correlation coefficient of the two distributions is 0.78, p $<$ 0.001.}
 \end{center}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.36]{./assets/figure_6.png}
-\caption{Percentage of all agreements in a year signed by United Nations (General) .}
+\caption{Percentage of all agreements in a year signed by United Nations (General).}
 \end{center}
 \end{figure}
 
@@ -582,28 +571,52 @@ In-depth analysis of the six agreements signed in 2015. Any year can be selected
 \begin{table}[H]
 \begin{center}
 \small
-\begin{tabularx}{\textwidth}{|l|X|}
+\begin{tabularx}{\textwidth}{|l|X|X|}
     \hline
-    \textbf{Agreement ID}  & \textbf{Agreement name} \\
+    \textbf{Agreement ID}  & \textbf{Agreement name}  & \textbf{Signatories}  \\
     \hline
-AGT\_1367 & Arrangement sécuritaire pour une cessation des hostilités \\
+AGT\_1367 & Arrangement sécuritaire pour une cessation des hostilités & African Union, Algeria, Burkina Faso, Chad, European Union, France, MINUSMA, Mali, Mauritania, National Movement for the Liberation of Azawad/Coordination of Azawad Movements, Niger, Nigeria, Organisation of Islamic Cooperation, United Nations (General), United States \\
 \hline
-AGT\_1357 & Agreement on the Resolution of the Conflict in the Republic of South Sudan (ARCSS) \\
+AGT\_1652 & Final declaration on the results of the Syria Talks in Vienna as agreed by participants & China, Egypt, European Union, France, Germany, Iran (Islamic Republic of), Iraq, Italy, Jordan, Lebanon, Oman, Qatar, Russia, Saudi Arabia, Turkey, United Arab Emirates, United Kingdom, United Nations (General), United States \\
 \hline
-AGT\_2035 & Agreement between the Transitional Government and the armed groups on the principles of disarmament, demobilization, reintegration and repatriation and of integration into the uniformed State forces of the Central African Republic (DDRR Agreement) \\
+AGT\_1366 & Relevé de Conclusions des Consultations Préparatoires a la mise en œuvre de l'Accord pour la Paix et la Reconciliation au Mali Issu du Procesus d'Alger & African Union, Algeria, Burkina Faso, Chad, European Union, France, MINUSMA, Mali, Mauritania, National Movement for the Liberation of Azawad/Coordination of Azawad Movements, Niger, Nigeria, Organisation of Islamic Cooperation, United Nations (General), United States \\
 \hline
-AGT\_1652 & Final declaration on the results of the Syria Talks in Vienna as agreed by participants \\
-\hline
-AGT\_1366 & Relevé de Conclusions des Consultations Préparatoires a la mise en œuvre de l'Accord pour la Paix et la Reconciliation au Mali Issu du Procesus d'Alger \\
-\hline
-AGT\_1436 & The Nationwide Ceasefire Agreement (NCA) between The Government of the Republic of the Union of Myanmar and the Ethnic Armed Organizations (EAO) \\
+AGT\_1436 & The Nationwide Ceasefire Agreement (NCA) between The Government of the Republic of the Union of Myanmar and the Ethnic Armed Organizations (EAO) & All Burma Students Democratic Front, Arakan Liberation Party, Chin National Front, China, DKBA-5, European Union, India, Japan, Karen National Union, Lahu Democratic Union, Myanmar, New Mon State Party, Norway, Pa-O National Liberation Army, Restoration Council of Shan State, Thailand, United Kingdom, United Nations (General), United States \\
 \hline
 \end{tabularx}
 \end{center}
 \normalsize
-\caption{Agreements signed by United Nations (General) (IGO\_49) in 2015.}
 \end{table}
 
+\begin{table}[H]
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|l|X|X|}
+    \hline
+    \textbf{Agreement ID (cont)}  & \textbf{Agreement name (cont)}  & \textbf{Signatories (cont)}  \\
+    \hline
+AGT\_1357 & Agreement on the Resolution of the Conflict in the Republic of South Sudan (ARCSS) & African Union, Algeria, Chad, China, Civil Society Representative, Djibouti, Eminent Personalities Representative, Ethiopia, European Union, Former Detainees, Intergovernmental Authority on Development, Kenya, Nigeria, Norway, Other Political Parties, Rwanda, Somalia, South Africa, South Sudan, Sudan, Sudan People Liberation Movement/Army - In Opposition, Uganda, United Kingdom, United Nations (General), United States, Women's Bloc Representative \\
+\hline
+AGT\_2035 & Agreement between the Transitional Government and the armed groups on the principles of disarmament, demobilization, reintegration and repatriation and of integration into the uniformed State forces of the Central African Republic (DDRR Agreement) & African Union, Congo, Economic Community of Central African States, Economic Community of West African States, Movement of Central African Liberators for Justice , Patriotic Movement for the Central African Republic , Popular Front for the Renaissance of Central Africa, Revolution and Justice, Transitional Government, Union of Democratic Forces for Unity, United Nations (General) \\
+\hline
+\end{tabularx}
+\end{center}
+\normalsize
+\caption{Agreements signed by United Nations (General) in 2015 with full list of signatories.}
+\end{table}
+
+\subsection{Metadata analysis}
+
+\subsubsection{Peace processes}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.36]{./assets/figure_7.png}
+\caption{Agreements signed by peace process.}
+\end{center}
+\end{figure}
+
+\subsubsection{Agreement stage}
 
 \end{document}
 
