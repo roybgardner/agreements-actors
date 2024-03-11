@@ -8,7 +8,7 @@ adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
 if not "keep_network_graphic" in st.session_state:
-    st.session_state["keep_network_graphics"] = False          
+    st.session_state["keep_network_graphic"] = False          
 if not "keep_engagement_graphic" in st.session_state:
     st.session_state["keep_engagement_graphic"] = False          
 if not "keep_stage_graphic" in st.session_state:
