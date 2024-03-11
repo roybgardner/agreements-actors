@@ -70,9 +70,13 @@ with st.form("peace_process"):
             st.session_state["adj_vertices"] = adj_vertices
 
         # *********************************************************************************************************************
-        st.divider()
-        st.subheader("Actor signatory counts by stage")
 
+st.divider()
+with st.form("stage_analysis"):
+    st.subheader("Actor signatory counts by stage")
+
+    submitted = st.form_submit_button("Submit")
+    if submitted:
         # Stage analysis
         stage_dict = {}
         stage_dict['Cea'] = [1,'Ceasefire related']
@@ -82,6 +86,7 @@ with st.form("peace_process"):
         stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
         stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
         stage_dict['Oth'] = [0,'']
+
 
         # Map agreements on to stages
         stage_map = {}
@@ -130,9 +135,13 @@ with st.form("peace_process"):
         st.pyplot(fig)
 
         # *********************************************************************************************************************
-        st.divider()
-        st.subheader("Actor signatory counts by year")
 
+st.divider()
+with st.form("year_analysis"):
+    st.subheader("Actor signatory counts by year")
+
+    submitted = st.form_submit_button("Submit")
+    if submitted:
         labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
         z = list(zip(range(0,len(labels)),labels))
         z = sorted(z,key=lambda t:t[1])
@@ -181,11 +190,14 @@ with st.form("peace_process"):
         cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
         st.pyplot(fig)
 
-        # *********************************************************************************************************************
-        st.divider()
+# *********************************************************************************************************************
+st.divider()
+with st.form("engagement_analysis"):
 
-        st.subheader("Actor engagements in peace process over time")
+    st.subheader("Actor engagements in peace process over time")
 
+    submitted = st.form_submit_button("Submit")
+    if submitted:
         st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
                 Actor, agreement, and date information are available but are not shown on this plot.\
                 A dot indicates that the actor is a cosignatory to an agreement.')
