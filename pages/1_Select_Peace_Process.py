@@ -48,7 +48,9 @@ with st.form("peace_process"):
     pp_names = get_peace_processes(data_dict)
     if len(pp_data_dict) > 0:
         index = pp_names.index(pp_data_dict['pp_name'])
-
+    else:
+        index = 0
+        
     pp_selection=st.selectbox("", pp_names, index=index, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
     pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
