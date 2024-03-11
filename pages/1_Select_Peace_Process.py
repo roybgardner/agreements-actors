@@ -65,7 +65,7 @@ with st.form("peace_process"):
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_network_graphic"]:
-        st.session_state["keep_network_graphics"] = True
+        st.session_state["keep_network_graphic"] = True
 
         if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
             st.write('ISSUE: peace process submatrix is empty')
