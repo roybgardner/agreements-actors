@@ -3,6 +3,9 @@ import streamlit as st
 from streamlit_shared import *
 
 data_dict = st.session_state["data_dict"]
+pp_data_dict = st.session_state["pp_data_dict"]
+adj_matrix = st.session_state["adj_matrix"]
+adj_vertices = st.session_state["adj_vertices"]
 
 # *********************************************************************************************************************
 
@@ -62,14 +65,8 @@ with st.form("peace_process"):
         adj_matrix,adj_vertices = adjacency_from_biadjacency(pp_data_dict)
         display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
 
-        if "pp_data_dict" not in st.session_state:
-            st.session_state["pp_data_dict"] = {}
         st.session_state["pp_data_dict"] = pp_data_dict
-        if "adj_matrix" not in st.session_state:
-            st.session_state["adj_matrix"] = {}
         st.session_state["adj_matrix"] = adj_matrix
-        if "adj_vertices" not in st.session_state:
-            st.session_state["adj_vertices"] = {}          
         st.session_state["adj_vertices"] = adj_vertices
             
 # *********************************************************************************************************************
