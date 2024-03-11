@@ -46,9 +46,11 @@ data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data
 if "data_dict" not in st.session_state:
    st.session_state["data_dict"] = data_dict
 
-st.subheader('Credits') 
+st.header('Credits') 
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
 st.write('Analysis/coding: Roy Gardner') 
+
+st.header("Introduction")
 
 st.subheader('Approach') 
 st.write('Agreement-actor signatory data are an example of an undirected bipartite graph, i.e.,\

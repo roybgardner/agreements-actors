@@ -35,11 +35,11 @@ st.markdown("""
 
 
 st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
+st.header("Query a Peace Process Network")
 
 
 #Query vertices using depth-first search
 with st.form("query"):
-    st.subheader("Query peace process network")
     st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
     st.write('Select actors (in alpha order) with agreements (in date order) using the selectors below.')
     st.write('Mixing and matching actor and agreements is supported but might not be sensible.')
