@@ -64,7 +64,7 @@ if "pp_data_dict" not in st.session_state:
 if "adj_matrix" not in st.session_state:
    st.session_state["adj_matrix"] = adj_matrix
 if "adj_vertices" not in st.session_state:
-   st.session_state["adj_vertices"] = adj_matrix
+   st.session_state["adj_vertices"] = adj_vertices
 
 # *********************************************************************************************************************
 st.divider()
