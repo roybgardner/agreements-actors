@@ -7,6 +7,9 @@ pp_data_dict = st.session_state["pp_data_dict"]
 adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
+if "keep_network_graphics" not in st.session_state:
+    st.session_state["keep_network_graphics"] = True          
+
 # *********************************************************************************************************************
 
 
@@ -50,12 +53,12 @@ with st.form("peace_process"):
         index = pp_names.index(pp_data_dict['pp_name'])
     else:
         index = 0
-        
+
     pp_selection=st.selectbox("", pp_names, index=index, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
     pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
     submitted = st.form_submit_button("Submit")
-    if submitted:
+    if submitted or st.session_state["keep_network_graphics"]:
 
 
         if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
