@@ -41,17 +41,11 @@ nodes_file = 'node_table.csv'
 links_file = 'links_table.csv'
 agreements_dict = 'agreements_dict.json'
 
-data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
+if len(st.session_state["data_dict"]) == 0:
+    data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
+else:
+    data_dict = st.session_state["data_dict"]
 
-if "data_dict" not in st.session_state:
-    st.session_state["data_dict"] = {}
-st.session_state["data_dict"] = data_dict
-if "pp_data_dict" not in st.session_state:
-    st.session_state["pp_data_dict"] = {}
-if "adj_matrix" not in st.session_state:
-    st.session_state["adj_matrix"] = {}
-if "adj_vertices" not in st.session_state:
-    st.session_state["adj_vertices"] = {}          
 
 st.header('Credits') 
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
