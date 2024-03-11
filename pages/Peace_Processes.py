@@ -1,8 +1,8 @@
 import streamlit as st
-st.write(st.session_state["shared"])
 
+from streamlit_shared import *
 
-st.divider()
+data_dict = st.session_state["data_dict"]
 
 st.header("Peace Process Analysis")
 
