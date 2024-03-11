@@ -4,8 +4,6 @@ from streamlit_shared import *
 
 data_dict = st.session_state["data_dict"]
 pp_data_dict = st.session_state["pp_data_dict"]
-if len(pp_data_dict) > 0:
-    st.write(pp_data_dict['pp_name'])
 adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
@@ -48,7 +46,10 @@ with st.form("peace_process"):
     # Select a peace process       
     st.write('Select a peace process from the list below')
     pp_names = get_peace_processes(data_dict)
-    pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
+    if len(pp_data_dict) > 0:
+        index = pp_names.index(pp_data_dict['pp_name'])
+
+    pp_selection=st.selectbox("", pp_names, index=index, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
     pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
     submitted = st.form_submit_button("Submit")
