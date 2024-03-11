@@ -7,8 +7,14 @@ pp_data_dict = st.session_state["pp_data_dict"]
 adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
-if "keep_network_graphics" not in st.session_state:
+if not "keep_network_graphic" in st.session_state:
     st.session_state["keep_network_graphics"] = True          
+if not "keep_engagement_graphic" in st.session_state:
+    st.session_state["keep_engagement_graphic"] = True          
+if not "keep_stage_graphic" in st.session_state:
+    st.session_state["keep_stage_graphic"] = True          
+if not "keep_year_graphic" in st.session_state:
+    st.session_state["keep_year_graphic"] = True          
 
 # *********************************************************************************************************************
 
@@ -58,7 +64,7 @@ with st.form("peace_process"):
     pp_data_dict = get_peace_process_data(pp_selection,data_dict)
 
     submitted = st.form_submit_button("Submit")
-    if submitted or st.session_state["keep_network_graphics"]:
+    if submitted or st.session_state["keep_network_graphic"]:
 
 
         if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
@@ -84,7 +90,7 @@ with st.form("engagement_analysis"):
     st.subheader("View actor engagements in over time")
 
     submitted = st.form_submit_button("Submit")
-    if submitted:
+    if submitted or st.session_state["keep_engagement_graphic"]:
         st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
                 Actor, agreement, and date information are available but are not shown on this plot.\
                 A dot indicates that the actor is a cosignatory to an agreement.')
@@ -142,7 +148,7 @@ with st.form("stage_analysis"):
     st.subheader("View actor signatory counts by stage")
 
     submitted = st.form_submit_button("Submit")
-    if submitted:
+    if submitted or st.session_state["keep_stage_graphic"]:
         # Stage analysis
         stage_dict = {}
         stage_dict['Cea'] = [1,'Ceasefire related']
@@ -207,7 +213,7 @@ with st.form("year_analysis"):
     st.subheader("View actor signatory counts by year")
 
     submitted = st.form_submit_button("Submit")
-    if submitted:
+    if submitted or st.session_state["keep_year_graphic"]:
         labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
         z = list(zip(range(0,len(labels)),labels))
         z = sorted(z,key=lambda t:t[1])
