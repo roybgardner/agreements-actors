@@ -4,6 +4,38 @@ from streamlit_shared import *
 
 data_dict = st.session_state["data_dict"]
 
+# *********************************************************************************************************************
+
+
+#define css for different classes 
+st.markdown("""
+    <style>
+    .maintitle {
+        letter-spacing: 1px;
+        color: #000080;
+        font-size: 45px;
+        font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+        font-weight: 100;
+        
+    }
+    .info {
+        
+        letter-spacing: 1px;
+        color: #000080;
+        font-size: 15px;
+        font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+        font-weight: 100;
+        
+    }    
+    </style>
+    """, unsafe_allow_html=True)
+
+
+st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
+
+# *********************************************************************************************************************
+
+
 st.header("Peace Process Analysis")
 
 # Select a peace process
@@ -11,6 +43,8 @@ st.subheader("Select a peace process")
 pp_names = get_peace_processes(data_dict)
 pp_selection=st.selectbox("", pp_names, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, placeholder="Choose a Peace Process", disabled=False, label_visibility="visible")
 pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+
+
 
 if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
     st.write('ISSUE: peace process submatrix is empty')
@@ -25,10 +59,12 @@ st.subheader("Peace Process Agreement-Actor Network")
 adj_matrix,adj_vertices = adjacency_from_biadjacency(pp_data_dict)
 display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
 
-# Get the co-occurrence matrices
-co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
-actor_upper = np.triu(co_matrices[0],k=1)
-agreement_upper = np.triu(co_matrices[1],k=1)
+if "pp_data_dict" not in st.session_state:
+   st.session_state["pp_data_dict"] = pp_data_dict
+if "adj_matrix" not in st.session_state:
+   st.session_state["adj_matrix"] = adj_matrix
+if "adj_vertices" not in st.session_state:
+   st.session_state["adj_vertices"] = adj_matrix
 
 # *********************************************************************************************************************
 st.divider()
