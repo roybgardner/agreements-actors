@@ -9,12 +9,6 @@ adj_vertices = st.session_state["adj_vertices"]
 
 if not "keep_network_graphic" in st.session_state:
     st.session_state["keep_network_graphic"] = False          
-if not "keep_engagement_graphic" in st.session_state:
-    st.session_state["keep_engagement_graphic"] = False          
-if not "keep_stage_graphic" in st.session_state:
-    st.session_state["keep_stage_graphic"] = False          
-if not "keep_year_graphic" in st.session_state:
-    st.session_state["keep_year_graphic"] = False          
 
 # *********************************************************************************************************************
 

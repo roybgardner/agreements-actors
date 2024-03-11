@@ -7,6 +7,9 @@ pp_data_dict = st.session_state["pp_data_dict"]
 adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
+if not "keep_query_graphic" in st.session_state:
+    st.session_state["keep_query_graphic"] = False          
+
 # *********************************************************************************************************************
 
 
@@ -70,7 +73,8 @@ with st.form("query"):
 
 # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
-    if submitted:
+    if submitted or st.session_state["keep_query_graphic"]:
+        st.session_state["keep_query_graphic"] = True
         options = [v.split(':')[0] for v in options_actor]
         options.extend([v.split(':')[0] for v in options_agreement])
         query_indices = [adj_vertices.index(vertex) for vertex in options]
