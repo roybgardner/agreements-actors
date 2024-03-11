@@ -2,6 +2,7 @@ import streamlit as st
 
 from streamlit_shared import *
 
+data_dict = st.session_state["data_dict"]
 
 # *********************************************************************************************************************
 
