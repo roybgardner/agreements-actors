@@ -44,7 +44,8 @@ agreements_dict = 'agreements_dict.json'
 data_dict = load_agreement_actor_data(nodes_file,links_file,agreements_dict,data_path)
 
 if "data_dict" not in st.session_state:
-   st.session_state["data_dict"] = data_dict
+    st.session_state["data_dict"] = {}
+st.session_state["data_dict"] = data_dict
 
 st.header('Credits') 
 st.write('Signatory data: Niamh Henry and Sanja Badanjak') 
