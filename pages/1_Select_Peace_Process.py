@@ -8,13 +8,13 @@ adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
 if not "keep_network_graphic" in st.session_state:
-    st.session_state["keep_network_graphics"] = True          
+    st.session_state["keep_network_graphics"] = False          
 if not "keep_engagement_graphic" in st.session_state:
-    st.session_state["keep_engagement_graphic"] = True          
+    st.session_state["keep_engagement_graphic"] = False          
 if not "keep_stage_graphic" in st.session_state:
-    st.session_state["keep_stage_graphic"] = True          
+    st.session_state["keep_stage_graphic"] = False          
 if not "keep_year_graphic" in st.session_state:
-    st.session_state["keep_year_graphic"] = True          
+    st.session_state["keep_year_graphic"] = False          
 
 # *********************************************************************************************************************
 
@@ -65,7 +65,7 @@ with st.form("peace_process"):
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_network_graphic"]:
-
+        st.session_state["keep_network_graphics"] = True
 
         if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
             st.write('ISSUE: peace process submatrix is empty')
@@ -91,6 +91,8 @@ with st.form("engagement_analysis"):
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_engagement_graphic"]:
+        st.session_state["keep_engagement_graphic"] = True
+
         st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
                 Actor, agreement, and date information are available but are not shown on this plot.\
                 A dot indicates that the actor is a cosignatory to an agreement.')
@@ -149,6 +151,8 @@ with st.form("stage_analysis"):
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_stage_graphic"]:
+        st.session_state["keep_stage_graphic"] = True
+
         # Stage analysis
         stage_dict = {}
         stage_dict['Cea'] = [1,'Ceasefire related']
@@ -214,6 +218,8 @@ with st.form("year_analysis"):
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_year_graphic"]:
+        st.session_state["keep_year_graphic"] = True
+
         labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
         z = list(zip(range(0,len(labels)),labels))
         z = sorted(z,key=lambda t:t[1])
