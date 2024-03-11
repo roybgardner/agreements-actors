@@ -2,7 +2,16 @@ import streamlit as st
 
 from streamlit_shared import *
 
-data_dict = st.session_state["data_dict"]
+if "data_dict" not in st.session_state:
+    st.session_state["data_dict"] = {}
+if "pp_data_dict" not in st.session_state:
+    st.session_state["pp_data_dict"] = {}
+if "adj_matrix" not in st.session_state:
+    st.session_state["adj_matrix"] = {}
+if "adj_vertices" not in st.session_state:
+    st.session_state["adj_vertices"] = {}          
+
+
 
 # *********************************************************************************************************************
 
