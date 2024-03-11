@@ -132,6 +132,7 @@ def get_peace_process_data(process_name,data_dict):
     pp_matrix = data_dict['matrix'][np.ix_(pp_agreement_indices,pp_actor_indices)]
     pp_matrix = np.array(pp_matrix)
     pp_data_dict = {}
+    pp_data_dict['pp_name'] = process_name
     pp_data_dict['pp_actor_ids'] = pp_actor_ids
     pp_data_dict['pp_agreement_ids'] = pp_agreement_ids
     pp_data_dict['pp_matrix'] = pp_matrix    

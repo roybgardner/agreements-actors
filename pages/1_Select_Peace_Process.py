@@ -4,6 +4,7 @@ from streamlit_shared import *
 
 data_dict = st.session_state["data_dict"]
 pp_data_dict = st.session_state["pp_data_dict"]
+st.write(len(pp_data_dict))
 adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
