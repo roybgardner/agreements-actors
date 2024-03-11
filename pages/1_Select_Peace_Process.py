@@ -44,7 +44,7 @@ st.markdown("""
 
 
 st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
-st.subheader("Peace Process Analysis")
+st.header("Select peace process")
 
 # *********************************************************************************************************************
 
