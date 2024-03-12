@@ -12,32 +12,6 @@ if not "keep_query_graphic" in st.session_state:
 
 # *********************************************************************************************************************
 
-
-#define css for different classes 
-st.markdown("""
-    <style>
-    .maintitle {
-        letter-spacing: 1px;
-        color: #000080;
-        font-size: 45px;
-        font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-        font-weight: 100;
-        
-    }
-    .info {
-        
-        letter-spacing: 1px;
-        color: #000080;
-        font-size: 15px;
-        font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-        font-weight: 100;
-        
-    }    
-    </style>
-    """, unsafe_allow_html=True)
-
-
-st.markdown('<p class="maintitle">Signatories Network Analysis</p>', unsafe_allow_html=True)
 st.header("Query a Peace Process Network")
 
 # *********************************************************************************************************************
