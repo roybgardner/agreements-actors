@@ -7,10 +7,14 @@ if "data_dict" not in st.session_state:
 if "pp_data_dict" not in st.session_state:
     st.session_state["pp_data_dict"] = {}
 if "adj_matrix" not in st.session_state:
-    st.session_state["adj_matrix"] = {}
+    st.session_state["adj_matrix"] = []
 if "adj_vertices" not in st.session_state:
-    st.session_state["adj_vertices"] = {}          
+    st.session_state["adj_vertices"] = []       
 
+if "selected_actors" not in st.session_state:
+    st.session_state["selected_actors"] = []       
+if "selected_agreements" not in st.session_state:
+    st.session_state["selected_agreements"] = []       
 
 
 

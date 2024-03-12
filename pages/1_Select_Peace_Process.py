@@ -61,6 +61,9 @@ with st.form("peace_process"):
     else:
         if st.session_state["pp_data_dict"]['pp_name'] != pp_selection:
             pp_data_dict = get_peace_process_data(pp_selection,data_dict)
+            # Clear state for the query interface
+            st.session_state["selected_actors"] = []       
+            st.session_state["selected_agreements"] = []       
 
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_network_graphic"]:
