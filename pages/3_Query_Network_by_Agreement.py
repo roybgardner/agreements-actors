@@ -31,9 +31,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
         options_agreement = st.multiselect(
         'Select one or more agreements',
         agreement_options,st.session_state["selected_agreements"])
+        st.session_state["selected_agreements"] = options_agreement
 
         disabled = False
-        if len(agreement_options) < 2:
+        if len(options_agreement) < 2:
             disabled = True
 
         operator=["Show only actors that are co-signatories to the selected agreements", "Show all signatories to each of the selected agreements"]
