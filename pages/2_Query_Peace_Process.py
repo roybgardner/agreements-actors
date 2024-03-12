@@ -62,13 +62,13 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         options_actor = st.multiselect(
         'Select zero or more actors.',
-        actor_options,
-        st.session_state["selected_actors"])
+        actor_options,[],
+        default=st.session_state["selected_actors"])
 
         options_agreement = st.multiselect(
         'Select zero or more agreements',
-        agreement_options,
-        st.session_state["selected_agreements"])
+        agreement_options,[]
+        default=st.session_state["selected_agreements"])
 
         operator=["AND", "OR"]
         select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, horizontal=False, captions=None, label_visibility="visible")
