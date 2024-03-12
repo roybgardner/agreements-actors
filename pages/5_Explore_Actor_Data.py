@@ -10,7 +10,7 @@ adj_vertices = st.session_state["adj_vertices"]
 
 # *********************************************************************************************************************
 
-st.header("Exploring Actor Data")
+st.header("Explore Actor Data")
 
 # *********************************************************************************************************************
 
@@ -18,6 +18,8 @@ st.header("Exploring Actor Data")
 st.divider()
 
 if len(st.session_state["pp_data_dict"]) > 0:
+    st.subheader(st.session_state["pp_data_dict"]['pp_name'])
+
 
     with st.form("actors"):
     

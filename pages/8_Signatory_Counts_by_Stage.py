@@ -17,6 +17,9 @@ st.header("Actor Signatory Counts by Agreement Stage")
 st.divider()
 
 if len(st.session_state["pp_data_dict"]) > 0:
+
+    st.subheader(st.session_state["pp_data_dict"]['pp_name'])
+
     # Stage analysis
     stage_dict = {}
     stage_dict['Cea'] = [1,'Ceasefire related']

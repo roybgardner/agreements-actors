@@ -48,9 +48,10 @@ with st.form("peace_process"):
         if pp_data_dict['pp_matrix'].shape[0] == 0 or pp_data_dict['pp_matrix'].shape[1] == 0:
             st.write('ISSUE: peace process submatrix is empty')
             raise Exception('error')
-
-        st.write('Number of agreements in peace process:',pp_data_dict['pp_matrix'].shape[0])
-        st.write('Number of actors in peace process:',pp_data_dict['pp_matrix'].shape[1])
+        s = 'Number of agreements in ' + pp_data_dict['pp_name'] + ':'
+        st.write(s,pp_data_dict['pp_matrix'].shape[0])
+        s = 'Number of actors in ' + pp_data_dict['pp_name'] + ':'
+        st.write(s,pp_data_dict['pp_matrix'].shape[1])
 
 
         # Build peace process adjacency matrix and get adjacency matrix vertices and display graph using networkX

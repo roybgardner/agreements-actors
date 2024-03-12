@@ -18,6 +18,8 @@ st.header("Actor Signatory Counts by Year")
 st.divider()
 
 if len(st.session_state["pp_data_dict"]) > 0:
+    
+    st.subheader(st.session_state["pp_data_dict"]['pp_name'])
 
     st.session_state["keep_year_graphic"] = True
 

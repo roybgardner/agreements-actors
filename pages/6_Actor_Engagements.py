@@ -16,6 +16,8 @@ st.header("Actor Engagements Over Time")
 st.divider()
 
 if len(st.session_state["pp_data_dict"]) > 0:
+    
+    st.subheader(st.session_state["pp_data_dict"]['pp_name'])
 
     st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
             Actor, agreement, and date information are available but are not shown on this plot.\
