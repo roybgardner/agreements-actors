@@ -33,7 +33,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         options_actor = st.multiselect(
         'Select one or more actors.',
-        actor_options,st.session_state["selected_actors"],on_change=update_actor_state,key='actors')
+        actor_options,st.session_state["selected_actors"])
 
         disabled = False
         if len(options_actor) < 2:
