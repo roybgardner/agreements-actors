@@ -67,7 +67,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         options_agreement = st.multiselect(
         'Select zero or more agreements',
-        agreement_options,[]
+        agreement_options,[],
         default=st.session_state["selected_agreements"])
 
         operator=["AND", "OR"]
