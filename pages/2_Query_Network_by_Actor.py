@@ -45,16 +45,12 @@ if len(st.session_state["pp_data_dict"]) > 0:
     # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_actor_query_graphic"]:
-            if len(options_actor) == 0:
-                st.session_state["selected_actors"] = []
-                st.session_state["keep_actor_query_graphic"] = False
-            else:
-                st.session_state["keep_actor_query_graphic"] = True
-                options = [v.split(':')[0] for v in options_actor]
-                query_indices = [adj_vertices.index(vertex) for vertex in options]
-                query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
-                display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
-                st.session_state["selected_actors"] = options_actor
+            st.session_state["keep_actor_query_graphic"] = True
+            options = [v.split(':')[0] for v in options_actor]
+            query_indices = [adj_vertices.index(vertex) for vertex in options]
+            query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
+            display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
+            st.session_state["selected_actors"] = options_actor
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
