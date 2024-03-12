@@ -3,7 +3,7 @@ import streamlit as st
 from streamlit_shared import *
 
 def update_actor_state():
-    st.write(st.session_state['selected_actors'])
+    st.write(st.session_state['actors'])
 
 data_dict = st.session_state["data_dict"]
 pp_data_dict = st.session_state["pp_data_dict"]
@@ -33,7 +33,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         options_actor = st.multiselect(
         'Select one or more actors.',
-        actor_options,st.session_state["selected_actors"],on_change=update_actor_state,key='selected_actors')
+        actor_options,st.session_state["selected_actors"],on_change=update_actor_state,key='actors')
 
         disabled = False
         if len(options_actor) < 2:
