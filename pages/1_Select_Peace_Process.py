@@ -64,7 +64,8 @@ with st.form("peace_process"):
             # Clear state for the query interface
             st.session_state["selected_actors"] = []       
             st.session_state["selected_agreements"] = []       
-
+            st.session_state["selected_data_actor"] = ''
+            
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_network_graphic"]:
         st.session_state["keep_network_graphic"] = True

@@ -2,8 +2,11 @@ import streamlit as st
 
 from streamlit_shared import *
 
+# Main data_dict for all pages that need it
 if "data_dict" not in st.session_state:
     st.session_state["data_dict"] = {}
+
+# State for selected peace process
 if "pp_data_dict" not in st.session_state:
     st.session_state["pp_data_dict"] = {}
 if "adj_matrix" not in st.session_state:
@@ -11,11 +14,15 @@ if "adj_matrix" not in st.session_state:
 if "adj_vertices" not in st.session_state:
     st.session_state["adj_vertices"] = []       
 
+# State for the query page
 if "selected_actors" not in st.session_state:
     st.session_state["selected_actors"] = []       
 if "selected_agreements" not in st.session_state:
     st.session_state["selected_agreements"] = []       
 
+# State for the actor data page
+if "selected_data_actor" not in st.session_state:
+    st.session_state["selected_data_actor"] = ''      
 
 
 
