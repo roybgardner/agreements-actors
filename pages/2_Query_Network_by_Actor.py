@@ -36,10 +36,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
         actor_options,st.session_state["selected_actors"])
 
         disabled = False
-        if len(options_actor) < 2:
-            disabled = True
+        #if len(options_actor) < 2:
+        #    disabled = True
 
-        operator=["Show only agreements signed by all selected actors", "Show all agreements signed by each of the selected actors"]
+        operator=["AND", "OR"]
         select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=disabled, horizontal=False, captions=None, label_visibility="visible")
 
     # Every form must have a submit button.
