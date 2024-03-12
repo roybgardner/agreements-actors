@@ -22,7 +22,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
     #Query vertices using depth-first search
     with st.form("query"):
         st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
-        st.write('Select agreements using the selector below.')
     
         # Get agreements in date order
         agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
@@ -37,7 +36,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         if len(agreement_options) < 2:
             disabled = True
 
-        operator=["AND", "OR"]
+        operator=["Show only actors that are co-signatories to the selected agreements", "Show all signatories to each of the selected agreements"]
         select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=disabled, horizontal=False, captions=None, label_visibility="visible")
 
     # Every form must have a submit button.

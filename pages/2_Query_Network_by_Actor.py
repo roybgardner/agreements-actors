@@ -22,7 +22,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
     #Query vertices using depth-first search
     with st.form("query"):
         st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
-        st.write('Select actors using the selector below.')
     
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
