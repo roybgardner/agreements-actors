@@ -31,7 +31,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
         options_agreement = st.multiselect(
         'Select one or more agreements',
         agreement_options,st.session_state["selected_agreements"])
-        st.session_state["selected_agreements"] = options_agreement
 
         disabled = False
         if len(options_agreement) < 2:

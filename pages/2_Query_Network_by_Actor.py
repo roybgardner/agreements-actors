@@ -2,6 +2,9 @@ import streamlit as st
 
 from streamlit_shared import *
 
+def update_actor_state():
+    st.write(st.session_state['selected_agreements'])
+
 data_dict = st.session_state["data_dict"]
 pp_data_dict = st.session_state["pp_data_dict"]
 adj_matrix = st.session_state["adj_matrix"]
@@ -30,9 +33,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         options_actor = st.multiselect(
         'Select one or more actors.',
-        actor_options,st.session_state["selected_actors"])
-        st.write(options_actor)
-        st.session_state["selected_actors"] = options_actor
+        actor_options,st.session_state["selected_actors"],on_change=update_actor_state,key='selected_agreements')
 
         disabled = False
         if len(options_actor) < 2:
@@ -44,12 +45,16 @@ if len(st.session_state["pp_data_dict"]) > 0:
     # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_actor_query_graphic"]:
-            st.session_state["keep_actor_query_graphic"] = True
-            options = [v.split(':')[0] for v in options_actor]
-            query_indices = [adj_vertices.index(vertex) for vertex in options]
-            query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
-            display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
-            st.session_state["selected_actors"] = options_actor
+            if len(options_actor) == 0:
+                st.session_state["selected_actors"] = []
+                st.session_state["keep_actor_query_graphic"] = False
+            else:
+                st.session_state["keep_actor_query_graphic"] = True
+                options = [v.split(':')[0] for v in options_actor]
+                query_indices = [adj_vertices.index(vertex) for vertex in options]
+                query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
+                display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
+                st.session_state["selected_actors"] = options_actor
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
