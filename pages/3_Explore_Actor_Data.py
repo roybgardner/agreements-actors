@@ -132,7 +132,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.session_state["selected_data_actor"] = actor_option
-            actor = actor_option.split(':')[1]
+            actor = actor_option.split(': ')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
 
             st.write(':blue[Agreements signed by]',actor_label)
