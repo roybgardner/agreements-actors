@@ -42,7 +42,7 @@ with st.form("peace_process"):
             st.session_state["selected_data_actor"] = ''
             st.session_state["selected_metadata_actor"] = ''
             st.session_state["selected_data_agreement"] = ''
-            
+
     submitted = st.form_submit_button("Submit")
     if submitted or st.session_state["keep_network_graphic"]:
         st.session_state["keep_network_graphic"] = True
