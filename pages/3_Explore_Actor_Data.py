@@ -133,17 +133,18 @@ if len(st.session_state["pp_data_dict"]) > 0:
         if submitted:
             st.session_state["selected_data_actor"] = actor_option
             actor = actor_option.split(':')[0]
+            actor_label = get_actor_name(actor,data_dict) + ' ' + actor
 
-            st.write(':blue[Agreements signed by]',actor,get_actor_name(actor,data_dict))
+            st.write(':blue[Agreements signed by]',actor_label)
             agreements = get_agreements(actor,pp_data_dict)
             tuples = [(agreement,get_agreement_name(agreement,data_dict)) for agreement in agreements]
             tuples = sorted(tuples,key=lambda t:t[1])
             for t in tuples:
-                s = t[0] + ' ' + t[1]
+                s = t[1] + ' ' + t[0]
                 st.caption(str(s))
             st.write()
 
-            st.write(':blue[Co-signatories of]',actor,'organised by agreement')
+            st.write(':blue[Co-signatories of]',actor_label,'organised by agreement')
             cosigns = get_consignatories(actor,pp_data_dict)
             agreement_cosign_dict = {}
             for cosign in cosigns:
@@ -154,12 +155,13 @@ if len(st.session_state["pp_data_dict"]) > 0:
                     else:
                         agreement_cosign_dict[agreement] = [(cosign,get_actor_name(cosign,data_dict))]
             for agreement,actors in agreement_cosign_dict.items():
+                actors = sorted(actors,key=lambda t:t[1])
                 s = agreement + ' ' + get_agreement_name(agreement,data_dict)
                 st.write(str(s))
                 for a in actors:
                     if a[0] == actor:
                         continue
-                    s = '\t' + a[0] + ' ' + a[1]
+                    s = '\t' + a[1] + ' ' + a[0]
                     st.caption(str(s))
             st.write()
 
