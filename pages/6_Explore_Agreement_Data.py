@@ -68,6 +68,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             index = agreement_options.index(st.session_state["selected_data_agreement"])
         else:
             index = 0
+        index = 0
 
         agreement_option = st.selectbox(
         'Select an agreement:',

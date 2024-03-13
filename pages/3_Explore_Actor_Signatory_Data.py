@@ -124,7 +124,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
             index = actor_options.index(st.session_state["selected_data_actor"])
         else:
             index = 0
-
+        index = 0
+        
         actor_option = st.selectbox(
         'Select an actor:',
         actor_options,index=index)
