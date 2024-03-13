@@ -117,7 +117,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
         actor_options = sorted(actor_options,key=lambda t:t[1])
-        actor_options = [t[0] + ': ' + t[1] for t in actor_options]
+        actor_options = [t[1] + ': ' + t[0] for t in actor_options]
 
         # Get currently selected actor if any
         if len(st.session_state["selected_data_actor"]) > 0:
@@ -132,7 +132,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.session_state["selected_data_actor"] = actor_option
-            actor = actor_option.split(':')[0]
+            actor = actor_option.split(':')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
 
             st.write(':blue[Agreements signed by]',actor_label)
