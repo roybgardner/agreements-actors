@@ -98,7 +98,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
                     else:
                         cosign_agreement_dict[cosign] = [coagree]
 
-            agreements = list(set([v for _,v in cosign_agreement_dict[cosign].items()]))
+            agreements = list(set([v for _,v in cosign_agreement_dict.items()]))
 
             agreements = sorted(agreements,key=lambda t:t[2])
             for agreement_id in agreements:
