@@ -407,3 +407,12 @@ def get_agreement_name(agreement_id,data_dict):
     return: Name of agreement
     """
     return data_dict['vertices_dict'][agreement_id][data_dict['nodes_header'].index('node_name')]
+
+def get_agreement_date(agreement_id,data_dict):
+    """
+    Get the date of an agreement
+    param agreement_id: agreement ID
+    param data_dict: Global data dictionary
+    return: Name of agreement
+    """
+    return data_dict['vertices_dict'][agreement_id][data_dict['nodes_header'].index('date')]

@@ -156,7 +156,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
                         agreement_cosign_dict[agreement] = [(cosign,get_actor_name(cosign,data_dict))]
             for agreement,actors in agreement_cosign_dict.items():
                 actors = sorted(actors,key=lambda t:t[1])
-                s = agreement + ' ' + get_agreement_name(agreement,data_dict)
+                s = agreement + ' ' + get_agreement_name(agreement,data_dict)  + ' (' + get_agreement_date(agreement,data_dict) + ')'
                 st.write(str(s))
                 for a in actors:
                     if a[0] == actor:
