@@ -14,7 +14,7 @@ if not "keep_network_graphic" in st.session_state:
 
 
 #define css for different classes 
-st.header("View a Peace Process Agreement-Actor Network")
+st.header("Select a Peace Process")
 
 # *********************************************************************************************************************
 

@@ -15,11 +15,12 @@ st.header("Explore Agreement Data")
 # *********************************************************************************************************************
 
 if len(st.session_state["pp_data_dict"]) > 0:
+    st.divider()
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
+    st.divider()
 
  # *********************************************************************************************************************
    
-    st.divider()
     st.subheader('Agreement co-occurrence matrix')
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     agreement_upper = np.triu(co_matrices[1],k=1)

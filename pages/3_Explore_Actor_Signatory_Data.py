@@ -15,11 +15,12 @@ st.header("Explore Actor Signatory Data")
 # *********************************************************************************************************************
 
 if len(st.session_state["pp_data_dict"]) > 0:
+    st.divider()
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
+    st.divider()
 
  # *********************************************************************************************************************
    
-    st.divider()
     st.subheader('Actor engagements over time')
 
     st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
