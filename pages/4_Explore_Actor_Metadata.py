@@ -97,8 +97,16 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.session_state["selected_metadata_actor"] = actor_option
             actor = actor_option.split(': ')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
-            year_vector = year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
-            st.write(year_vector)
+            actor_vector = year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
+
+            f = plt.figure(figsize=(8,8))
+            y = actor_vector
+            x = range(0,len(y))
+            plt.barh(x,y)
+            plt.xlabel('Number of agreements signed',fontsize='xx-large')
+            plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
+            plt.margins(y=0.01)
+            plt.show()
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
