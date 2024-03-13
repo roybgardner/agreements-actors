@@ -24,6 +24,10 @@ if "selected_agreements" not in st.session_state:
 if "selected_data_actor" not in st.session_state:
     st.session_state["selected_data_actor"] = ''      
 
+# State for the agreement data page
+if "selected_data_agreement" not in st.session_state:
+    st.session_state["selected_data_agreement"] = ''      
+
 
 
 # *********************************************************************************************************************
