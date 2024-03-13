@@ -97,7 +97,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.session_state["selected_metadata_actor"] = actor_option
             actor = actor_option.split(': ')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
-            year_vector = ordered_year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
+            year_vector = year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
             st.write(year_vector)
 
 else:
