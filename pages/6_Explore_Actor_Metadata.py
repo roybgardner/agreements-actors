@@ -67,7 +67,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
     plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
     plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
     plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
-    plt.ylabel('Actor',fontsize='large')
     plt.xlabel('Year',fontsize='xx-large')
     cbar = plt.colorbar()
     cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
@@ -139,8 +138,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
         ax.set_xlim(0,max(values)+5)
         ax.margins(y=0)
         ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
-        if i == 2:
-            plt.xlabel('Number of agreements signed')
+        if i == 1:
+            plt.xlabel('Number of agreements signed',font_size='xx-large')
     st.pyplot(fig)
 
 else:
