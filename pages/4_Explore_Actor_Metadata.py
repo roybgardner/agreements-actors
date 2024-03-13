@@ -99,14 +99,14 @@ if len(st.session_state["pp_data_dict"]) > 0:
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
             actor_vector = year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
 
-            f = plt.figure(figsize=(8,8))
+            fig = plt.figure(figsize=(8,8))
             y = actor_vector
             x = range(0,len(y))
             plt.barh(x,y)
             plt.xlabel('Number of agreements signed',fontsize='xx-large')
             plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
             plt.margins(y=0.01)
-            plt.show()
+            st.pyplot(fig)
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
