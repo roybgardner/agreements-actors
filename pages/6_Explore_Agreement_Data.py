@@ -88,6 +88,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
                 st.caption(str(s))
             st.write()
 
+            st.divider()
+            
             st.write(':blue[Agreements also signed by the signatories of]',agreement)
             coagrees = get_coagreements(agreement,pp_data_dict)
             cosign_agreement_dict = {}

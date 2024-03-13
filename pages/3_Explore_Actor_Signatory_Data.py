@@ -124,15 +124,14 @@ if len(st.session_state["pp_data_dict"]) > 0:
             index = actor_options.index(st.session_state["selected_data_actor"])
         else:
             index = 0
-        index = 0
-        
+        #index = 0
+
         actor_option = st.selectbox(
         'Select an actor:',
         actor_options,index=index)
 
         submitted = st.form_submit_button("Submit")
         if submitted:
-            st.session_state["selected_data_actor"] = actor_option
             actor = actor_option.split(': ')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
 
@@ -144,6 +143,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
                 s = t[1] + ' ' + t[0] + ' [' + t[2] + ']'
                 st.caption(str(s))
             st.write()
+
+            st.divider()
 
             st.write(':blue[Co-signatories of]',actor_label,'organised by agreement')
             cosigns = get_consignatories(actor,pp_data_dict)
@@ -169,6 +170,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
                     s = '\t' + a[1] + ' ' + a[0]
                     st.caption(str(s))
             st.write()
+            st.session_state["selected_data_actor"] = actor_option
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
