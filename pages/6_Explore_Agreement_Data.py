@@ -37,7 +37,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
     st.caption(':blue[' + s + ']')
     s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
-    st.caption(str(s))
+    st.caption(':blue[' + s + ']')
 
     f = plt.figure(figsize=(8,8))
     plt.imshow(agreement_upper,cmap=plt.cm.Blues)
