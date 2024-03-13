@@ -157,7 +157,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             sorted_agreements = [(agreement_id,get_agreement_name(agreement_id,data_dict),get_agreement_date(agreement_id,data_dict),v) for agreement_id,v in agreement_cosign_dict.items()]
             sorted_agreements = sorted(sorted_agreements,key=lambda t:t[2])
             for t in sorted_agreements:
-                if len(t[3]) == 0:
+                if len(t[3]) <= 1:
                     continue
                 actors = sorted(t[3],key=lambda a:a[1])
                 s = t[0] + ' ' + t[1] + ' [' + t[2] + ']'
