@@ -75,7 +75,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 # *********************************************************************************************************************
     st.divider()
 
-    with st.form("actors_matadata"):
+    with st.form("actors_metadata"):
     
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]

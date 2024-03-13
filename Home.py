@@ -20,8 +20,12 @@ if "selected_actors" not in st.session_state:
 if "selected_agreements" not in st.session_state:
     st.session_state["selected_agreements"] = []       
 
-# State for the actor metadata page
+# State for the actor signatory page
 if "selected_data_actor" not in st.session_state:
+    st.session_state["selected_data_actor"] = ''      
+
+# State for the actor metadata page
+if "selected_metadata_actor" not in st.session_state:
     st.session_state["selected_metadata_actor"] = ''      
 
 # State for the agreement data page
