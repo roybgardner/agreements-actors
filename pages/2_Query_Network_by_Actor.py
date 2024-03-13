@@ -20,7 +20,8 @@ st.header("Query a Peace Process Network by Actor")
 # *********************************************************************************************************************
 
 if len(st.session_state["pp_data_dict"]) > 0:
-    st.subheader(st.session_state["pp_data_dict"]['pp_name'])
+
+    st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
 
     #Query vertices using depth-first search
     with st.form("query"):
