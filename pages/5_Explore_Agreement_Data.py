@@ -21,7 +21,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
  # *********************************************************************************************************************
    
     st.divider()
-    st.subheader('Actor co-occurrence matrix')
+    st.subheader('Agreement co-occurrence matrix')
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     agreement_upper = np.triu(co_matrices[1],k=1)
 
@@ -87,7 +87,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
                 st.caption(str(s))
             st.write()
 
-            st.write(':blue[Agreements with co-signatories of]',agreement,'organised by co-signatory')
+            st.write(':blue[Agreements also signed by the co-signatories of]',agreement)
             coagrees = get_coagreements(agreement,pp_data_dict)
             cosign_agreement_dict = {}
             for coagree in coagrees:
@@ -100,12 +100,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
             for cosign,agreements in cosign_agreement_dict.items():
                 s = cosign + ' ' + get_actor_name(cosign,data_dict)
-                st.write(str(s))
-                for a in agreements:
-                    if a[0] == agreement:
-                        continue
-                    s = '\t' + a[0] + ' ' + a[1]
-                    st.caption(str(s))
+                st.caption(str(s))
             st.write()
 
 else:
