@@ -17,9 +17,7 @@ st.header("Explore Actor Metadata")
 
 
 if len(st.session_state["pp_data_dict"]) > 0:
-    st.divider()
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
-    st.divider()
     
 # *********************************************************************************************************************
     st.subheader('Agreement year')
