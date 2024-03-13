@@ -98,11 +98,17 @@ if len(st.session_state["pp_data_dict"]) > 0:
                     else:
                         cosign_agreement_dict[cosign] = [coagree]
 
-            agreements = list(set([v for _,v in cosign_agreement_dict.items()]))
-
+            agreement_ids = []
+            for _,v in cosign_agreement_dict.items():
+                agreements.extend(v)
+            agreement_ids = list(set(agreement_ids))
+            agreements = []
+            for agreement_id in agreement_ids:
+                agreements.append((agreement_id,get_agreement_name(agreement_id,data_dict),get_agreement_name(agreement_id,data_dict)))
+                
             agreements = sorted(agreements,key=lambda t:t[2])
-            for agreement_id in agreements:
-                s = agreement_id + ' ' + get_agreement_name(agreement_id,data_dict) + ' [' + get_agreement_name(agreement_id,data_dict) + ']'
+            for t in agreements:
+                s = t[0] + ' ' + t[1] + ' [' + t[2] + ']'
                 st.caption(str(s))
             st.write()
 
