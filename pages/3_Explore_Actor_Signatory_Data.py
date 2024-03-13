@@ -10,7 +10,7 @@ adj_vertices = st.session_state["adj_vertices"]
 
 # *********************************************************************************************************************
 
-st.header("Explore Actor Data")
+st.header("Explore Actor Signatory Data")
 st.subheader(st.session_state["pp_data_dict"]['pp_name'])
 
 
@@ -111,7 +111,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 # *********************************************************************************************************************
 
     st.divider()
-    st.subheader('Explore individual actors using actor co-occurrence data')
+    st.subheader('Explore actor co-occurrence data')
     with st.form("actors"):
     
         # Get actors in alpha order
