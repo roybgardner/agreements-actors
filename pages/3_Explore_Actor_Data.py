@@ -138,7 +138,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.write(':blue[Agreements signed by]',actor_label)
             agreements = get_agreements(actor,pp_data_dict)
             tuples = [(agreement,get_agreement_name(agreement,data_dict),get_agreement_date(agreement,data_dict)) for agreement in agreements]
-            tuples = sorted(tuples,key=lambda t:t[1])
+            tuples = sorted(tuples,key=lambda t:t[2])
             for t in tuples:
                 s = t[1] + ' ' + t[0] + ' [' + t[2] + ']'
                 st.caption(str(s))
