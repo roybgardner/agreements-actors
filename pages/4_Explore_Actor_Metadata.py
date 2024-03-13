@@ -61,8 +61,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
         ordered_year_matrix.append(year_matrix[t[0]])
         
     ordered_year_matrix = np.array(ordered_year_matrix)
-            
-            
+          
+    s = 'Number of agreements signed in year - all actors'
+    st.caption(s)
+
     fig = plt.figure(figsize=(16,16),layout="constrained")
     plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
     plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
@@ -72,8 +74,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
     cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
     st.pyplot(fig)
             
-    s = 'Number of agreements signed in year - all actors'
-    st.caption(s)
 
 # *********************************************************************************************************************
     st.divider()
@@ -106,6 +106,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
             actor_vector = year_matrix[pp_data_dict['pp_actor_ids'].index(actor)]
 
+            s = 'Number of agreements signed by ' + actor_label + ' by year'
+            st.caption(s)
+
             fig = plt.figure(figsize=(8,8))
             y = actor_vector
             x = range(0,len(y))
@@ -117,8 +120,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
             plt.yticks(yint,fontsize='x-large')
             st.pyplot(fig)
 
-            s = 'Number of agreements signed by ' + actor_label + ' by year'
-            st.caption(s)
 
             st.divider()
 
@@ -157,6 +158,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
             stage_map = sorted(stage_map.items(),key=lambda kv:len(kv[1]))
             stage_labels = [t[0] for t in stage_map]
 
+            s = 'Number of agreements signed by ' + actor_label + ' by agreement stage'
+            st.caption(s)
+
             fig = plt.figure(figsize=(8,8))
             y = [len(t[1]) for t in stage_map]
             x = range(0,len(y))
@@ -167,8 +171,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
             plt.margins(y=0.01)
             st.pyplot(fig)
 
-            s = 'Number of agreements signed by ' + actor_label + ' by agreement stage'
-            st.caption(s)
 
 
 else:
