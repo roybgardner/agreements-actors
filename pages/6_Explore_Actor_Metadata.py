@@ -132,6 +132,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         ax.margins(y=0)
         ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
     fig.suptitle('Actor Signatory Counts by Agreement Stage',fontsize='xx-large')
+    plt.xlabel('Number of agreements signed')
     st.pyplot(fig)
 
 else:
