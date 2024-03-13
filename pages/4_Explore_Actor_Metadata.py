@@ -105,10 +105,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
             x = range(0,len(y))
             plt.bar(x,y)
             plt.xlabel('Year',fontsize='xx-large')
-            plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
-            plt.ylabel('Number of agreements signed',fontsize='xx-large')
+            plt.xticks(range(0,len(year_list)),year_list,fontsize='x-large',rotation=90)
+            plt.ylabel('Number of agreements signed',fontsize='x-large')
             yint = range(0, math.ceil(max(y))+1)
-            plt.yticks(yint,fontsize='xx-large')
+            plt.yticks(yint,fontsize='x-large')
             st.pyplot(fig)
 
 else:
