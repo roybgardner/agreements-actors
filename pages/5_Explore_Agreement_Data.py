@@ -104,7 +104,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             agreement_ids = list(set(agreement_ids))
             agreements = []
             for agreement_id in agreement_ids:
-                agreements.append((agreement_id,get_agreement_name(agreement_id,data_dict),get_agreement_name(agreement_id,data_dict)))
+                agreements.append((agreement_id,get_agreement_name(agreement_id,data_dict),get_agreement_date(agreement_id,data_dict)))
                 
             agreements = sorted(agreements,key=lambda t:t[2])
             for t in agreements:
