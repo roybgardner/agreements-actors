@@ -100,7 +100,7 @@ def display_networkx_graph(query_matrix,vertex_indices,adj_vertices,data_dict):
     graph = nx.from_numpy_array(query_matrix, create_using=nx.Graph)
     f = plt.figure(figsize=(16,16))
     pos = nx.spring_layout(graph) 
-    nx.draw_networkx(graph,pos,labels=node_labels,node_color=node_colors,node_size=200,alpha=0.6)
+    nx.draw_networkx(graph,pos,labels=node_labels,node_color=node_colors,node_size=400,font_size=12,alpha=0.6)
     plt.grid(False)
     st.pyplot(f)
     

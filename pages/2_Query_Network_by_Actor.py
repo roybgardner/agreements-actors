@@ -39,7 +39,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         #if len(options_actor) < 2:
         #    disabled = True
 
-        operator=["AND", "OR"]
+        operator=["AND: Show only the agreements (if any) to which all the selected actors are signatories", "OR: Show all agreements to which the selected actors are signatories"]
         select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=disabled, horizontal=False, captions=None, label_visibility="visible")
 
     # Every form must have a submit button.
@@ -48,7 +48,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.session_state["keep_actor_query_graphic"] = True
             options = [v.split(':')[0] for v in options_actor]
             query_indices = [adj_vertices.index(vertex) for vertex in options]
-            query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator)
+            query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator.split(':')[0])
             display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
             st.session_state["selected_actors"] = options_actor
 
