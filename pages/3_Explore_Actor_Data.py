@@ -111,7 +111,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 # *********************************************************************************************************************
 
     st.divider()
-    st.subheader('Explore individual actors')
+    st.subheader('Explore individual actors using actor co-occurrence data')
     with st.form("actors"):
     
         # Get actors in alpha order

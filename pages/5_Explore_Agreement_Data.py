@@ -55,7 +55,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 # *********************************************************************************************************************
 
     st.divider()
-    st.subheader('Explore individual agreements')
+    st.subheader('Explore individual agreements using agreement co-occurrence data')
     with st.form("agreements"):
     
         # Get agreements in date order
