@@ -102,8 +102,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             fig = plt.figure(figsize=(8,8))
             y = actor_vector
             x = range(0,len(y))
-            plt.plot(x,y)
-            plt.scatter(x,y)
+            plt.bar(x,y)
             plt.xlabel('Year',fontsize='xx-large')
             plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
             plt.ylabel('Number of agreements signed',fontsize='xx-large')
