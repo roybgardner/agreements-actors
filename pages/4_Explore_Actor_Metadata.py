@@ -71,6 +71,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
     cbar = plt.colorbar()
     cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
     st.pyplot(fig)
+            
+    s = 'Number of agreements signed in year - all actors'
+    st.caption(s)
 
 # *********************************************************************************************************************
     st.divider()
@@ -94,6 +97,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
         actor_options,index=index)
 
         submitted = st.form_submit_button("Submit")
+
+        st.divider()
+
         if submitted:
             st.session_state["selected_metadata_actor"] = actor_option
             actor = actor_option.split(': ')[1]
@@ -110,6 +116,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
             yint = range(0, math.ceil(max(y))+1)
             plt.yticks(yint,fontsize='x-large')
             st.pyplot(fig)
+
+            s = 'Number of agreements signed by ' + actor_label + ' by year'
+            st.caption(s)
 
             st.divider()
 
@@ -157,6 +166,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
             plt.yticks(x,stage_labels,fontsize='xx-large')
             plt.margins(y=0.01)
             st.pyplot(fig)
+
+            s = 'Number of agreements signed by ' + actor_label + ' by agreement stage'
+            st.caption(s)
 
 
 else:
