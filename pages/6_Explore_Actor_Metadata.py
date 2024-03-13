@@ -21,7 +21,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     
 # *********************************************************************************************************************
     st.divider()
-    st.subheader('Number of agreements signed by actors by year')
+    st.subheader('Agreement year')
 
     st.session_state["keep_year_graphic"] = True
 
@@ -75,7 +75,15 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
 # *********************************************************************************************************************
     st.divider()
-    st.subheader('Number of agreements signed by actors by stage of agreement')
+    st.subheader('Agreement stage')
+
+    st.write('Key to agreement stages:')
+    st.caption('Level 1: Ceasefire related')
+    st.caption('Level 2: Pre-negotiation process')
+    st.caption('Level 3: Partial Framework - substantive')
+    st.caption('Level 4: Comprehensive Framework - substantive')
+    st.caption('Level 5: Implementation Renegotiation/Renewal')
+
 
     # Stage analysis
     stage_dict = {}
@@ -132,7 +140,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
         ax.margins(y=0)
         ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
     fig.suptitle('Actor Signatory Counts by Agreement Stage',fontsize='xx-large')
-    plt.xlabel('Number of agreements signed')
     st.pyplot(fig)
 
 else:
