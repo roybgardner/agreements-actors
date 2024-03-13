@@ -100,7 +100,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
             agreement_ids = []
             for _,v in cosign_agreement_dict.items():
-                agreements.extend(v)
+                agreement_ids.extend(v)
             agreement_ids = list(set(agreement_ids))
             agreements = []
             for agreement_id in agreement_ids:
