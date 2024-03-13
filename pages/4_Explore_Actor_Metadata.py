@@ -111,5 +111,53 @@ if len(st.session_state["pp_data_dict"]) > 0:
             plt.yticks(yint,fontsize='x-large')
             st.pyplot(fig)
 
+            st.divider()
+
+            stage_dict = {}
+            stage_dict['Cea'] = [1,'Ceasefire related']
+            stage_dict['Pre'] = [2,'Pre-negotiation process']
+            stage_dict['SubPar'] = [3,'Partial Framework - substantive']
+            stage_dict['SubComp'] = [4,'Comprehensive Framework - substantive']
+            stage_dict['Ren'] = [5,'Implementation Renegotiation/Renewal']
+            stage_dict['Imp'] = [5,'Implementation Renegotiation/Renewal']
+            stage_dict['Oth'] = [0,'']
+
+            agreement_ids = get_agreements(actor,pp_data_dict)
+
+            # Map selected actor agreements on to stages
+            stage_map = {}
+            for agreement_id in agreement_ids:
+                pax_id = agreement_id.split('_')[1]
+                agreement_year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
+                if pax_id in data_dict['agreements_dict']:
+                    # Can't get stage so put in other
+                    stage_id = stage_dict[data_dict['agreements_dict'][pax_id]['Stage']][1]
+                    if stage_id in stage_map:
+                        stage_map[stage_id].append((agreement_id, agreement_year))
+                    else:
+                        stage_map[stage_id] = [(agreement_id, agreement_year)]
+                else:
+                    # Can't get stage so put in other
+                    if 0 in stage_map:
+                        stage_map[0].append((agreement_id, agreement_year))
+                    else:
+                        stage_map[0] = [(agreement_id, agreement_year)]
+                        
+            print(sum([len(v) for k,v in stage_map.items()]))
+
+            stage_map = sorted(stage_map.items(),key=lambda kv:len(kv[1]))
+            stage_labels = [t[0] for t in stage_map]
+
+            fig = plt.figure(figsize=(8,8))
+            y = [len(t[1]) for t in stage_map]
+            x = range(0,len(y))
+            plt.barh(x,y)
+            plt.xlabel('Number of agreements signed',fontsize='xx-large')
+            plt.xticks(fontsize='xx-large')
+            plt.yticks(x,stage_labels,fontsize='xx-large')
+            plt.margins(y=0.01)
+            st.pyplot(fig)
+
+
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
