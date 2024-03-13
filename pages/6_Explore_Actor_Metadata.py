@@ -139,7 +139,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         ax.margins(y=0)
         ax.set_title('Level ' + str(stage_level),fontsize='xx-large')
         if i == 1:
-            plt.xlabel('Number of agreements signed',font_size='xx-large')
+            plt.xlabel('Number of agreements signed',fontsize='xx-large')
     st.pyplot(fig)
 
 else:
