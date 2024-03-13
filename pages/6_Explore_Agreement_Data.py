@@ -35,7 +35,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     agreements = [(pp_data_dict['pp_agreement_ids'][index],\
                     data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
     s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-    st.caption(str(s))
+    st.caption(':blue[' + s + ']')
     s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
     st.caption(str(s))
 
@@ -89,7 +89,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.write()
 
             st.divider()
-            
+
             st.write(':blue[Agreements also signed by the signatories of]',agreement)
             coagrees = get_coagreements(agreement,pp_data_dict)
             cosign_agreement_dict = {}
