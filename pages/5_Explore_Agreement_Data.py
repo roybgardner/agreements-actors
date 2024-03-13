@@ -16,8 +16,6 @@ st.subheader(st.session_state["pp_data_dict"]['pp_name'])
 
 # *********************************************************************************************************************
 
-st.divider()
-
 if len(st.session_state["pp_data_dict"]) > 0:
 
  # *********************************************************************************************************************
@@ -28,7 +26,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     agreement_upper = np.triu(co_matrices[1],k=1)
 
     st.write('The agreement co-occurrence matrix provides the number of co-signatories to pairs of agreements.')
-    st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the count of actors in the cell.')
+    st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the number of actors in the cell.')
 
     st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of agreements with the most actors in common.')
 
@@ -41,11 +39,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
     s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
     st.caption(str(s))
 
-    f = plt.figure(figsize=(4,4))
+    f = plt.figure(figsize=(8,8))
     plt.imshow(agreement_upper,cmap=plt.cm.Blues)
     ticks = range(0,agreement_upper.shape[0])
-    #plt.xticks(ticks,[])    
-    #plt.yticks(ticks,[])    
+    plt.xticks([],[])    
+    plt.yticks([],[])    
     plt.ylabel('Agreements',fontsize='x-large')
     plt.xlabel('Agreements',fontsize='x-large')
     plt.title('Agreements co-occurrence matrix')
