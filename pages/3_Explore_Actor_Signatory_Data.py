@@ -119,12 +119,12 @@ if len(st.session_state["pp_data_dict"]) > 0:
         actor_options = sorted(actor_options,key=lambda t:t[1])
         actor_options = [t[1] + ': ' + t[0] for t in actor_options]
 
-        # Get currently selected actor if any
+        # Get currently selected actor if any - doesn't work
         if len(st.session_state["selected_data_actor"]) > 0:
             index = actor_options.index(st.session_state["selected_data_actor"])
         else:
             index = 0
-        #index = 0
+        index = 0
 
         actor_option = st.selectbox(
         'Select an actor:',
