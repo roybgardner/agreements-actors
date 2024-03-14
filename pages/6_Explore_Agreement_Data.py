@@ -24,8 +24,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.write("Actor co-occurrence is when two agreements are both signed the same actors.")
     st.write("Using the drop-down menu, select an agreement from the chosen peace process to discover which other agreements were signed by the signatories of the chosen agreement.\
              Clicking on the Submit button will:")
-    st.text("1. Display the agreements to which the actor is a co-signatory.\n\
-2. Display the names of the other co-signatories on each agreement")
+    st.text("1. Display the signatories of the agreement.\n\
+2. Display a list of agreements also signed by the signatories of the selected agreement.")
     with st.form("agreements"):
     
         # Get agreements in date order
@@ -46,6 +46,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         submitted = st.form_submit_button("Submit")
         if submitted:
+            st.divider()
             st.session_state["selected_data_agreement"] = agreement_option
             agreement = agreement_option.split(':')[0]
 

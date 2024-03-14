@@ -51,6 +51,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         submitted = st.form_submit_button("Submit")
         if submitted:
+            st.divider()
             actor = actor_option.split(': ')[1]
             actor_label = get_actor_name(actor,data_dict) + ' ' + actor
 

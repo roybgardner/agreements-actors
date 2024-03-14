@@ -53,6 +53,7 @@ OR means show actors that signed any one of the selected agreements.")
     # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_agreement_query_graphic"]:
+            st.divider()
             if len(options_agreement) > 0:
 
                 st.session_state["keep_agreement_query_graphic"] = True
