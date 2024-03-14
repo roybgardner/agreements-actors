@@ -16,25 +16,24 @@ if not "keep_network_graphic" in st.session_state:
 #define css for different classes 
 st.header("Select a Peace Process")
 
-st.write("The first step is to select a peace process from the drop-down menu below.\
-          Clicking on the Submit button will:")
-st.text("1. Feed your selected peace process into the other pages of the demonstrator.\n\
-2. Display the actor-agreement network of the selected peace process.\n\
-3. Display the key to the colour code of the network nodes.\n\
-4. Display the number of agreements and the number of actors in the selected\n\
-   peace process.")
-
-st.write('From here you can select another peace process or move on to any of the five other pages.\
-          These pages do not have to be used in any particular order and you can return to the Select Peace Process\
-          page to change the peace process at any point.')
 
 # *********************************************************************************************************************
 
 
 with st.form("peace_process"):
 
-    # Select a peace process       
-    st.write('Select a peace process from the list below')
+    st.write("The first step is to select a peace process from the drop-down menu below.\
+            Clicking on the Submit button will:")
+    st.text("1. Feed your selected peace process into the other pages of the demonstrator.\n\
+2. Display the actor-agreement network of the selected peace process.\n\
+3. Display the key to the colour code of the network nodes.\n\
+4. Display the number of agreements and the number of actors in the selected\n\
+peace process.")
+
+    st.write('From here you can select another peace process or move on to any of the five other pages.\
+            These pages do not have to be used in any particular order and you can return to the Select Peace Process\
+            page to change the peace process at any point.')
+    
     pp_names = get_peace_processes(data_dict)
     if len(pp_data_dict) > 0:
         index = pp_names.index(pp_data_dict['pp_name'])
