@@ -79,12 +79,12 @@ with st.form("peace_process"):
         st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
         st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
-        st.divider()
-        st.write(':violet[POTENTIAL FUNCTIONS]')
-        st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
-
 
         st.session_state["pp_data_dict"] = pp_data_dict
         st.session_state["adj_matrix"] = adj_matrix
         st.session_state["adj_vertices"] = adj_vertices
             
+st.divider()
+st.write(':violet[POTENTIAL FUNCTIONS]')
+st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
+

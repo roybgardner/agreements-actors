@@ -17,16 +17,6 @@ if not "keep_actor_query_graphic" in st.session_state:
 
 st.header("Query a Peace Process Network by Actor")
 
-st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
-        If only one actor is chosen, then AND/OR is irrelevant, otherwise:")
-st.text("AND means show agreements signed by all the selected actors.\n\
-OR means show agreements signed by any of the selected actors.")
-
-st.write("Clicking on the Submit button will:")
-st.text("1. Display the actor-agreement network for the selected actors.\n\
-2. Display the key to the colour code of the network nodes.")
-
-st.write('You can stay on this page adding or removing actors from your list and re-submitting.')
 
 # *********************************************************************************************************************
 
@@ -34,7 +24,16 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
  
- 
+    st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
+            If only one actor is chosen, then AND/OR is irrelevant, otherwise:")
+    st.text("AND means show agreements signed by all the selected actors.\n\
+    OR means show agreements signed by any of the selected actors.")
+    st.write("Clicking on the Submit button will:")
+    st.text("1. Display the actor-agreement network for the selected actors.\n\
+    2. Display the key to the colour code of the network nodes.")
+
+    st.write('You can stay on this page adding or removing actors from your list and re-submitting.')
+
     #Query vertices using depth-first search
     with st.form("query"):
         st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
@@ -71,13 +70,14 @@ if len(st.session_state["pp_data_dict"]) > 0:
                 st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
                 st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
-                st.divider()
-                st.write(':violet[POTENTIAL FUNCTIONS]')
-                st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
  
                 st.session_state["selected_actors"] = options_actor
             else:
                 st.write('Please select one or more actors.')
+                
+    st.divider()
+    st.write(':violet[POTENTIAL FUNCTIONS]')
+    st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')
