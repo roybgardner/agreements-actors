@@ -87,8 +87,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     agreement_upper = np.triu(co_matrices[1],k=1)
 
     st.write('The agreement co-occurrence matrix provides the number of co-signatories to pairs of agreements.')
-    st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the number of actors in the cell.')
-
+    st.write('The agreement co-occurrence matrix for the selected peace process is visualised below as a heat map — the deeper the blue of a cell the greater the number of actors in the cell.')
     st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of agreements with the most actors in common.')
 
     # Agreements with max actors between them
