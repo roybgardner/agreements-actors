@@ -19,7 +19,13 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
 # *********************************************************************************************************************
 
-    st.subheader('Explore individual agreements using agreement co-occurrence data')
+    st.subheader('Explore agreement co-occurrence data')
+
+    st.write("Actor co-occurrence is when two agreements are both signed the same actors.")
+    st.write("Using the drop-down menu, select an agreement from the chosen peace process to discover which other agreements were signed by the signatories of the chosen agreement.\
+             Clicking on the Submit button will:")
+    st.text("1. Display the agreements to which the actor is a co-signatory.\n\
+2. Display the names of the other co-signatories on each agreement")
     with st.form("agreements"):
     
         # Get agreements in date order
@@ -86,9 +92,12 @@ if len(st.session_state["pp_data_dict"]) > 0:
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     agreement_upper = np.triu(co_matrices[1],k=1)
 
-    st.write('The agreement co-occurrence matrix provides the number of co-signatories to pairs of agreements.')
-    st.write('The agreement co-occurrence matrix for the selected peace process is visualised below as a heat map — the deeper the blue of a cell the greater the number of actors in the cell.')
-    st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of agreements with the most actors in common.')
+    st.write('The graph shows an example of a co-occurrence matrix represented as a heat map. The example here shows the co-occurrence of agreements, i.e.,\
+              when two agreements are both signed by the same actors.\
+              The deeper the blue, the greater the number of actors that a particular pair of agreements have in common.\
+              The lightest blue indicates that a particular pair of agreements had no actors in common.')
+    st.write('Various operations on co-occurrence matrices are supported including the ability to recover the identities of the actors in a matrix cell.\
+             The example below gives the pair of agreements with the most signatories in common.')
 
     # Agreements with max actors between them
     agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)

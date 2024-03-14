@@ -30,7 +30,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
              Clicking on the Submit button will:")
     st.text("1. Display the agreements to which the actor is a co-signatory.\n\
 2. Display the names of the other co-signatories on each agreement")
-
+    
     with st.form("actors"):
     
         # Get actors in alpha order
@@ -99,9 +99,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
     co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
     actor_upper = np.triu(co_matrices[0],k=1)
 
-    st.write('The actor co-occurrence matrix provides the number of agreements to which a pair of actors are co-signatories.')
-    st.write('The actor co-occurrence matrix for the selected peace process is visualised below as a heat map — the deeper the blue of a cell the greater the number of agreements in the cell.')
-    st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of actors with the most agreements in common.')
+    st.write('The graph shows an example of a co-occurrence matrix represented as a heat map. The example here shows the co-occurrence of actors, i.e., when two actors both sign the same agreements.\
+              The deeper the blue, the greater the number of agreements that a particular pair of actors have co-signed.\
+              The lightest blue indicates that for a particular pair of actors there were no agreements that they both signed.')
+    st.write('Various operations on co-occurrence matrices are supported including the ability to recover the identities of the agreements in a matrix cell.\
+             The example below gives the pair of actors with the most agreements in common.')
 
     # Actors with max agreements between them
     actor_max = np.amax(actor_upper)
