@@ -17,42 +17,8 @@ st.header("Explore Agreement Data")
 if len(st.session_state["pp_data_dict"]) > 0:
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
 
- # *********************************************************************************************************************
-   
-    st.subheader('Agreement co-occurrence matrix')
-    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
-    agreement_upper = np.triu(co_matrices[1],k=1)
-
-    st.write('The agreement co-occurrence matrix provides the number of co-signatories to pairs of agreements.')
-    st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the number of actors in the cell.')
-
-    st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of agreements with the most actors in common.')
-
-    # Agreements with max actors between them
-    agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
-    agreements = [(pp_data_dict['pp_agreement_ids'][index],\
-                    data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
-    s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
-    st.caption(':blue[' + s + ']')
-    s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
-    st.caption(':blue[' + s + ']')
-
-    f = plt.figure(figsize=(8,8))
-    plt.imshow(agreement_upper,cmap=plt.cm.Blues)
-    ticks = range(0,agreement_upper.shape[0])
-    plt.xticks([],[])    
-    plt.yticks([],[])    
-    plt.ylabel('Agreements',fontsize='x-large')
-    plt.xlabel('Agreements',fontsize='x-large')
-    plt.title('Agreements co-occurrence matrix')
-    cbar = plt.colorbar()
-    cbar.set_label('Number of actors',rotation=270,labelpad=15,fontsize='x-large')
-    st.pyplot(f)
-
-
 # *********************************************************************************************************************
 
-    st.divider()
     st.subheader('Explore individual agreements using agreement co-occurrence data')
     with st.form("agreements"):
     
@@ -112,6 +78,41 @@ if len(st.session_state["pp_data_dict"]) > 0:
                 s = t[0] + ' ' + t[1] + ' [' + t[2] + ']'
                 st.caption(str(s))
             st.write()
+
+ # *********************************************************************************************************************
+   
+    st.divider()
+    st.subheader('Agreement co-occurrence matrix')
+    co_matrices = get_cooccurrence_matrices(pp_data_dict['pp_matrix'])
+    agreement_upper = np.triu(co_matrices[1],k=1)
+
+    st.write('The agreement co-occurrence matrix provides the number of co-signatories to pairs of agreements.')
+    st.write('Co-occurrence matrices are visualised below as heatmaps — the deeper the blue of a cell the greater the number of actors in the cell.')
+
+    st.write('Various operations on co-occurrence matrices are supported. The example below gives the pair of agreements with the most actors in common.')
+
+    # Agreements with max actors between them
+    agreement_indices = np.unravel_index(np.argmax(agreement_upper,axis=None),agreement_upper.shape)
+    agreements = [(pp_data_dict['pp_agreement_ids'][index],\
+                    data_dict['vertices_dict'][pp_data_dict['pp_agreement_ids'][index]][5]) for index in agreement_indices]
+    s = agreements[0][1] + ' (' + agreements[0][0] + ') and ' + agreements[1][1] + ' (' + agreements[1][0] + ')'
+    st.caption(':blue[' + s + ']')
+    s = 'Number of co-signatories: ' + str(agreement_upper[agreement_indices])
+    st.caption(':blue[' + s + ']')
+
+    f = plt.figure(figsize=(8,8))
+    plt.imshow(agreement_upper,cmap=plt.cm.Blues)
+    ticks = range(0,agreement_upper.shape[0])
+    plt.xticks([],[])    
+    plt.yticks([],[])    
+    plt.ylabel('Agreements',fontsize='x-large')
+    plt.xlabel('Agreements',fontsize='x-large')
+    plt.title('Agreements co-occurrence matrix')
+    cbar = plt.colorbar()
+    cbar.set_label('Number of actors',rotation=270,labelpad=15,fontsize='x-large')
+    st.pyplot(f)
+
+
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')

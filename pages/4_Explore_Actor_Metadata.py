@@ -15,15 +15,9 @@ st.header("Explore Actor Metadata")
 # *********************************************************************************************************************
 
 
-
+# *********************************************************************************************************************
 if len(st.session_state["pp_data_dict"]) > 0:
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
-    
-# *********************************************************************************************************************
-    st.subheader('Agreement year')
-
-    st.session_state["keep_year_graphic"] = True
-
     labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
     z = list(zip(range(0,len(labels)),labels))
     z = sorted(z,key=lambda t:t[1])
@@ -40,42 +34,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         year_list.append(ag_year)
     # Sort by year    
     year_list = sorted(set(year_list))
-    print(year_list)
-
     year_matrix = np.zeros((len(pp_data_dict['pp_actor_ids']),len(year_list)))
-
-    matrix_t = pp_data_dict['pp_matrix'].T
-    for i,row in enumerate(matrix_t):
-        for j,v in enumerate(row):
-            if v == 0:
-                continue
-            agreement_id = pp_data_dict['pp_agreement_ids'][j]
-            year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
-            year_index = year_list.index(year)
-            year_matrix[i][year_index] += 1
-            
-    # Get matrix in actor alpha order
-    ordered_year_matrix = []
-    for t in z:
-        ordered_year_matrix.append(year_matrix[t[0]])
-        
-    ordered_year_matrix = np.array(ordered_year_matrix)
-          
-    s = 'Number of agreements signed in year - all actors'
-    st.caption(s)
-
-    fig = plt.figure(figsize=(16,16),layout="constrained")
-    plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
-    plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
-    plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
-    plt.xlabel('Year',fontsize='xx-large')
-    cbar = plt.colorbar()
-    cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
-    st.pyplot(fig)
-            
-
-# *********************************************************************************************************************
-    st.divider()
 
     with st.form("actors_metadata"):
     
@@ -169,6 +128,98 @@ if len(st.session_state["pp_data_dict"]) > 0:
             plt.yticks(x,stage_labels,fontsize='xx-large')
             plt.margins(y=0.01)
             st.pyplot(fig)
+
+
+    
+    st.divider()
+    st.subheader('Actor engagements over time')
+
+    st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
+            Actor, agreement, and date information are available but are not shown on this plot.\
+            A dot indicates that the actor is a cosignatory to an agreement.')
+
+    pp_ag_ids = pp_data_dict['pp_agreement_ids']
+    # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
+    t_list = []
+    for i,agreement_id in enumerate(pp_ag_ids):
+        if not agreement_id in data_dict['dates_dict']:
+            continue
+        ag_date = data_dict['dates_dict'][agreement_id]
+        # Might use the agreement_id later but currently not used
+        t_list.append((i,agreement_id,ag_date))
+    # Sort the agreements by date by date    
+    t_list = sorted(t_list,key=lambda t:t[2])
+
+    # Build a time-order agreement-actor matrix
+    ordered_matrix = []
+    for t in t_list:
+        ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
+        
+    ordered_matrix = np.array(ordered_matrix)
+    # Put actors in rows
+    ordered_matrix = ordered_matrix.T
+
+    # Now order actors by first appearance in process (process is defined as a sequence of agreements)
+    row_indices = []
+    for i,row in enumerate(ordered_matrix):
+        where = np.where(row==1)
+        v = 0
+        if len(where[0]) > 0:
+            v = where[0][0]
+        row_indices.append((i,v))
+    sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
+
+    sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
+
+    f = plt.figure(figsize=(16,8))
+    for i,row in enumerate(sorted_matrix):
+        x = [j for j,x in enumerate(row) if x > 0]
+        y = [i]*len(x)
+        plt.scatter(x,y,alpha=0.9,linewidth=0.5,s=10)
+        plt.plot(x,y,alpha=0.9,linewidth=0.5)
+    plt.xticks(fontsize='xx-large')    
+    plt.yticks(fontsize='xx-large')    
+    plt.ylabel('Actor index (in order of first appearance)',fontsize='xx-large')
+    plt.xlabel('Agreement index in time order',fontsize='xx-large')
+    st.pyplot(f)
+
+
+# *********************************************************************************************************************
+    st.subheader('Agreement year')
+
+    st.session_state["keep_year_graphic"] = True
+
+
+
+    matrix_t = pp_data_dict['pp_matrix'].T
+    for i,row in enumerate(matrix_t):
+        for j,v in enumerate(row):
+            if v == 0:
+                continue
+            agreement_id = pp_data_dict['pp_agreement_ids'][j]
+            year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
+            year_index = year_list.index(year)
+            year_matrix[i][year_index] += 1
+            
+    # Get matrix in actor alpha order
+    ordered_year_matrix = []
+    for t in z:
+        ordered_year_matrix.append(year_matrix[t[0]])
+        
+    ordered_year_matrix = np.array(ordered_year_matrix)
+          
+    s = 'Number of agreements signed in year - all actors'
+    st.caption(s)
+
+    fig = plt.figure(figsize=(16,16),layout="constrained")
+    plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
+    plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
+    plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
+    plt.xlabel('Year',fontsize='xx-large')
+    cbar = plt.colorbar()
+    cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
+    st.pyplot(fig)
+            
 
 
 
