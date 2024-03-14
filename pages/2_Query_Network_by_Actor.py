@@ -24,19 +24,18 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
  
-    st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
-            If only one actor is chosen, then AND/OR is irrelevant, otherwise:")
-    st.text("AND means show agreements signed by all the selected actors.\n\
-OR means show agreements signed by any of the selected actors.")
-    st.write("Clicking on the Submit button will:")
-    st.text("1. Display the actor-agreement network for the selected actors.\n\
-2. Display the key to the colour code of the network nodes.")
-
-    st.write('You can stay on this page adding or removing actors from your list and re-submitting.')
-
     #Query vertices using depth-first search
     with st.form("query"):
-        st.write('Interface for formulating queries and providing users with insight into peace process actors and agreements.')
+
+        st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
+                If only one actor is chosen, then AND/OR is irrelevant, otherwise:")
+        st.text("AND means show agreements signed by all the selected actors.\n\
+OR means show agreements signed by any of the selected actors.")
+        st.write("Clicking on the Submit button will:")
+        st.text("1. Display the actor-agreement network for the selected actors.\n\
+2. Display the key to the colour code of the network nodes.")
+        st.write('You can stay on this page adding or removing actors from your list and re-submitting.')
+
     
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]

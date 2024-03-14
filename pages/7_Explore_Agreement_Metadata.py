@@ -54,6 +54,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
             year_matrix[i][year_index] += 1
 
     with st.form("actors_metadata"):
+
+        st.write("Using the drop-down menu, select an agreement from the chosen peace process to explore the metadata of the agreements signed by the actor.\
+                Clicking on the Submit button will:")
+        st.text("1. Display a bar chart showing the number of agreements signed each year by the selected actor .\n\
+2. Display a bar chart showing the number of agreements signed at different stages of the peace process.")
     
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
@@ -151,9 +156,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.divider()
     st.subheader('Actor engagements over time')
 
-    st.caption('Actors are represetned by horizontal lines ordered by first appearance of an actor in a peace process. Time increases from botton to top on the y-axis. The peace process is represented as a time-ordered set of agreements on the x-axis.\
-            Time increases from left to right on the x-axis. Actor, agreement, and date information are available but are not shown on this plot.\
-            A dot indicates that the actor is a cosignatory to an agreement.')
+    st.caption('This graph illustrates how a user could visualise the chronological activity of all the actors in a chosen peace process.\
+                The peace process is represented as a time-ordered set of agreements where the date of the agreement is along the x-axis.\
+                Each actor is represented on the y-axis as coloured line connecting dots (the name of the actor is not displayed in this demo).\
+                A dot indicates that the actor is a signatory to an agreement. Actors are ordered by first appearance.')
 
     pp_ag_ids = pp_data_dict['pp_agreement_ids']
     # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
@@ -213,8 +219,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
         
     ordered_year_matrix = np.array(ordered_year_matrix)
           
-    s = 'Number of agreements signed in year - all actors'
-    st.caption(s)
+    st.caption('This heat map illustrates another way that a user could visualise the chronological activity of all the actors in a chosen peace process.\
+                Here the x-axis shows the year. Again, each actor is represented on the y-axis and in this example the name of the actor is displayed.\
+                The depth of colour indicates the number of agreements an actor signed in a particular year, where the deeper the blue, the greater the number of agreements signed.')
 
     fig = plt.figure(figsize=(16,16),layout="constrained")
     plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
@@ -228,6 +235,9 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.pyplot(fig)
             
 
+    st.divider()
+    st.write(':violet[POTENTIAL FUNCTIONS]')
+    st.write(':violet[Interactive timeline diagram to display actor and agreement data]')
 
 
 else:
