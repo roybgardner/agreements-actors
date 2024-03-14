@@ -86,18 +86,34 @@ st.write('Analysis/coding: Roy Gardner')
 
 st.header("Introduction")
 
+st.subheader('Demonstration') 
+
+st.write('Peace process network analysis is demonstrated here using agreement-actor signatory data.\
+          The approach described below enables interrogation, analysis, and visualisation of the data in many different ways.\
+          The data can be explored to reveal relationship networks, comparisons, and patterns across time.\
+          Analysis of the data can be visualised as networks, heat maps, or simple graphs.\
+          Numerical values can be displayed in tables and used for statistical analysis.')
+
+st.write('This demonstration is limited to a selection of the data to illustrate a few of the many ways in which\
+          these data could be analysed and displayed using a full version of the tool.\
+          This demo serves to give an idea of its potential.')
+
+st.write('The demo is limited in scope, especially in terms of user interaction with networks and other visualisations.\
+          The potential for such interactions are described in ‘Potential function’ sections.')
+
 st.subheader('Approach') 
+
 st.write('Agreement-actor signatory data are an example of an undirected bipartite graph, i.e.,\
           there are edges (links) between agreements and actors, but not between agreements or between actors.') 
-st.write('Agreement-actor bipartite graphs are represented by binary-valued biadjacency matrices (BMs).\
-          The rows of the matrix correspond to agreements and the columns to actors. Cell values contain\
+st.write('Agreement-actor bipartite graphs are represented by binary-valued biadjacency matrices where\
+          the rows of the matrix correspond to agreements and the columns to actors. Cell values contain\
           the value 1 if an actor is a signatory to an agreement, otherwise cells values are 0.') 
-st.write('Agreement-actor biadjacency matrices provide the basis of peace process network analysis as follows:') 
-st.write('1. Extraction of BMs containing data from individual peace processes.') 
-st.write('2. Generation of adjacency matrices used for depth-first search network queries,\
-          and for passing to network packages for network visualisation.') 
+st.write('Agreement-actor biadjacency matrices, together with actor and agreement data, provide the basis of peace process network analysis as follows:') 
+st.write('1. Extraction of biadjacency matrices containing data from individual peace processes.') 
+st.write('2. Generation of full adjacency matrices used for depth-first search network queries. \
+          Adjacency matrices can be passed to network packages for network visualisation.') 
 st.write('3. Generation of co-occurrence matrices measuring, a)\
           the number of agreements to which a pair of actors are co-signatories, b)\
           the number of signatories a pair of agreements have in common.\
-         The indices of entities in co-occurrence matrix cells can be recovered.') 
+         The entities in co-occurrence matrix cells can be recovered.') 
 st.write('4. Support for metadata-based analysis within and across peace processes.') 
