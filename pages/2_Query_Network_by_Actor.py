@@ -50,7 +50,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             st.write('Network key:')
             st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
             st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
-            st.caption(':rainbow[Other colours represent different actor types, e.g., military, political, IGO etc]')
+            st.caption('Other colours represent different actor types, e.g., military, political, IGO etc')
 
             st.session_state["keep_actor_query_graphic"] = True
             options = [v.split(':')[0] for v in options_actor]
