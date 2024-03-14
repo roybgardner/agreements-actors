@@ -67,12 +67,6 @@ with st.form("peace_process"):
             st.write('ISSUE: peace process submatrix is empty')
             raise Exception('error')
         
-        st.divider()
-        st.write('Network key:')
-        st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
-        st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
-        st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
-        st.divider()
 
         s = 'Number of agreements in ' + pp_data_dict['pp_name'] + ':'
         st.write(s,pp_data_dict['pp_matrix'].shape[0])
@@ -83,6 +77,11 @@ with st.form("peace_process"):
         # Build peace process adjacency matrix and get adjacency matrix vertices and display graph using networkX
         adj_matrix,adj_vertices = adjacency_from_biadjacency(pp_data_dict)
         display_networkx_graph(adj_matrix,range(0,len(adj_vertices)),adj_vertices,data_dict)
+
+        st.caption('Network key:')
+        st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
+        st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
+        st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
         st.session_state["pp_data_dict"] = pp_data_dict
         st.session_state["adj_matrix"] = adj_matrix
