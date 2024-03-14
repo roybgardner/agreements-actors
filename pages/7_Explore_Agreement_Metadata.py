@@ -156,7 +156,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.divider()
     st.subheader('Actor engagements over time')
 
-    st.caption('This graph illustrates how a user could visualise the chronological activity of all the actors in a chosen peace process.\
+    st.caption('This graph illustrates the chronological activity of all the actors in a chosen peace process.\
                 The peace process is represented as a time-ordered set of agreements where the date of the agreement is along the x-axis.\
                 Each actor is represented on the y-axis as coloured line connecting dots (the name of the actor is not displayed in this demo).\
                 A dot indicates that the actor is a signatory to an agreement. Actors are ordered by first appearance.')
@@ -219,7 +219,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         
     ordered_year_matrix = np.array(ordered_year_matrix)
           
-    st.caption('This heat map illustrates another way that a user could visualise the chronological activity of all the actors in a chosen peace process.\
+    st.caption('This heat map illustrates another method for visualising the chronological activity of all the actors in a chosen peace process.\
                 Here the x-axis shows the year. Again, each actor is represented on the y-axis and in this example the name of the actor is displayed.\
                 The depth of colour indicates the number of agreements an actor signed in a particular year, where the deeper the blue, the greater the number of agreements signed.')
 
