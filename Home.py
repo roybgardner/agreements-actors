@@ -88,20 +88,19 @@ st.header("Introduction")
 
 st.subheader('Demonstration') 
 
-st.write('Peace process network analysis is demonstrated here using agreement-actor signatory data.\
-          The approach described below enables interrogation, analysis, and visualisation of the data in many different ways.\
-          The data can be explored to reveal relationship networks, comparisons, and patterns across time.\
-          Analysis of the data can be visualised as networks, heat maps, or simple graphs.\
-          Numerical values can be displayed in tables and used for statistical analysis.')
-
-st.write('This demonstration is limited to a selection of the data to illustrate a few of the many ways in which\
-          these data could be analysed and displayed using a full version of the tool.\
+st.write('This demonstration illustrates a few of the many ways in which\
+          agreement-actor signatory data can be analysed and displayed.\
           This demo serves to give an idea of its potential.')
 
-st.write('The demo is limited in scope, especially in terms of user interaction with networks and other visualisations.\
-          The potential for such interactions are described in ‘Potential function’ sections.')
+st.write('The demonstrator applies the methodology describe below in order to interrogate, analyse,\
+          and visualise agreement-actor signatory data.\
+         Network representations of the data and the ability to query these networks are a core feature of the methodology.\
+         Numerical values can be displayed in tables and used for statistical analysis.')
 
-st.subheader('Approach') 
+st.write('The demo is limited in scope, especially in terms of user interaction with networks and other visualisations.\
+          The potential for such interaction is described in ‘Potential function’ sections.')
+
+st.subheader('Methodology') 
 
 st.write('Agreement-actor signatory data are an example of an undirected bipartite graph, i.e.,\
           there are edges (links) between agreements and actors, but not between agreements or between actors.') 
