@@ -21,14 +21,15 @@ st.write("The first step is to select a peace process from the dropdown list bel
 st.text("1. Feed your selected peace process into the other pages of the demonstrator.\n\
 2. Display the actor-agreement network of the selected peace process.\n\
 3. Display the key to the colour code of the network nodes.\n\
-4. Display the number of agreements and the number of actors in the selected peace process.")
+4. Display the number of agreements and the number of actors in the selected\n\
+   peace process.")
 
 st.write('From here you can select another peace process or move on to any of the five other pages.\
           These pages do not have to be used in any particular order and you can return to the Select Peace Process\
           page to change the peace process at any point.')
 
 st.write(':violet[POTENTIAL FUNCTIONS]')
-st.text(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
+st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
 
 
 # *********************************************************************************************************************
@@ -67,9 +68,9 @@ with st.form("peace_process"):
             raise Exception('error')
         
         st.write('Network key:')
-        st.text(':red[Red nodes are agreements — identifier prefix AGT_]\n\
-        :blue[Blue nodes are country actors — identifier prefix CON_]\n\
-        Other colours represent different actor types, e.g., military, political, IGO etc.')
+        st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
+        st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
+        st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
         s = 'Number of agreements in ' + pp_data_dict['pp_name'] + ':'
         st.write(s,pp_data_dict['pp_matrix'].shape[0])
