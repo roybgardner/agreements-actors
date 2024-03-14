@@ -217,6 +217,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
     plt.xlabel('Year',fontsize='xx-large')
     cbar = plt.colorbar()
+    yint = range(0, math.ceil(np.amax(ordered_year_matrix))+1)
+    cbar.set_ticks(yint)
     cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
     st.pyplot(fig)
             

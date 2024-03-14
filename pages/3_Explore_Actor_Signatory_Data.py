@@ -111,6 +111,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     plt.xlabel('Actors',fontsize='x-large')
     plt.title('Actors co-occurrence matrix')
     cbar = plt.colorbar()
+    yint = range(0, math.ceil(np.amax(actor_upper))+1)
+    cbar.set_ticks(yint)
     cbar.set_label('Number of agreements',rotation=270,labelpad=15,fontsize='x-large')
     st.pyplot(f)
 
