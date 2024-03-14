@@ -99,7 +99,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
               when two agreements are both signed by the same actors.\
               The deeper the blue, the greater the number of actors that a particular pair of agreements have in common.\
               The lightest blue indicates that a particular pair of agreements had no actors in common.')
-    st.write('Various constraints mean that agreement names are not shown. However, names and other agreement data are available.\
+    st.write('Various constraints mean that agreement names are not shown. However, names and other agreement metadata are available.\
               It is also possible to recover the identities of the actors in a matrix cell.\
               The example below gives the pair of agreements with the most signatories in common.')
 

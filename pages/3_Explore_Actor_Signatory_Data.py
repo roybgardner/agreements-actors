@@ -104,7 +104,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.write('The graph shows an example of a co-occurrence matrix represented as a heat map. The example here shows the co-occurrence of actors, i.e., when two actors both sign the same agreements.\
               The deeper the blue, the greater the number of agreements that a particular pair of actors have co-signed.\
               The lightest blue indicates that for a particular pair of actors there were no agreements that they both signed.')
-    st.write('Various constraints mean that actor names are not shown. However, names and other actor data are available.\
+    st.write('Various constraints mean that actor names are not shown. However, names and other actor metadata are available.\
               It is also possible to recover the identities of the agreements in a matrix cell.\
               The example below gives the pair of actors with the most agreements in common.')
 
