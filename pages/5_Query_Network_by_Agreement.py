@@ -42,17 +42,20 @@ if len(st.session_state["pp_data_dict"]) > 0:
     # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_agreement_query_graphic"]:
-            st.write('Network key:')
-            st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
-            st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
-            st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
+            if len(options_agreement) > 0:
+                st.write('Network key:')
+                st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
+                st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
+                st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
-            st.session_state["keep_agreement_query_graphic"] = True
-            options = [v.split(':')[0] for v in options_agreement]
-            query_indices = [adj_vertices.index(vertex) for vertex in options]
-            query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator.split(':')[0])
-            display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
-            st.session_state["selected_agreements"] = options_agreement
+                st.session_state["keep_agreement_query_graphic"] = True
+                options = [v.split(':')[0] for v in options_agreement]
+                query_indices = [adj_vertices.index(vertex) for vertex in options]
+                query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator.split(':')[0])
+                display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
+                st.session_state["selected_agreements"] = options_agreement
+            else:
+                st.write('Please select one or more agreements.')
 
 else:
     st.write('Please select a peace process in the Select Peace Process page.')

@@ -145,8 +145,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.divider()
     st.subheader('Actor engagements over time')
 
-    st.write('Actors are on y-axis ordered by first appearance in a peace process. The peace process is represented as a time-ordered set of agreements on the x-axis.\
-            Actor, agreement, and date information are available but are not shown on this plot.\
+    st.caption('Actors are represetned by horizontal lines ordered by first appearance of an actor in a peace process. Time increases from botton to top on the y-axis. The peace process is represented as a time-ordered set of agreements on the x-axis.\
+            Time increases from left to right on the x-axis. Actor, agreement, and date information are available but are not shown on this plot.\
             A dot indicates that the actor is a cosignatory to an agreement.')
 
     pp_ag_ids = pp_data_dict['pp_agreement_ids']
@@ -199,8 +199,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
 # *********************************************************************************************************************
     st.subheader('Agreement year')
-
-    st.session_state["keep_year_graphic"] = True
            
     # Get matrix in actor alpha order
     ordered_year_matrix = []
