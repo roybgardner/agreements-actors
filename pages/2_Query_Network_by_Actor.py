@@ -18,7 +18,7 @@ if not "keep_actor_query_graphic" in st.session_state:
 st.header("Query a Peace Process Network by Actor")
 
 st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
-        If only one actor is chosen, the AND/OR is irrelevant otherwise:")
+        If only one actor is chosen, then AND/OR is irrelevant, otherwise:")
 st.text("AND means show agreements signed by all the selected actors.\n\
 OR means show agreements signed by any of the selected actors.")
 
