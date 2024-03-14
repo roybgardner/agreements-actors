@@ -52,9 +52,9 @@ with st.form("peace_process"):
             raise Exception('error')
         
         st.write('Network key:')
-        st.caption('red:[Red nodes are agreements — identifier prefix AGT_]')
-        st.caption('blue:[Blue nodes are country actors — identifier prefix CON_]')
-        st.caption('rainbow:[Other colours represent different actor types, e.g., military, political, IGO etc]')
+        st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
+        st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
+        st.caption(':rainbow[Other colours represent different actor types, e.g., military, political, IGO etc]')
 
         s = 'Number of agreements in ' + pp_data_dict['pp_name'] + ':'
         st.write(s,pp_data_dict['pp_matrix'].shape[0])
