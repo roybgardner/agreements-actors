@@ -212,7 +212,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.caption(s)
 
     fig = plt.figure(figsize=(16,16),layout="constrained")
-    plt.imshow(ordered_year_matrix,cmap=plt.cm.Blues)
+    plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
     plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
     plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
     plt.xlabel('Year',fontsize='xx-large')

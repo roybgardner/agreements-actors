@@ -47,6 +47,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
     # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_actor_query_graphic"]:
+            st.write('Network key:')
+            st.caption('red:[Red nodes are agreements — identifier prefix AGT_]')
+            st.caption('blue:[Blue nodes are country actors — identifier prefix CON_]')
+            st.caption('rainbow:[Other colours represent different actor types, e.g., military, political, IGO etc]')
+
             st.session_state["keep_actor_query_graphic"] = True
             options = [v.split(':')[0] for v in options_actor]
             query_indices = [adj_vertices.index(vertex) for vertex in options]
