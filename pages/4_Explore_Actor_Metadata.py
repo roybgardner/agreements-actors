@@ -46,7 +46,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             year = int(str(data_dict['dates_dict'][agreement_id])[0:4])
             year_index = year_list.index(year)
             year_matrix[i][year_index] += 1
-            
+
     with st.form("actors_metadata"):
     
         # Get actors in alpha order
@@ -188,7 +188,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         y = [i]*len(x)
         plt.scatter(x,y,alpha=0.9,linewidth=0.5,s=20)
         plt.plot(x,y,alpha=0.9,linewidth=0.5)
-    xint = range(0, sorted_matrix.shape[1])
+    xint = range(0, sorted_matrix.shape[1],10)
     plt.xticks(xint,fontsize='xx-large')    
     yint = range(0, math.ceil(np.amax(sorted_matrix))+1)
     plt.yticks(yint,fontsize='xx-large')    
