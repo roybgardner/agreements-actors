@@ -24,10 +24,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more agreements from the drop-down menu.\
             If only one agreement is chosen, then AND/OR is irrelevant, otherwise:")
     st.text("AND means show actors that signed every one of the selected agreements.\n\
-    OR means show actors that signed any one of the selected agreements.")
+OR means show actors that signed any one of the selected agreements.")
     st.write("Clicking on the Submit button will:")
     st.text("1. Display the actor-agreement network for the selected agreements.\n\
-    2. Display the key to the colour code of the network nodes.")
+2. Display the key to the colour code of the network nodes.")
 
     st.write('You can stay on this page adding or removing agreements from your list and re-submitting.')
 

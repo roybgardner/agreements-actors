@@ -29,8 +29,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.write("Using the drop-down menu, select an actor from the chosen peace process to see with whom and on which agreements their signature co-occurs.\
              Clicking on the Submit button will:")
     st.text("1. Display the agreements to which the actor is a co-signatory.\n\
-    2. Display the names of the other co-signatories on each agreement")
-    
+2. Display the names of the other co-signatories on each agreement")
+
     with st.form("actors"):
     
         # Get actors in alpha order
