@@ -88,9 +88,8 @@ st.header("Introduction")
 
 st.subheader('Demonstration') 
 
-st.write('This demonstration illustrates a few of the many ways in which\
-          agreement-actor signatory data can be analysed and displayed.\
-          This demo serves to give an idea of its potential.')
+st.write('This demonstrator illustrates a few of the many ways in which\
+          agreement-actor signatory data can be analysed and displayed.')
 
 st.write('The demonstrator applies the methodology describe below in order to interrogate, analyse,\
           and visualise agreement-actor signatory data.\
