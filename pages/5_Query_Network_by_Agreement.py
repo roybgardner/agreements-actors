@@ -16,7 +16,7 @@ st.header("Query a Peace Process Network")
 
 st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more agreements from the drop-down menu.\
         If only one agreement is chosen, then AND/OR is irrelevant, otherwise:")
-st.text("AND means show actors that signed every one of selected agreement.\n\
+st.text("AND means show actors that signed every one of the selected agreements.\n\
 OR means show actors that signed any one of the selected agreements.")
 
 st.write("Clicking on the Submit button will:")
@@ -47,7 +47,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
         #if len(options_agreement) < 2:
         #    disabled = True
 
-        operator=["AND: Show only the actors (if any) that are signatories to all the selected agreements", "OR: Show all actors that are signatories to the selected agreements"]
+        operator=["AND: Show actors that signed every one of the selected agreements", "OR: Show actors that signed any one of the selected agreements"]
         select_operator=st.radio("Select operator", operator, index=0, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=disabled, horizontal=False, captions=None, label_visibility="visible")
 
     # Every form must have a submit button.
