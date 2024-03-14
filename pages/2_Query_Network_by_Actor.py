@@ -17,6 +17,16 @@ if not "keep_actor_query_graphic" in st.session_state:
 
 st.header("Query a Peace Process Network by Actor")
 
+st.write("Here you can query your chosen peace process by selecting one or more actors from the drop-down menu.\
+          If only one actor is chosen, the AND/OR is irrelevant.\
+         Clicking on the Submit button will:")
+st.text("1. Display a subset of the actor-agreement network based on the actors you selected.\n\
+2. Display the key to the colour code of the network nodes.")
+
+st.write('From here you can select another peace process or move on to any of the five other pages.\
+          These pages do not have to be used in any particular order and you can return to the Select Peace Process\
+          page to change the peace process at any point.')
+
 # *********************************************************************************************************************
 
 if len(st.session_state["pp_data_dict"]) > 0:
@@ -48,16 +58,22 @@ if len(st.session_state["pp_data_dict"]) > 0:
         submitted = st.form_submit_button("Submit")
         if submitted or st.session_state["keep_actor_query_graphic"]:
             if len(options_actor) > 0:
-                st.write('Network key:')
-                st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
-                st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
-                st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
 
                 st.session_state["keep_actor_query_graphic"] = True
                 options = [v.split(':')[0] for v in options_actor]
                 query_indices = [adj_vertices.index(vertex) for vertex in options]
                 query_matrix,found_indices = get_query_matrix(query_indices,adj_matrix,max_depth=1,operator=select_operator.split(':')[0])
                 display_networkx_graph(query_matrix,found_indices,adj_vertices,data_dict)
+
+                st.caption('Network key:')
+                st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
+                st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
+                st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
+
+                st.divider()
+                st.write(':violet[POTENTIAL FUNCTIONS]')
+                st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
+ 
                 st.session_state["selected_actors"] = options_actor
             else:
                 st.write('Please select one or more actors.')

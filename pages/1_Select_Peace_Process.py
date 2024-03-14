@@ -16,7 +16,7 @@ if not "keep_network_graphic" in st.session_state:
 #define css for different classes 
 st.header("Select a Peace Process")
 
-st.write("The first step is to select a peace process from the dropdown list below.\
+st.write("The first step is to select a peace process from the drop-down menu below.\
           Clicking on the Submit button will:")
 st.text("1. Feed your selected peace process into the other pages of the demonstrator.\n\
 2. Display the actor-agreement network of the selected peace process.\n\
@@ -27,10 +27,6 @@ st.text("1. Feed your selected peace process into the other pages of the demonst
 st.write('From here you can select another peace process or move on to any of the five other pages.\
           These pages do not have to be used in any particular order and you can return to the Select Peace Process\
           page to change the peace process at any point.')
-
-st.write(':violet[POTENTIAL FUNCTIONS]')
-st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
-
 
 # *********************************************************************************************************************
 
@@ -82,6 +78,11 @@ with st.form("peace_process"):
         st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
         st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
         st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
+
+        st.divider()
+        st.write(':violet[POTENTIAL FUNCTIONS]')
+        st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
+
 
         st.session_state["pp_data_dict"] = pp_data_dict
         st.session_state["adj_matrix"] = adj_matrix
