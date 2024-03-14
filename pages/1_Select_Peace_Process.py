@@ -28,7 +28,7 @@ st.write('From here you can select another peace process or move on to any of th
           page to change the peace process at any point.')
 
 st.write(':violet[POTENTIAL FUNCTIONS]')
-st.write(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
+st.text(':violet[Interactive network diagram with zoom, rearrangement, and access to node data]')
 
 
 # *********************************************************************************************************************
@@ -67,9 +67,9 @@ with st.form("peace_process"):
             raise Exception('error')
         
         st.write('Network key:')
-        st.caption(':red[Red nodes are agreements — identifier prefix AGT_]')
-        st.caption(':blue[Blue nodes are country actors — identifier prefix CON_]')
-        st.caption('Other colours represent different actor types, e.g., military, political, IGO etc.')
+        st.text(':red[Red nodes are agreements — identifier prefix AGT_]\n\
+        :blue[Blue nodes are country actors — identifier prefix CON_]\n\
+        Other colours represent different actor types, e.g., military, political, IGO etc.')
 
         s = 'Number of agreements in ' + pp_data_dict['pp_name'] + ':'
         st.write(s,pp_data_dict['pp_matrix'].shape[0])
