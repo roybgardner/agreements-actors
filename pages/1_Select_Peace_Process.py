@@ -18,9 +18,9 @@ st.header("Select a Peace Process")
 
 st.write("The first step is to select a peace process from the dropdown list below.\
           Clicking on the Submit button will:")
-st.write("1. Feed your selected peace process into the other pages of the demonstrator.\n\
-         2. Display the actor-agreement network of the selected peace process.\n\
-         3. Display the key to the colour code of the network nodes.\n\
+st.write("1. Feed your selected peace process into the other pages of the demonstrator.\\n\
+         2. Display the actor-agreement network of the selected peace process.\\n\
+         3. Display the key to the colour code of the network nodes.\\n\
          4. Display the number of agreements and the number of actors in the selected peace process.")
 
 
