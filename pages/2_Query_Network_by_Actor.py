@@ -17,15 +17,16 @@ if not "keep_actor_query_graphic" in st.session_state:
 
 st.header("Query a Peace Process Network by Actor")
 
-st.write("Here you can query your chosen peace process by selecting one or more actors from the drop-down menu.\
-          If only one actor is chosen, the AND/OR is irrelevant.\
-         Clicking on the Submit button will:")
-st.text("1. Display a subset of the actor-agreement network based on the actors you selected.\n\
+st.write("Here you can query your chosen peace process actor-agreement network by selecting one or more actors from the drop-down menu.\
+        If only one actor is chosen, the AND/OR is irrelevant otherwise:")
+st.text("AND means show agreements signed by all the selected actors.\n\
+2. OR means show agreements signed by any of the selected actors.")
+
+st.write("Clicking on the Submit button will:")
+st.text("1. Display the actor-agreement network for the selected actors.\n\
 2. Display the key to the colour code of the network nodes.")
 
-st.write('From here you can select another peace process or move on to any of the five other pages.\
-          These pages do not have to be used in any particular order and you can return to the Select Peace Process\
-          page to change the peace process at any point.')
+st.write('You can stay on this page adding or removing actors from your list and re-submitting.')
 
 # *********************************************************************************************************************
 
