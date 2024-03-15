@@ -30,7 +30,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 OR means show actors that signed any one of the selected agreements.")
         st.write("Clicking on the Submit button will:")
         st.text("1. Display the actor-agreement network for the selected agreements.\n\
- 2. Display the key to the colour code of the network nodes.")
+2. Display the key to the colour code of the network nodes.")
         st.write('You can stay on this page adding or removing agreements from your list and re-submitting.')
 
         # Get agreements in date order

@@ -91,7 +91,7 @@ st.subheader('Demonstration')
 st.write('This demonstrator illustrates a few of the many ways in which\
           agreement-actor signatory data for selected peace processes can be analysed and displayed.')
 
-st.write('The demonstrator applies the methodology describe below in order to interrogate, analyse,\
+st.write('The demonstrator applies the methodology described below in order to interrogate, analyse,\
           and visualise agreement-actor signatory data.\
          Network representations of the data and the ability to query these networks are a core feature of the methodology.\
          Numerical values can be displayed in tables and used for statistical analysis.')
@@ -101,8 +101,9 @@ st.write('The demo is limited in scope, especially in terms of user interaction 
 
 st.subheader('Methodology') 
 
-st.write('Agreement-actor signatory data are an example of an undirected bipartite graph, i.e.,\
-          there are edges (links) between agreements and actors, but not between agreements or between actors.') 
+st.write('Agreement-actor signatory data are an example of an undirected bipartite graph where agreements and actors are directly linked by edges.\
+          However, there are no direct links between actors, and there are no direct links between agreements. The relationship between actors is defined by the agreements\
+          that they have in common, and the relationship between agreements is defined by the actors that they have in common.') 
 st.write('Agreement-actor bipartite graphs are represented by binary-valued biadjacency matrices where\
           the rows of the matrix correspond to agreements and the columns to actors. Cell values contain\
           the value 1 if an actor is a signatory to an agreement, otherwise cells values are 0.') 

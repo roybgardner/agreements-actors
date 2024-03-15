@@ -25,7 +25,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.subheader('Explore actor co-occurrence data')
 
-    st.write("Actor co-occurrence is when two actors both sign the same set of agreements, i.e., their signatures co-occur.")
+    st.write("Actor co-occurrence is when two actors both sign the same set of agreements, i.e., their signatures co-occur.\
+             On this page you can:")
+    st.text("1. View co-occurrence data for individual actors.\n\
+2. View the co-occurrence matrix of all actors.")
     
     with st.form("actors"):
 

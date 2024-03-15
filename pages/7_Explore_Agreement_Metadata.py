@@ -57,8 +57,10 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
         st.write("Using the drop-down menu, select an agreement from the chosen peace process to explore the metadata of the agreements signed by the actor.\
                 Clicking on the Submit button will:")
-        st.text("1. Display a bar chart showing the number of agreements signed each year by the selected actor .\n\
-2. Display a bar chart showing the number of agreements signed at different stages of the peace process.")
+        st.text("1. Display a bar chart showing the number of agreements signed each year\n\
+                    by the selected actor .\n\
+2. Display a bar chart showing the number of agreements signed at different\n\
+   stages of the peace process.")
     
         # Get actors in alpha order
         actor_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5]) for vertex_id in pp_data_dict['pp_actor_ids']]
@@ -158,7 +160,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.caption('This graph illustrates the chronological activity of all the actors in a chosen peace process.\
                 The peace process is represented as a time-ordered set of agreements where the date of the agreement is along the x-axis.\
-                Each actor is represented on the y-axis as coloured line connecting dots (the name of the actor is not displayed in this demo).\
+                Each actor is represented on the y-axis as a coloured line connecting dots (the name of the actor is not displayed in this demo).\
                 A dot indicates that the actor is a signatory to an agreement. Actors are ordered by first appearance.')
 
     pp_ag_ids = pp_data_dict['pp_agreement_ids']

@@ -21,14 +21,18 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.subheader('Explore agreement co-occurrence data')
 
-    st.write("Agreement co-occurrence is when two agreements are both signed the same actors.")
+    st.write("Agreement co-occurrence is when two agreements are both signed by the same actors.\
+             On this page you can:")
+    st.text("1. View co-occurrence data for individual agreements.\n\
+2. View the co-occurrence matrix of all agreements.")
 
     with st.form("agreements"):
 
         st.write("Using the drop-down menu, select an agreement from the chosen peace process to discover which other agreements were signed by the signatories of the chosen agreement.\
                 Clicking on the Submit button will:")
         st.text("1. Display the signatories of the agreement.\n\
-2. Display a list of agreements also signed by the signatories of the selected agreement.")
+2. Display a list of agreements also signed by the signatories of the selected\n\
+   agreement.")
     
         # Get agreements in date order
         agreement_options = [(vertex_id,data_dict['vertices_dict'][vertex_id][5],data_dict['dates_dict'][vertex_id]) for vertex_id in pp_data_dict['pp_agreement_ids']]
