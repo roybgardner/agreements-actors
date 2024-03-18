@@ -10,6 +10,8 @@ adj_vertices = st.session_state["adj_vertices"]
 
 # *********************************************************************************************************************
 
+add_logo("./logos/peacerep_text.png")
+
 st.header("Explore Actor Signatory Data")
 
 

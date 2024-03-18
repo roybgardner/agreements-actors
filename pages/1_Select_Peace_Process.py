@@ -8,10 +8,13 @@ adj_matrix = st.session_state["adj_matrix"]
 adj_vertices = st.session_state["adj_vertices"]
 
 if not "keep_network_graphic" in st.session_state:
-    st.session_state["keep_network_graphic"] = False          
+    st.session_state["keep_network_graphic"] = False  
+
+
 
 # *********************************************************************************************************************
 
+add_logo("./logos/peacerep_text.png")
 
 #define css for different classes 
 st.header("Select a Peace Process")

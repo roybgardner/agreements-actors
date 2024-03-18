@@ -14,6 +14,8 @@ if not "keep_actor_query_graphic" in st.session_state:
     st.session_state["keep_actor_query_graphic"] = False          
 
 # *********************************************************************************************************************
+    
+add_logo("./logos/peacerep_text.png")
 
 st.header("Query a Peace Process Network by Actor")
 

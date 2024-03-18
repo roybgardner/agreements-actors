@@ -12,6 +12,8 @@ if not "keep_agreement_query_graphic" in st.session_state:
 
 # *********************************************************************************************************************
 
+add_logo("./logos/peacerep_text.png")
+
 st.header("Query a Peace Process Network")
 
 
