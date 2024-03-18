@@ -15,7 +15,20 @@ import os
 import csv
 import sys
 
-
+def add_logo():
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(./logos/peacerep_text.png);
+                background-repeat: no-repeat;
+                padding-top: 120px;
+                background-position: 20px 20px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visited=[]):
     """
     Recursive function to visit all vertices that are reachable from a query vertex.

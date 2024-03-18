@@ -36,6 +36,7 @@ if "selected_data_agreement" not in st.session_state:
 
 # *********************************************************************************************************************
 
+add_logo()
 
 #define css for different classes 
 st.markdown("""
