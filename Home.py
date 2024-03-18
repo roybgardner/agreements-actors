@@ -36,7 +36,7 @@ if "selected_data_agreement" not in st.session_state:
 
 # *********************************************************************************************************************
 
-add_logo("./logos/peacerep_text.png", width=50, height=60)
+add_logo("./logos/peacerep_text.png")
 
 #define css for different classes 
 st.markdown("""
