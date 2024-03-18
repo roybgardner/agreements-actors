@@ -26,7 +26,7 @@ def get_base64_of_bin_file(png_file):
 def build_markup_for_logo(
     # https://stackoverflow.com/questions/73251012/put-logo-and-title-above-on-top-of-page-navigation-in-sidebar-of-streamlit-multi
     png_file,
-    background_position="20% 10% 10% 50%",
+    background_position="10% 50%",
     margin_top="10%",
     image_width="60%",
     image_height="",
