@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 import networkx as nx
 from networkx.readwrite import json_graph
@@ -15,28 +16,12 @@ import os
 import csv
 import sys
 
-def add_logo():
-    st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {
-                background-image: url(./logos/peacerep_text.png);
-                background-repeat: no-repeat;
-                padding-top: 120px;
-                background-position: 20px 20px;
-            }
-            [data-testid="stSidebarNav"]::before {
-                content: "";
-                margin-left: 20px;
-                margin-top: 20px;
-                font-size: 30px;
-                position: relative;
-                top: 100px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+def add_logo(logo_path, width, height):
+    """Read and return a resized logo"""
+    logo = Image.open(logo_path)
+    modified_logo = logo.resize((width, height))
+    return modified_logo
+
 def depth_first_search(matrix,query_index,max_depth=1,depth=1,vertices=[],visited=[]):
     """
     Recursive function to visit all vertices that are reachable from a query vertex.
