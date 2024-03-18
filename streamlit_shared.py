@@ -48,6 +48,7 @@ def build_markup_for_logo(
         binary_string,
         background_position,
         margin_top,
+        margin_bottom,
         image_width,
         image_height,
     )
