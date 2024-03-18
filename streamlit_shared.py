@@ -28,7 +28,7 @@ def build_markup_for_logo(
     png_file,
     background_position="10% 10%",
     margin_top="10%",
-    margin_bottom="20%",
+    margin_bottom="50%",
     image_width="60%",
     image_height="",
 ):
