@@ -24,7 +24,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
     st.write("Agreement co-occurrence is when two agreements are both signed by the same actors.\
              On this page you can:")
-    st.text("1. View co-occurrence data for individual agreements.\n\
+    st.write("1. View co-occurrence data for individual agreements.\n\
 2. View the co-occurrence matrix of all agreements.")
 
     with st.form("agreements"):
