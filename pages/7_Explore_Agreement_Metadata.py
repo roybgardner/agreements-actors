@@ -133,6 +133,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.pyplot(fig)
             
 # *********************************************************************************************************************
+    st.subheader('Explore individual actors')
     st.divider()
     with st.form("actors_metadata"):
 
