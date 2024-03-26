@@ -22,6 +22,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.text("1. Agreement date.\n\
 2. Agreement year.\n\
 3. Agreement stage.")
+    st.write("Explore individual actor data using thr form at the bottom of the page.")
 
 
     labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
@@ -229,6 +230,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
             y = [len(t[1]) for t in stage_map]
             x = range(0,len(y))
 
+            # This is far from ideal
             step = 1
             if max(y) > 10:
                 step = 5
