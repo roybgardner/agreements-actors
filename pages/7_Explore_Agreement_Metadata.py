@@ -18,10 +18,9 @@ st.header("Explore Agreement Metadata")
 if len(st.session_state["pp_data_dict"]) > 0:
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
 
-    st.write("This page explores the relationship between actors and agreement metadata. Agreement metadata explored here are:")
-    st.write("1. Date.\n\
-2. Stage.")
-    st.write("Explore individual actor data using the form at the bottom of the page.")
+    st.write("This page explores the relationship between actors and agreement metadata.\
+              Agreement metadata explored here are date and stage.")
+    st.write("You can explore individual actor data using the form at the bottom of the page.")
 
 
     labels = [data_dict['vertices_dict'][v][5] for v in pp_data_dict['pp_actor_ids']]
