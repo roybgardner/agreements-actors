@@ -15,9 +15,6 @@ add_logo("./logos/peacerep_text.png")
 st.header("Explore Agreement Metadata")
 
 # *********************************************************************************************************************
-
-
-# *********************************************************************************************************************
 if len(st.session_state["pp_data_dict"]) > 0:
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
 
@@ -55,6 +52,88 @@ if len(st.session_state["pp_data_dict"]) > 0:
             year_index = year_list.index(year)
             year_matrix[i][year_index] += 1
 
+    st.subheader('Actor engagements over time')
+
+    st.caption('This graph illustrates the chronological activity of all the actors in a chosen peace process.\
+                The peace process is represented as a time-ordered set of agreements where the date of the agreement is along the x-axis.\
+                Each actor is represented on the y-axis as a coloured line connecting dots (the name of the actor is not displayed in this demo).\
+                A dot indicates that the actor is a signatory to an agreement. Actors are ordered by first appearance.')
+
+    pp_ag_ids = pp_data_dict['pp_agreement_ids']
+    # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
+    t_list = []
+    for i,agreement_id in enumerate(pp_ag_ids):
+        if not agreement_id in data_dict['dates_dict']:
+            continue
+        ag_date = data_dict['dates_dict'][agreement_id]
+        # Might use the agreement_id later but currently not used
+        t_list.append((i,agreement_id,ag_date))
+    # Sort the agreements by date by date    
+    t_list = sorted(t_list,key=lambda t:t[2])
+
+    # Build a time-order agreement-actor matrix
+    ordered_matrix = []
+    for t in t_list:
+        ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
+        
+    ordered_matrix = np.array(ordered_matrix)
+    # Put actors in rows
+    ordered_matrix = ordered_matrix.T
+
+    # Now order actors by first appearance in process (process is defined as a sequence of agreements)
+    row_indices = []
+    for i,row in enumerate(ordered_matrix):
+        where = np.where(row==1)
+        v = 0
+        if len(where[0]) > 0:
+            v = where[0][0]
+        row_indices.append((i,v))
+    sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
+
+    sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
+
+    f = plt.figure(figsize=(16,8))
+    for i,row in enumerate(sorted_matrix):
+        x = [j for j,x in enumerate(row) if x > 0]
+        y = [i]*len(x)
+        plt.scatter(x,y,alpha=0.9,linewidth=0.5,s=20)
+        plt.plot(x,y,alpha=0.9,linewidth=0.5)
+    #xint = range(0, sorted_matrix.shape[1],10)
+    plt.xticks([],fontsize='xx-large')    
+    #yint = range(0, math.ceil(np.amax(sorted_matrix))+1)
+    plt.yticks([],fontsize='xx-large')    
+    plt.ylabel('Actors (in order of first appearance)',fontsize='xx-large')
+    plt.xlabel('Agreements in time order',fontsize='xx-large')
+    st.pyplot(f)
+
+
+# *********************************************************************************************************************
+    st.subheader('Agreement year')
+           
+    # Get matrix in actor alpha order
+    ordered_year_matrix = []
+    for t in z:
+        ordered_year_matrix.append(year_matrix[t[0]])
+        
+    ordered_year_matrix = np.array(ordered_year_matrix)
+          
+    st.caption('This heat map illustrates another method for visualising the chronological activity of all the actors in a chosen peace process.\
+                Here the x-axis shows the year. Again, each actor is represented on the y-axis and in this example the name of the actor is displayed.\
+                The depth of colour indicates the number of agreements an actor signed in a particular year, where the deeper the blue, the greater the number of agreements signed.')
+
+    fig = plt.figure(figsize=(16,16),layout="constrained")
+    plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
+    plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
+    plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
+    plt.xlabel('Year',fontsize='xx-large')
+    cbar = plt.colorbar()
+    yint = range(0, math.ceil(np.amax(ordered_year_matrix))+1)
+    cbar.set_ticks(yint)
+    cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
+    st.pyplot(fig)
+            
+# *********************************************************************************************************************
+    st.divider()
     with st.form("actors_metadata"):
 
         st.write("Using the drop-down menu, select an agreement from the chosen peace process to explore the metadata of the agreements signed by the actor.\
@@ -157,87 +236,6 @@ if len(st.session_state["pp_data_dict"]) > 0:
 
 
     
-    st.divider()
-    st.subheader('Actor engagements over time')
-
-    st.caption('This graph illustrates the chronological activity of all the actors in a chosen peace process.\
-                The peace process is represented as a time-ordered set of agreements where the date of the agreement is along the x-axis.\
-                Each actor is represented on the y-axis as a coloured line connecting dots (the name of the actor is not displayed in this demo).\
-                A dot indicates that the actor is a signatory to an agreement. Actors are ordered by first appearance.')
-
-    pp_ag_ids = pp_data_dict['pp_agreement_ids']
-    # We want to sort agreements in date order so build list of agreement index-agreement_id-date tuples
-    t_list = []
-    for i,agreement_id in enumerate(pp_ag_ids):
-        if not agreement_id in data_dict['dates_dict']:
-            continue
-        ag_date = data_dict['dates_dict'][agreement_id]
-        # Might use the agreement_id later but currently not used
-        t_list.append((i,agreement_id,ag_date))
-    # Sort the agreements by date by date    
-    t_list = sorted(t_list,key=lambda t:t[2])
-
-    # Build a time-order agreement-actor matrix
-    ordered_matrix = []
-    for t in t_list:
-        ordered_matrix.append(pp_data_dict['pp_matrix'][t[0]])
-        
-    ordered_matrix = np.array(ordered_matrix)
-    # Put actors in rows
-    ordered_matrix = ordered_matrix.T
-
-    # Now order actors by first appearance in process (process is defined as a sequence of agreements)
-    row_indices = []
-    for i,row in enumerate(ordered_matrix):
-        where = np.where(row==1)
-        v = 0
-        if len(where[0]) > 0:
-            v = where[0][0]
-        row_indices.append((i,v))
-    sorted_row_indices = [t[0] for t in sorted(row_indices,key=lambda t:t[1])]
-
-    sorted_matrix = ordered_matrix[np.ix_(sorted_row_indices)]
-
-    f = plt.figure(figsize=(16,8))
-    for i,row in enumerate(sorted_matrix):
-        x = [j for j,x in enumerate(row) if x > 0]
-        y = [i]*len(x)
-        plt.scatter(x,y,alpha=0.9,linewidth=0.5,s=20)
-        plt.plot(x,y,alpha=0.9,linewidth=0.5)
-    #xint = range(0, sorted_matrix.shape[1],10)
-    plt.xticks([],fontsize='xx-large')    
-    #yint = range(0, math.ceil(np.amax(sorted_matrix))+1)
-    plt.yticks([],fontsize='xx-large')    
-    plt.ylabel('Actors (in order of first appearance)',fontsize='xx-large')
-    plt.xlabel('Agreements in time order',fontsize='xx-large')
-    st.pyplot(f)
-
-
-# *********************************************************************************************************************
-    st.subheader('Agreement year')
-           
-    # Get matrix in actor alpha order
-    ordered_year_matrix = []
-    for t in z:
-        ordered_year_matrix.append(year_matrix[t[0]])
-        
-    ordered_year_matrix = np.array(ordered_year_matrix)
-          
-    st.caption('This heat map illustrates another method for visualising the chronological activity of all the actors in a chosen peace process.\
-                Here the x-axis shows the year. Again, each actor is represented on the y-axis and in this example the name of the actor is displayed.\
-                The depth of colour indicates the number of agreements an actor signed in a particular year, where the deeper the blue, the greater the number of agreements signed.')
-
-    fig = plt.figure(figsize=(16,16),layout="constrained")
-    plt.imshow(ordered_year_matrix,aspect='auto',cmap=plt.cm.Blues)
-    plt.xticks(range(0,len(year_list)),year_list,fontsize='xx-large',rotation=90)
-    plt.yticks(range(0,len(labels)),[t[1] for t in z],fontsize='x-large')
-    plt.xlabel('Year',fontsize='xx-large')
-    cbar = plt.colorbar()
-    yint = range(0, math.ceil(np.amax(ordered_year_matrix))+1)
-    cbar.set_ticks(yint)
-    cbar.set_label('Signed in year',rotation=270,labelpad=15,fontsize='xx-large')
-    st.pyplot(fig)
-            
 
     st.divider()
     st.write(':violet[POTENTIAL FUNCTIONS]')
