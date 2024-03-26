@@ -133,8 +133,8 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.pyplot(fig)
             
 # *********************************************************************************************************************
-    st.subheader('Explore individual actors')
     st.divider()
+    st.subheader('Explore individual actors')
     with st.form("actors_metadata"):
 
         st.write("Using the drop-down menu, select an agreement from the chosen peace process to explore the metadata of the agreements signed by the actor.\
