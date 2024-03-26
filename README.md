@@ -14,4 +14,4 @@ Port of Jupyter notebook into Streamlit app. Supports:
 6. Various visualisations based on metadata attributie values.
 
 
-The app can be viewed here: https://agreements-actors-jm3mmkozifmylnrtgjy4nb
+The app can be viewed here: [https://agreements-actors-jm3mmkozifmylnrtgjy4nb](https://agreements-actors-jm3mmkozifmylnrtgjy4nb.streamlit.app/)https://agreements-actors-jm3mmkozifmylnrtgjy4nb.streamlit.app/
