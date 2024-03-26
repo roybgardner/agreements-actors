@@ -19,7 +19,7 @@ if len(st.session_state["pp_data_dict"]) > 0:
     st.subheader(':blue[' + st.session_state["pp_data_dict"]['pp_name'] + ']')
 
     st.write("This page explores the relationship between actors and agreement metadata. Agreement metadata explored here are:")
-    st.text("1. Agreement date.\n\
+    st.write("1. Agreement date.\n\
 2. Agreement year.\n\
 3. Agreement stage.")
     st.write("Explore individual actor data using the form at the bottom of the page.")
