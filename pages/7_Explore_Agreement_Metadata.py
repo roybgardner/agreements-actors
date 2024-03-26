@@ -228,7 +228,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
             fig = plt.figure(figsize=(8,8))
             y = [len(t[1]) for t in stage_map]
             x = range(0,len(y))
-            xint = range(0, max(y)+1)
+
+            step = 1
+            if max(y) > 10:
+                step = 5
+            xint = range(0, max(y)+1,step)
 
             plt.barh(x,y,alpha=0.6)
             plt.xlabel('Number of agreements signed',fontsize='xx-large')
