@@ -228,9 +228,11 @@ if len(st.session_state["pp_data_dict"]) > 0:
             fig = plt.figure(figsize=(8,8))
             y = [len(t[1]) for t in stage_map]
             x = range(0,len(y))
+            xint = range(0, max(y)+1)
+
             plt.barh(x,y,alpha=0.6)
             plt.xlabel('Number of agreements signed',fontsize='xx-large')
-            plt.xticks(fontsize='xx-large')
+            plt.xticks(xint,xint,fontsize='xx-large')
             plt.yticks(x,stage_labels,fontsize='xx-large')
             plt.margins(y=0.01)
             st.pyplot(fig)
