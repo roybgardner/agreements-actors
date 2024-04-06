@@ -17,5 +17,6 @@ st.write("Each frame shows the UK signatory network on the date shown in the fra
 st.write("All agreements signed on a date are shown even if the UK was not a signatory.\
          However, there are only two dates in the sequence that contain agreements not signed by\
          the UK: 1992-08-27 AGT_1170, and 1995-11-21 AGT_1289.")
+st.write("For the best experience pause the movie and drag the slider.")
 
 st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
