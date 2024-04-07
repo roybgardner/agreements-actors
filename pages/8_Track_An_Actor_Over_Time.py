@@ -17,7 +17,7 @@ st.write("All agreements signed on a date are shown even if the UK was not a sig
          However, there are only two dates in the sequence that contain agreements not signed by\
          the UK: 1992-08-27 AGT_1170, and 1995-11-21 AGT_1289.")
 st.write("The video provides a glimpse into a wealth of possibilities: changing networks of co-signatories,\
-         metadata analysis etc. The computation is fast enough network that diagrams can be generated in real-time.")
+         metadata analysis etc. The computation is fast enough that network diagrams can be generated in real-time.")
 
 st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
 
