@@ -17,5 +17,13 @@ st.write("Each frame shows the UK's signatory network on the date shown in the f
 st.write("All agreements signed on a date are shown even if the UK was not a signatory.\
          However, there are only two dates in the sequence that contain agreements not signed by\
          the UK: 1992-08-27 AGT_1170, and 1995-11-21 AGT_1289.")
+st.write("The video provides a glimpse into a wealth of possibilities: changing networks of co-signatories,\
+         metadata analysis etc. The computation is fast enough network that diagrams can be generated in real-time.")
 
 st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
+
+st.divider()
+st.write(':violet[POTENTIAL FUNCTIONS]')
+st.write(':violet[Interface for real-time generation and display of time series of network diagrams.]')
+st.write(':violet[Interactive network diagrams with reveal of actor and agreement data.]')
+st.write(':violet[Side-by-side comparison of network digrams with different dates.]')
