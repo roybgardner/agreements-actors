@@ -2,7 +2,6 @@ import streamlit as st
 
 from streamlit_shared import *
 
-
 # *********************************************************************************************************************
 
 add_logo("./logos/peacerep_text.png")
