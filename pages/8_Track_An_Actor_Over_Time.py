@@ -23,6 +23,6 @@ st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_ti
 
 st.divider()
 st.write(':violet[POTENTIAL FUNCTIONS]')
-st.write(':violet[Interface for real-time generation and display of time series of network diagrams.]')
+st.write(':violet[Interface for real-time generation and display of a time series of network diagrams.]')
 st.write(':violet[Interactive network diagrams with reveal of actor and agreement data.]')
 st.write(':violet[Side-by-side comparison of network digrams with different dates.]')
