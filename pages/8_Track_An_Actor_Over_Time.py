@@ -10,7 +10,7 @@ st.header("Track an Actor Over Time")
 
 # *********************************************************************************************************************
 
-st.write("The video below shows UK activity in the Bosnia Peace Process. The\
+st.write("The video below shows UK engagement in the Bosnia Peace Process. The\
          UK (CON_19) is the actor in the fixed position on the right of the frame")
 st.write("Each frame shows the UK's signatory network on the date shown in the frame's title.")
 st.write("All agreements signed on a date are shown even if the UK was not a signatory.\
