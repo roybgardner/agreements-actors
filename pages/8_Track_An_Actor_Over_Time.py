@@ -24,6 +24,7 @@ st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_ti
 
 st.write("The video below shows Bosnia and Herzegovina (CON_0) and UK (CON_19) co-signatory engagements in the Bosnia Peace Process.")
 st.write("Bosnia and Herzegovina (CON_0) is a fixed position of the left of the frame, the UK (CON_19) on the right.")
+st.write("This analysis could be extended to any number of co-signatories.")
 st.video('./movie_uk_bosnia.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
 
 
