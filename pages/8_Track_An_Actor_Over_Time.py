@@ -22,6 +22,10 @@ st.write("The video provides a glimpse into a wealth of possibilities: changing 
 st.video('./movie.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
 
 
+st.write("The video below shows Bosnia and Herzegovina (CON_0) engagement in the Bosnia Peace Process.")
+st.video('./movie_bosnia.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
+
+
 st.divider()
 st.write(':violet[POTENTIAL FUNCTIONS]')
 st.write(':violet[Interface for real-time generation and display of a time series of network diagrams.]')
