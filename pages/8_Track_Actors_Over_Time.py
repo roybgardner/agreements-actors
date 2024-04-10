@@ -6,7 +6,7 @@ from streamlit_shared import *
 
 add_logo("./logos/peacerep_text.png")
 
-st.header("Track an Actor Over Time")
+st.header("Track Actors Over Time")
 
 # *********************************************************************************************************************
 
