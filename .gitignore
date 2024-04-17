@@ -42,3 +42,4 @@ data/node_table_OLD.csv
 data/links_table_OLD.csv
 _doc/un_analysis/NOTES.pdf
 .ipynb_checkpoints/signatories_network_time_series-checkpoint.ipynb
+.ipynb_checkpoints/tensors-checkpoint.ipynb
