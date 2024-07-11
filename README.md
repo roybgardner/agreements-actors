@@ -11,7 +11,7 @@ Port of Jupyter notebook into Streamlit app. Supports:
    The co-occurrence matrices diagonals provide the column and row marginals of a peace process sub-matrix.
    Only need the upper triangle (excluding the diagonal) of co-occurrence matrices for graph generation.
    Recovery of coocurring entities.
-6. Various visualisations based on metadata attributie values.
+6. Various visualisations based on metadata attribute values.
 
 
 The app can be viewed here: [https://agreements-actors-jm3mmkozifmylnrtgjy4nb.streamlit.app](https://agreements-actors-jm3mmkozifmylnrtgjy4nb.streamlit.app/)
