@@ -1,4 +1,4 @@
-# Agreement-actor networks
+# Agreement-actor networks - DEPRECATED
 
 29/07/2024. Analysis here is now superceded by analysis in paa-x repo.
 
