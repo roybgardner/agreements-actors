@@ -1,5 +1,7 @@
 # Agreement-actor networks
 
+29/07/2024. Analysis here is now superceded by analysis in paa-x repo.
+
 Port of Jupyter notebook into Streamlit app. Supports:
 
 1. Signatory data load into a data dictionary.
